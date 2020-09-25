@@ -1,4 +1,3 @@
-
 <div class="page-header -i navbar navbar-fixed-top">
 	<!-- BEGIN HEADER INNER -->
 	<div class="page-header-inner">
