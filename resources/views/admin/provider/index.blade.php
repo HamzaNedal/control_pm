@@ -66,9 +66,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <button id="sample_editable_1_new" class="btn green">
+                                    <a  class="btn green" data-toggle="modal" href="#addProvider">
                                         Add New <i class="fa fa-plus"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -94,10 +94,25 @@
                             </div>
                         </div>
                     </div>
-                    @include('provider.table')
+                    @include('admin.provider.table')
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
     </div>
+    <x-modal title="Add Provider" id="addProvider" classProvider='add-provider'>
+        <x-slot name='inputs'>
+            <x-admin.form.form-add-update-provider  id="form-add-provider" action="{{ route('admin.provider.store') }}" />
+        </x-slot> 
+    </x-modal>
+    @push('js')
+        <script>
+
+            $(document).on('click','.add-provider',function(){
+               $('#form-add-provider').submit();
+                
+            });
+      
+        </script>
+    @endpush
 @endsection

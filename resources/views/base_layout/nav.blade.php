@@ -34,7 +34,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="active">
-                        <a href="{{ route('provider.index') }}">
+                        <a href="{{ route('admin.provider.index') }}">
                         Show Providers </a>
                     </li>
 
