@@ -56,7 +56,7 @@
             <input type="text" class="form-control" name="country" @isset($user) value="{{$user->country }}" @endisset id="country">
           </div>
           <div class="form-group col-md-12">
-            <label for="whats_up" class="col-form-label">Whats up :</label>
+            <label for="whats_up" class="col-form-label">Whatsapp :</label>
             <input type="text" class="form-control" name="whats_up" @isset($user) value="{{$user->Whats_up }}" @endisset id="whats_up">
           </div>
     </div>
