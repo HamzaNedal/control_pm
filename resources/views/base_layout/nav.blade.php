@@ -27,148 +27,20 @@
                 <a href="javascript:;">
                 <i class="fa fa-cogs"></i>
                 <span class="title">
-                Page Layouts </span>
+                Provider </span>
                 <span class="arrow open">
                 </span>
                 <span class="selected"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="active">
-                        <a href="layout_horizontal_sidebar_menu.html">
-                        Horizontal & Sidebar Menu </a>
+                        <a href="{{ route('admin.provider.index') }}">
+                        Show Providers </a>
                     </li>
-                    <li>
-                        <a href="index_horizontal_menu.html">
-                        Dashboard & Mega Menu </a>
-                    </li>
-                    <li>
-                        <a href="layout_horizontal_menu1.html">
-                        Horizontal Mega Menu 1 </a>
-                    </li>
-                    <li>
-                        <a href="layout_horizontal_menu2.html">
-                        Horizontal Mega Menu 2 </a>
-                    </li>
-                    <li>
-                        <a href="layout_fontawesome_icons.html">
-                        <span class="badge badge-roundless badge-danger">new</span>Layout with Fontawesome Icons</a>
-                    </li>
-                    <li>
-                        <a href="layout_glyphicons.html">
-                        Layout with Glyphicon</a>
-                    </li>
-                    <li>
-                        <a href="layout_full_height_portlet.html">
-                        <span class="badge badge-roundless badge-success">new</span>Full Height Portlet</a>
-                    </li>
-                    <li>
-                        <a href="layout_full_height_content.html">
-                        <span class="badge badge-roundless badge-warning">new</span>Full Height Content</a>
-                    </li>
-                    <li>
-                        <a href="layout_search_on_header1.html">
-                        Search Box On Header 1 </a>
-                    </li>
-                    <li>
-                        <a href="layout_search_on_header2.html">
-                        Search Box On Header 2 </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_search_option1.html">
-                        Sidebar Search Option 1 </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_search_option2.html">
-                        Sidebar Search Option 2 </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_reversed.html">
-                        <span class="badge badge-roundless badge-warning">
-                        new </span>
-                        Right Sidebar Page </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_fixed.html">
-                        Sidebar Fixed Page </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_closed.html">
-                        Sidebar Closed Page </a>
-                    </li>
-                    <li>
-                        <a href="layout_ajax.html">
-                        Content Loading via Ajax </a>
-                    </li>
-                    <li>
-                        <a href="layout_disabled_menu.html">
-                        Disabled Menu Links </a>
-                    </li>
-                    <li>
-                        <a href="layout_blank_page.html">
-                        Blank Page </a>
-                    </li>
-                    <li>
-                        <a href="layout_boxed_page.html">
-                        Boxed Page </a>
-                    </li>
-                    <li>
-                        <a href="layout_language_bar.html">
-                        Language Switch Bar </a>
-                    </li>
+
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                <i class="fa fa-th-list"></i>
-                <span class="title">
-                Portlets </span>
-                <span class="arrow ">
-                </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="portlet_general.html">
-                        General Portlets </a>
-                    </li>
-                    <li>
-                        <a href="portlet_draggable.html">
-                        Draggable Portlets </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                <i class="fa fa-map-marker"></i>
-                <span class="title">
-                Maps </span>
-                <span class="arrow ">
-                </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="maps_google.html">
-                        Google Maps </a>
-                    </li>
-                    <li>
-                        <a href="maps_vector.html">
-                        Vector Maps </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="charts.html">
-                <i class="fa fa-bar-chart-o"></i>
-                <span class="title">
-                Visual Charts </span>
-                </a>
-            </li>
-            <li class="last">
-                <a href="login.html">
-                <i class="fa fa-user"></i>
-                <span class="title">
-                Login Page </span>
-                </a>
-            </li>
+
         </ul>
         <!-- END SIDEBAR MENU1 -->
         <!-- BEGIN RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->

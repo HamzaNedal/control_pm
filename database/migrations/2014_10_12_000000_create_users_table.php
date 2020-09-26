@@ -38,7 +38,7 @@ class CreateUsersTable extends Migration
              $table->string('subjects')->nullable();
              $table->string('country')->nullable();
              $table->string('Whats_up')->nullable();
-
+            
 
 
             $table->rememberToken();

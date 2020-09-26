@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProviderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('base_layout.master_layout');
+});
+Route::group(['prefix' => 'admin'], function () {
+
+Route::get('/providers',[ProviderController::class,'index'])->name('admin.provider.index');
+Route::post('/provider',[ProviderController::class,'store'])->name('admin.provider.store');
 });
