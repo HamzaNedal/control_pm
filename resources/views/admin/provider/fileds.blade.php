@@ -1,7 +1,6 @@
-<form action="{{ $action }}"  method="post" id="{{ $id }}">
+<form action="{{ $action }}"  method="post" >
     @csrf
     @isset($updateForm)
-        <input type="hidden" name="user_id" value="" class="user_id">
          @method('put')
     @endisset
     <div class="row">
@@ -58,7 +57,7 @@
           </div>
           <div class="form-group col-md-12">
             <label for="whats_up" class="col-form-label">Whats up :</label>
-            <input type="text" class="form-control" name="whats_up" @isset($user) value="{{$user->whats_up }}" @endisset id="whats_up">
+            <input type="text" class="form-control" name="whats_up" @isset($user) value="{{$user->Whats_up }}" @endisset id="whats_up">
           </div>
     </div>
  

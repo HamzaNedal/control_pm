@@ -6,6 +6,7 @@ use App\Http\Requests\createProviderRequest;
 use App\Http\Requests\updateProviderRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProviderController extends Controller
 {
@@ -35,15 +36,6 @@ class ProviderController extends Controller
         }
     }
 
-    public function edit($id)
-    {
-
-
-
-        $users = User::where('id', $id)->get();
-        return view('admin.provider.edit', compact('users'));
-    }
-
     public function update(updateProviderRequest $request, $id)
     {
 
@@ -59,4 +51,24 @@ class ProviderController extends Controller
             return redirect()->route('admin.provider.index')->with('success', '');
         }
     }
+
+    public  function edit($id)
+    {   $user = User::findOrFail($id);
+        return view('admin.provider.edit',compact('user'));
+    }
+
+    protected function datatable(){
+        $users = User::where(['role'=>'provider'])->get();
+        $route ='provider';
+        return DataTables::of($users)->addColumn('actions', function ($data) use($route) {
+            return view('admin.datatables.actions',compact('data','route'));
+        })->rawColumns(['actions'])
+        ->make(true);
+     }
+
+    //  public function getProviders($id)
+    //  {
+    //     $user = User::findOrFail($id);
+    //     return json_encode($user);
+    //  }
 }
