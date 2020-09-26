@@ -11,10 +11,7 @@
 
     </div>
     <div class="portlet-body form" style="display: block;">
-        @php
-           $route = route('admin.order.update',['id'=>$user->id])
-        @endphp
-        @include('admin.order.fileds',['action'=>"$route",'updateForm'=>'updateForm'])
+        @include('admin.order.fileds',['action'=>route('admin.order.update',['id'=>$user->id]),'updateForm'=>'updateForm'])
     </div>
 </div>
 @endsection

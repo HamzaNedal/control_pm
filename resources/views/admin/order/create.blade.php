@@ -12,10 +12,8 @@
 
     </div>
     <div class="portlet-body form" style="display: block;">
-    @php
-        $route = route('admin.order.create')
-     @endphp
-     @include('admin.order.fileds',['action'=>"$route",'updateForm'=>'updateForm'])
+
+     @include('admin.order.fileds',['action'=>route('admin.order.create'),'updateForm'=>'updateForm'])
     </div>
 </div>
 @push('js')

@@ -135,7 +135,7 @@
             //    });
             // });
         $(function() {
-          $('#prvider-table').DataTable({
+          var table = $('#prvider-table').DataTable({
               processing: true,
               serverSide: true,
               ajax: '{!! route('admin.provider.datatable') !!}',
@@ -155,6 +155,40 @@
                   { data: 'whats_up', name: 'whats_up' },
               ]
           });
+          $(document).on('click','.remove',function(){
+          var url = "{{ route('admin.client.destroy') }}/";
+          var id = $(this).data('id');
+          url = url+id
+        swal({
+            title: "Are you sure?",
+            text: "Your will not be able to recover this imaginary file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        },
+        function(willConfirm){
+
+            if(willConfirm){
+            $.ajax({
+                   type: "post",
+                   url: `${url}`,
+                   data:{
+                       '_method':"Delete",
+                       '_token':$('meta[name="csrf-token"]').attr('content')
+                   },
+                   dataType: "html"})
+                   .done(function() {
+                    table.ajax.reload();
+                   });
+
+            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            }
+
+        })
+      });
+
       });
 
         </script>

@@ -21,7 +21,7 @@
 
     </div>
     <div class="portlet-body form" style="display: block;">
-        <x-admin.form.form-add-update-provider  id="form-add-provider" action="{{ route('admin.provider.store') }}" />
+     @include('admin.provider.fileds',['action'=>route('admin.provider.store')])
     </div>
 </div>
 @endsection
