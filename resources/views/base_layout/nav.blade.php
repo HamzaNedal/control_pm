@@ -45,6 +45,22 @@
                     </li>
                 </ul>
             </li>
+            <li class="start">
+                <a href="javascript:;">
+                <i class="fa fa-cogs"></i>
+                <span class="title">
+                Orders </span>
+                <span class="arrow open">
+                </span>
+                <span class="selected"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="active">
+                        <a href="{{ route('admin.order.index') }}">
+                        Show Orders </a>
+                    </li>
+                </ul>
+            </li>
 
         </ul>
         <!-- END SIDEBAR MENU1 -->

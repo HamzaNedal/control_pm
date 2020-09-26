@@ -66,7 +66,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a  class="btn green" data-toggle="modal" href="{{ route('admin.provider.create') }}">
+                                    <a  class="btn green" data-toggle="modal" href="{{ route('admin.order.create') }}">
                                         Add New <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                    @include('admin.provider.table')
+                    @include('admin.order.table')
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->

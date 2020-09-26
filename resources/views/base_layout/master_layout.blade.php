@@ -10,9 +10,8 @@
 <body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo">
 <!-- BEGIN HEADER -->
 @include('base_layout.header._header')
-@push('css')
-	
-@endpush
+@stack('css')
+
 <!-- END HEADER -->
 <div class="clearfix">
 </div>
