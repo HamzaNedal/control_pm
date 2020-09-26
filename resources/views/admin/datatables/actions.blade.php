@@ -4,5 +4,8 @@
     <div class='btn-group'>
         <a data-id={{ $data->id }}  href='{{ route('admin.' . $route . '.edit', ['id' => $data->id]) }}'  class='btn btn-default btn-xs update-provider'><i
                 class="fa fa-edit"></i></a>
+        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('هل انت متأكد من الحذف ؟')"><i class="fa fa-trash"></i></button>
+
     </div>
+    
 </form>
