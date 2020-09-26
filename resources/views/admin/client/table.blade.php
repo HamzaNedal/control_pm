@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered table-hover" id="prvider-table">
+<table class="table table-striped table-bordered table-hover" id="table">
     <thead>
         <tr>
             <th class="table-checkbox">

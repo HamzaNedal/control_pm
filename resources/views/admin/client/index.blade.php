@@ -104,7 +104,10 @@
     @push('js')
         <script>
         $(function() {
-          $('#prvider-table').DataTable({
+            $.ajaxSetup({
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             });
+        var table =  $('#table').DataTable({
               processing: true,
               serverSide: true,
               ajax: '{!! route('admin.client.datatable') !!}',
@@ -112,14 +115,49 @@
                   { data: 'id', name: 'id' },
                   { data: 'name', name: 'name' },
                   { data: 'email', name: 'email' },
-                  { data: 'phone', name: 'phone' },
-                  { data: 'payment', name: 'payment' },
+                  { data: 'Phone', name: 'Phone' },
+                  { data: 'Payment', name: 'Payment' },
                   { data: 'words', name: 'words' },
                   { data: 'created_at', name: 'created_at' },
                   {data: 'actions', name: 'actions', orderable: false, searchable: false}
               ]
           });
+          $(document).on('click','.remove',function(){
+          var url = "{{ route('admin.client.destroy') }}/";
+          var id = $(this).data('id');
+          url = url+id
+        swal({
+            title: "Are you sure?",
+            text: "Your will not be able to recover this imaginary file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        },
+        function(willConfirm){
+
+            if(willConfirm){
+            $.ajax({
+                   type: "post",
+                   url: `${url}`,
+                   data:{
+                       '_method':"Delete",
+                       '_token':$('meta[name="csrf-token"]').attr('content')
+                   },
+                   dataType: "html"})
+                   .done(function() {
+                        $('#table').DataTable().clear().draw();
+                   });
+               
+            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            }
+         
+        })
       });
+
+      });
+
 
         </script>
     @endpush

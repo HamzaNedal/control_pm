@@ -29,7 +29,7 @@ class ClientController extends Controller
 
 
         if ($user) {
-            return redirect()->route('admin.provider.index')->with('success', 'Client added successfully');
+            return redirect()->route('admin.client.index')->with('success', 'Client added successfully');
         }
     }
 
@@ -61,7 +61,8 @@ class ClientController extends Controller
         try {
 
            $user = User::findOrFail($id)->delete();
-           return redirect()->route('admin.provider.index')->with('success', 'The client has been successfully deleted');
+           return 'success';
+        //    return redirect()->route('admin.client.index')->with('success', 'The client has been successfully deleted');
        } catch (ModelNotFoundException $e) {
            return redirect()->back()->with('error', 'not found');
        }
