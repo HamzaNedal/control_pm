@@ -13,7 +13,7 @@ class UpdateOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class UpdateOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'=>'required|string',
+            'number_words'=>'required|integer',
+            'information'=>'required|string',
+            'added_date'=>'required|date',
+            'deadline'=>'required|date',
+            'provider_id'=>'required|integer',
+            'client_id'=>'required|integer',
+            'files.*'=>'somtimes|nullable|file|mimes:jpeg,png,jpg,doc,docx,ppt,pps,pptx,xls,xlsx,pdf',
         ];
     }
 }

@@ -25,13 +25,13 @@
     <div class="col-md-6">
       <div class="form-group">
       <label for="added_date" class="col-form-label">Added Date :</label>
-      <input type="date" class="form-control form-filter input-sm"  name="added_date" placeholder="From">
+      <input type="date" class="form-control form-filter input-sm"  name="added_date" placeholder="From" @isset($order) value="{{$order->added_date }}" @endisset>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
       <label for="deadline" class="col-form-label">Deadline :</label>
-      <input type="date" class="form-control form-filter input-sm"  name="deadline" placeholder="To">
+      <input type="date" class="form-control form-filter input-sm"  name="deadline" placeholder="To" @isset($order) value="{{$order->deadline }}" @endisset>
       </div>
     </div>
 		<div class="col-md-6">
@@ -39,7 +39,7 @@
         <label class="control-label">Providers :</label>
         <select class="select2_category form-control" data-placeholder="Choose a Provider" name="provider_id" tabindex="1">
           @foreach ($providers as $provider)
-            <option value="{{ $provider->id }}">{{ $provider->name }}</option>
+            <option value="{{ $provider->id }}" @isset($order) {{ $order->provider_id == $provider->id ? "selected" : "" }} @endisset>{{ $provider->name }}</option>
           @endforeach
         </select>
        <small><a href="{{ route('admin.provider.create') }}">Add New Provider</a></small>
@@ -50,7 +50,7 @@
         <label class="control-label">Clients :</label>
         <select class="select2_category form-control" data-placeholder="Choose a Client" name="client_id" tabindex="1">
           @foreach ($clients as $client)
-            <option value="{{ $client->id }}">{{ $client->name }}</option>
+            <option value="{{ $client->id }}" @isset($order) {{ $order->client_id == $client->id ? 'selected' : '' }} @endisset>{{ $client->name }}</option>
           @endforeach
         </select>
         <small><a href="{{ route('admin.client.create') }}">Add New Client</a></small>
