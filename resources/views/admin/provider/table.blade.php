@@ -4,6 +4,8 @@
             <th class="table-checkbox">
                 <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
             </th>
+            <th>Actions</th>
+
             <th>Name</th>
             <th>Email</th>
             <th>Payment method</th>
@@ -14,8 +16,6 @@
             <th>Subjects</th>
             <th>Country</th>
             <th>Whatsapp</th>
-            <th>Created at</th>
-            <th>Actions</th>
         </tr>
     </thead>
 
