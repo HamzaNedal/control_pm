@@ -19,7 +19,6 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('client_id')->nullable();
             $table->unsignedBigInteger('provider_id')->nullable();
 
-
             $table->string('title');
             $table->integer('number_words');
             $table->text('information');

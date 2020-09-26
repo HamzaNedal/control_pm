@@ -24,7 +24,8 @@ class updateProviderRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:users,name,id',
+            'name' => 'required|unique:users,name'.$this->user_id,
+            'email' => 'required|email|unique:users,email,'.$this->user_id,
             'password' => 'required',
             'payment_method' => 'required|string',
             'education_level' => 'required|string',
@@ -35,5 +36,14 @@ class updateProviderRequest extends FormRequest
             'whats_up' => 'required',
             'capacity_day'=>'required|numeric',
         ];
+
+    }
+    public function prepareForValidation()
+    {
+        if($this->password === null) {
+            $this->request->remove('password');
+        }else{
+           // $this->password = Hash::make($this->password); 
+        }
     }
 }
