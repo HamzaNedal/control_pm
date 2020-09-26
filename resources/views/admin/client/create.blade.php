@@ -12,7 +12,7 @@
     </div>
     <div class="portlet-body form" style="display: block;">
         @php
-        $route = {{ route('admin.provider.store') }}
+        $route =  route('admin.provider.store')
      @endphp
      @include('admin.client.fileds',['action'=>"$route"])
         {{-- <x-admin.form.form-add-update-provider  id="form-add-provider" action="{{ route('admin.provider.store') }}" /> --}}

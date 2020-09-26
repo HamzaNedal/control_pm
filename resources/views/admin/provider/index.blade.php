@@ -147,7 +147,7 @@
                   { data: 'capacity_day', name: 'capacity_day' },
                   { data: 'subjects', name: 'subjects' },
                   { data: 'country', name: 'country' },
-                  { data: 'Whats_up', name: 'Whats_up' },
+                  { data: 'whats_up', name: 'whats_up' },
                   { data: 'created_at', name: 'created_at' },
                   {data: 'actions', name: 'actions', orderable: false, searchable: false}
               ]

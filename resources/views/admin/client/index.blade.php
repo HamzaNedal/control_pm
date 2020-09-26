@@ -112,14 +112,9 @@
                   { data: 'id', name: 'id' },
                   { data: 'name', name: 'name' },
                   { data: 'email', name: 'email' },
-                  { data: 'payment_method', name: 'payment_method' },
-                  { data: 'education_level', name: 'education_level' },
-                  { data: 'name_university', name: 'name_university' },
-                  { data: 'years_experience', name: 'years_experience' },
-                  { data: 'capacity_day', name: 'capacity_day' },
-                  { data: 'subjects', name: 'subjects' },
-                  { data: 'country', name: 'country' },
-                  { data: 'Whats_up', name: 'Whats_up' },
+                  { data: 'phone', name: 'phone' },
+                  { data: 'Payment', name: 'Payment' },
+                  { data: 'words', name: 'words' },
                   { data: 'created_at', name: 'created_at' },
                   {data: 'actions', name: 'actions', orderable: false, searchable: false}
               ]
