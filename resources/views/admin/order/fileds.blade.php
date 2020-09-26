@@ -1,4 +1,4 @@
-<form action="{{ $action }}"  method="post" >
+<form action="{{ $action }}"  method="post" enctype="multipart/form-data">
     @csrf
     @isset($updateForm)
          @method('put')
@@ -19,7 +19,7 @@
       <div class="col-md-6">
         <div class="form-group">
         <label for="information" class="col-form-label">Information :</label>
-        <textarea  cols="30" rows="10" class="form-control" name="information" id="information">@isset($order) {{$order->information }} @endisset</textarea>
+        <textarea  cols="15" rows="4.5" class="form-control" name="information" id="information">@isset($order) {{$order->information }} @endisset</textarea>
         </div>
     </div>
     <div class="col-md-6">
@@ -54,6 +54,12 @@
           @endforeach
         </select>
         <small><a href="{{ route('admin.client.create') }}">Add New Client</a></small>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="files" class="control-label">Files</label>
+          <input type="file" id="files" multiple>
       </div>
     </div>
     </div>

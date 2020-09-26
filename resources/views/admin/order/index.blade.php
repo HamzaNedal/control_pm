@@ -111,7 +111,7 @@
               ajax: '{!! route('admin.order.datatable') !!}',
               columns: [
                   { data: 'id', name: 'id' },
-                  {data: 'actions', name: 'actions', orderable: false, searchable: false}
+                  {data: 'actions', name: 'actions', orderable: false, searchable: false},
                   { data: 'client_id', name: 'client_id' },
                   { data: 'provider_id', name: 'provider_id' },
                   { data: 'title', name: 'title' },

@@ -21,8 +21,8 @@ class OrderController extends Controller
 
     }
     protected function datatable(){
-        $users = Order::where(['role'=>'provider'])->get();
-        $route ='provider';
+        $users = Order::get();
+        $route ='order';
         return DataTables::of($users)->addColumn('actions', function ($data) use($route) {
             return view('admin.datatables.actions',compact('data','route'));
         })->rawColumns(['actions'])
