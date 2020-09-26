@@ -28,7 +28,7 @@ class ClientController extends Controller
         dd(request()->all());
     }
     protected function datatable(){
-        $users = User::get();
+        $users = User::where(['role'=>'client'])->get();
         $route ='client';
         return DataTables::of($users)->addColumn('actions', function ($data) use($route) {
             return view('admin.datatables.actions',compact('data','route'));

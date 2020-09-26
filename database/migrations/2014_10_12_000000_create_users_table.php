@@ -19,6 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            //role
+
+              $table->enum('role', ['admin', 'provider','client']);
+
+
             //client
             $table->string('Phone')->nullable();
             $table->string('Payment')->nullable();
@@ -32,12 +37,10 @@ class CreateUsersTable extends Migration
              $table->integer('capacity_day')->nullable();
              $table->string('subjects')->nullable();
              $table->string('country')->nullable();
-             $table->string('Whats_up')->nullable();
-            
+             $table->string('whats_up')->nullable();
+      $table->rememberToken();
 
-
-            $table->rememberToken();
-            $table->timestamps();
+          $table->timestamps();
         });
 
     }
