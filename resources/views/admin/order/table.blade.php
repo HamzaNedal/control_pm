@@ -4,18 +4,14 @@
             <th class="table-checkbox">
                 #
             </th>
-            <th>Title</th>
-            <th>Email</th>
-            <th>Payment method</th>
-            <th>Education level</th>
-            <th>Name university</th>
-            <th>Years experience</th>
-            <th>Capacity day</th>
-            <th>Subjects</th>
-            <th>Country</th>
-            <th>Whatsapp</th>
-            <th>Created at</th>
             <th>Actions</th>
+            <th>client Name</th>
+            <th>provider Name</th>
+            <th>Status</th>
+            <th>Date Added</th>
+            <th>Deadline</th>
+            <th>Number of words</th>
+
         </tr>
     </thead>
 
