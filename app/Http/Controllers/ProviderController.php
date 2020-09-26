@@ -31,7 +31,6 @@ class ProviderController extends Controller
 
 
         if ($user) {
-
             return redirect()->route('admin.provider.index')->with('success','Service provider added successfully');
         }
     }

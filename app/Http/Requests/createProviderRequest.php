@@ -25,6 +25,7 @@ class createProviderRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:users,name',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'payment_method' => 'required|string',
             'education_level' => 'required|string',
@@ -35,5 +36,9 @@ class createProviderRequest extends FormRequest
             'whats_up' => 'required',
             'capacity_day'=>'required|numeric',
         ];
+    }
+    public function prepareForValidation()
+    {
+      // $this->password = Hash::make($this->password); 
     }
 }

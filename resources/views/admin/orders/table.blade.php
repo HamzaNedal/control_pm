@@ -6,9 +6,14 @@
             </th>
             <th>Name</th>
             <th>Email</th>
-            <th>Phone</th>
-            <th>Payment</th>
-            <th>Words</th>
+            <th>Payment method</th>
+            <th>Education level</th>
+            <th>Name university</th>
+            <th>Years experience</th>
+            <th>Capacity day</th>
+            <th>Subjects</th>
+            <th>Country</th>
+            <th>Whatsapp</th>
             <th>Created at</th>
             <th>Actions</th>
         </tr>

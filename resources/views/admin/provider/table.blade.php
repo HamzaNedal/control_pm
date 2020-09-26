@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th class="table-checkbox">
-                <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
+                #
             </th>
             <th>Actions</th>
 
