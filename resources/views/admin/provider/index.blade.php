@@ -182,10 +182,10 @@
                    .done(function() {
                     table.ajax.reload();
                    });
-               
+
             swal("Deleted!", "Your imaginary file has been deleted.", "success");
             }
-         
+
         })
       });
 
@@ -193,5 +193,10 @@
 
         </script>
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 3931f0827932bf29bfd811db01fc0895a48568e9
     @endpush
 @endsection
