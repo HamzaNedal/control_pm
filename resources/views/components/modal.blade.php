@@ -7,7 +7,6 @@
             </div>
             <div class="modal-body">
                 <div class="scroller" style="height:500px" data-always-visible="1" data-rail-visible1="1">
-                    
                     {{ $inputs }}
                 </div>
             </div>

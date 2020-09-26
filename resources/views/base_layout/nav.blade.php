@@ -27,7 +27,7 @@
                 <a href="javascript:;">
                 <i class="fa fa-cogs"></i>
                 <span class="title">
-                Provider </span>
+                Users </span>
                 <span class="arrow open">
                 </span>
                 <span class="selected"></span>
@@ -37,7 +37,12 @@
                         <a href="{{ route('admin.provider.index') }}">
                         Show Providers </a>
                     </li>
-
+                </ul>
+                <ul class="sub-menu">
+                    <li class="active">
+                        <a href="{{ route('admin.client.index') }}">
+                        Show Clients </a>
+                    </li>
                 </ul>
             </li>
 

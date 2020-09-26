@@ -66,7 +66,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a  class="btn green" data-toggle="modal" href="{{ route('admin.provider.create') }}">
+                                    <a  class="btn green" data-toggle="modal" href="{{ route('admin.client.create') }}">
                                         Add New <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
@@ -94,48 +94,20 @@
                             </div>
                         </div>
                     </div>
-                    @include('admin.provider.table')
+                    @include('admin.client.table')
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
     </div>
 
-    {{-- <x-modal title="Add Provider" id="addProvider" classProvider='add-provider'>
-        <x-slot name='inputs'>
-            <x-admin.form.form-add-update-provider  id="form-add-provider" action="{{ route('admin.provider.store') }}" />
-        </x-slot> 
-    </x-modal>
-    <x-modal title="Update Provider" id="updateProvider" classProvider='update-provider'>
-        <x-slot name='inputs'>
-            <x-admin.form.form-add-update-provider updateForm='updateForm' id="form-update-provider" action="{{ route('admin.provider.update',['id'=>0]) }}" />
-        </x-slot> 
-    </x-modal> --}}
     @push('js')
         <script>
-            // $(document).on('click','.add-provider',function(){
-            //    $('#form-add-provider').submit();   
-            // });
-            // $(document).on('click','.update-provider',function(){
-            //     var id = $(this).data('id');
-            //     $('#form-update-provider').children('.user_id').val(id);
-            //     var url = "/"+id;
-            //     $('#form-update-provider').attr('action',url);
-            //    $.ajax({
-            //        type: "get",
-            //        url: `${url}`,
-            //        data: "get",
-            //        dataType: "json",
-            //        success: function (response) {
-            //         $('#form-update-provider').children('#name').val(id);
-            //        }
-            //    }); 
-            // });
         $(function() {
           $('#prvider-table').DataTable({
               processing: true,
               serverSide: true,
-              ajax: '{!! route('admin.provider.datatable') !!}',
+              ajax: '{!! route('admin.client.datatable') !!}',
               columns: [
                   { data: 'id', name: 'id' },
                   { data: 'name', name: 'name' },

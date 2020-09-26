@@ -1,7 +1,6 @@
-<form action="{{ $action }}"  method="post" id="{{ $id }}">
+<form action="{{ $action }}"  method="post" >
     @csrf
     @isset($updateForm)
-        <input type="hidden" name="user_id" value="" class="user_id">
          @method('put')
     @endisset
     <div class="row">
