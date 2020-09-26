@@ -13,7 +13,7 @@
     </div>
     <div class="portlet-body form" style="display: block;">
 
-     @include('admin.order.fileds',['action'=>route('admin.order.create'),'updateForm'=>'updateForm'])
+     @include('admin.order.fileds',['action'=>route('admin.order.store')])
     </div>
 </div>
 @push('js')
