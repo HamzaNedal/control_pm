@@ -56,7 +56,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="active">
-                        <a href="">
+                        <a href="{{ route('admin.order.index') }}">
                         Show Orders </a>
                     </li>
                 </ul>
