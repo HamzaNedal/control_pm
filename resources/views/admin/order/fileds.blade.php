@@ -36,24 +36,24 @@
     </div>
 		<div class="col-md-6">
       <div class="form-group">
-        <label class="control-label">Provider</label>
-        <select class="select2_category form-control" data-placeholder="Choose a Category" tabindex="1">
-          <option value="Category 1">Category 1</option>
-          <option value="Category 2">Category 2</option>
-          <option value="Category 3">Category 5</option>
-          <option value="Category 4">Category 4</option>
+        <label class="control-label">Providers :</label>
+        <select class="select2_category form-control" data-placeholder="Choose a Provider" name="provider" tabindex="1">
+          @foreach ($providers as $provider)
+            <option value="{{ $provider->id }}">{{ $provider->name }}</option>
+          @endforeach
         </select>
+       <small><a href="{{ route('admin.provider.create') }}">Add New Provider</a></small>
       </div>
     </div>
 		<div class="col-md-6">
       <div class="form-group">
-        <label class="control-label">Clients</label>
-        <select class="select2_category form-control" data-placeholder="Choose a Category" tabindex="1">
-          <option value="Category 1">Category 1</option>
-          <option value="Category 2">Category 2</option>
-          <option value="Category 3">Category 5</option>
-          <option value="Category 4">Category 4</option>
+        <label class="control-label">Clients :</label>
+        <select class="select2_category form-control" data-placeholder="Choose a Client" name="client" tabindex="1">
+          @foreach ($clients as $client)
+            <option value="{{ $client->id }}">{{ $client->name }}</option>
+          @endforeach
         </select>
+        <small><a href="{{ route('admin.client.create') }}">Add New Client</a></small>
       </div>
     </div>
     </div>
