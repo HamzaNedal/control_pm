@@ -1,6 +1,9 @@
 @extends('base_layout.master_layout')
 
 @section('content')
+
+
+
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>
@@ -154,6 +157,13 @@
           });
       });
 
+        </script>
+<script>
+
+    $('.btn-danger').click(function (){
+
+
+    });
         </script>
     @endpush
 @endsection

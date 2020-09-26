@@ -11,7 +11,7 @@
 <!-- BEGIN HEADER -->
 @include('base_layout.header._header')
 @push('css')
-	
+
 @endpush
 <!-- END HEADER -->
 <div class="clearfix">
@@ -36,6 +36,7 @@
 <!-- END FOOTER -->
 @include('base_layout._script')
 @stack('js')
+
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

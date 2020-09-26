@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
 
 
             //client
-            $table->string('Phone')->nullable();
-            $table->string('Payment')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('payment')->nullable();
             $table->integer('words')->nullable();
 
             //provider

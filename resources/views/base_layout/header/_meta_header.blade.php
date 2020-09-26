@@ -22,7 +22,9 @@
 <link id="style_color" href="{{asset('metronic/assets/admin/layout/css/themes/darkblue.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('metronic/assets/admin/layout/css/custom.css')}}" rel="stylesheet" type="text/css"/>
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css"/>
 
+<link rel="stylesheet" type="text/css" href="{{ asset('metronic') }}/assets/global/plugins/sweetalert.css"/>
 
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
