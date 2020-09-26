@@ -55,6 +55,19 @@ class ClientController extends Controller
             return redirect()->back()->with('error', 'not found');
         }
     }
+
+    public  function destroy($id){
+
+        try {
+
+           $user = User::findOrFail($id)->delete();
+           return redirect()->route('admin.provider.index')->with('success', 'The client has been successfully deleted');
+       } catch (ModelNotFoundException $e) {
+           return redirect()->back()->with('error', 'not found');
+       }
+
+   }
+
     protected function datatable()
     {
         $users = User::where(['role' => 'client'])->get();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\createProviderRequest;
 use App\Http\Requests\updateProviderRequest;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -53,11 +54,19 @@ class ProviderController extends Controller
 
     public  function edit($id)
     {   $user = User::findOrFail($id);
+
         return view('admin.provider.edit',compact('user'));
     }
 
-    public  function destroy($id)
-    {   $user = User::destroy($id);
+    public  function destroy($id){
+
+         try {
+
+            $user = User::findOrFail($id)->delete();
+            return redirect()->route('admin.provider.index')->with('success', 'The service provider has been successfully deleted');
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->with('error', 'not found');
+        }
 
     }
 
