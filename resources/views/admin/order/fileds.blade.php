@@ -6,8 +6,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-            <label for="name" class="col-form-label">Title:</label>
-            <input type="text" class="form-control" name="name" id="name" @isset($order) value="{{$order->name }}" @endisset >
+            <label for="title" class="col-form-label">Title:</label>
+            <input type="text" class="form-control" name="title" id="title" @isset($order) value="{{$order->title }}" @endisset >
             </div>
         </div>
         <div class="col-md-6">
@@ -37,7 +37,7 @@
 		<div class="col-md-6">
       <div class="form-group">
         <label class="control-label">Providers :</label>
-        <select class="select2_category form-control" data-placeholder="Choose a Provider" name="provider" tabindex="1">
+        <select class="select2_category form-control" data-placeholder="Choose a Provider" name="provider_id" tabindex="1">
           @foreach ($providers as $provider)
             <option value="{{ $provider->id }}">{{ $provider->name }}</option>
           @endforeach
@@ -48,7 +48,7 @@
 		<div class="col-md-6">
       <div class="form-group">
         <label class="control-label">Clients :</label>
-        <select class="select2_category form-control" data-placeholder="Choose a Client" name="client" tabindex="1">
+        <select class="select2_category form-control" data-placeholder="Choose a Client" name="client_id" tabindex="1">
           @foreach ($clients as $client)
             <option value="{{ $client->id }}">{{ $client->name }}</option>
           @endforeach
@@ -59,7 +59,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="files" class="control-label">Files</label>
-          <input type="file" id="files" multiple>
+          <input type="file" id="files" name="files[]" multiple>
       </div>
     </div>
     </div>

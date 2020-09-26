@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateOrderRequest;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -47,9 +48,9 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateOrderRequest $request)
     {
-        dd(request()->all());
+        dd($request->all());
     }
 
     /**
