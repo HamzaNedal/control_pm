@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
 {
@@ -18,7 +20,14 @@ class OrderController extends Controller
         return view('admin.order.index');
 
     }
-
+    protected function datatable(){
+        $users = Order::where(['role'=>'provider'])->get();
+        $route ='provider';
+        return DataTables::of($users)->addColumn('actions', function ($data) use($route) {
+            return view('admin.datatables.actions',compact('data','route'));
+        })->rawColumns(['actions'])
+        ->make(true);
+     }
     /**
      * Show the form for creating a new resource.
      *
@@ -26,9 +35,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $s = "[tets,'test']";
-        
-        return view('admin.order.create');
+        $providers = User::where('role','provider')->get();
+        $clients = User::where('role','client')->get();
+        return view('admin.order.create',compact('providers','clients'));
 
     }
 

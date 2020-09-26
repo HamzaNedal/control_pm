@@ -101,54 +101,17 @@
         </div>
     </div>
 
-    {{-- <x-modal title="Add Provider" id="addProvider" classProvider='add-provider'>
-        <x-slot name='inputs'>
-            <x-admin.form.form-add-update-provider  id="form-add-provider" action="{{ route('admin.provider.store') }}" />
-        </x-slot> 
-    </x-modal>
-    <x-modal title="Update Provider" id="updateProvider" classProvider='update-provider'>
-        <x-slot name='inputs'>
-            <x-admin.form.form-add-update-provider updateForm='updateForm' id="form-update-provider" action="{{ route('admin.provider.update',['id'=>0]) }}" />
-        </x-slot> 
-    </x-modal> --}}
     @push('js')
         <script>
-            // $(document).on('click','.add-provider',function(){
-            //    $('#form-add-provider').submit();   
-            // });
-            // $(document).on('click','.update-provider',function(){
-            //     var id = $(this).data('id');
-            //     $('#form-update-provider').children('.user_id').val(id);
-            //     var url = "/"+id;
-            //     $('#form-update-provider').attr('action',url);
-            //    $.ajax({
-            //        type: "get",
-            //        url: `${url}`,
-            //        data: "get",
-            //        dataType: "json",
-            //        success: function (response) {
-            //         $('#form-update-provider').children('#name').val(id);
-            //        }
-            //    }); 
-            // });
+
         $(function() {
           $('#prvider-table').DataTable({
               processing: true,
               serverSide: true,
-              ajax: '{!! route('admin.provider.datatable') !!}',
+              ajax: '{!! route('admin.order.datatable') !!}',
               columns: [
                   { data: 'id', name: 'id' },
-                  { data: 'name', name: 'name' },
-                  { data: 'email', name: 'email' },
-                  { data: 'payment_method', name: 'payment_method' },
-                  { data: 'education_level', name: 'education_level' },
-                  { data: 'name_university', name: 'name_university' },
-                  { data: 'years_experience', name: 'years_experience' },
-                  { data: 'capacity_day', name: 'capacity_day' },
-                  { data: 'subjects', name: 'subjects' },
-                  { data: 'country', name: 'country' },
-                  { data: 'whats_up', name: 'whats_up' },
-                  { data: 'created_at', name: 'created_at' },
+
                   {data: 'actions', name: 'actions', orderable: false, searchable: false}
               ]
           });

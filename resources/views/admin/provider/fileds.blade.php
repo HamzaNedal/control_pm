@@ -50,6 +50,7 @@
           <div class="form-group col-md-12">
             <label for="subjects" class="col-form-label">Subjects :</label>
             {{-- <input type="text" class="form-control" name="subjects" @isset($user) value="{{$user->subjects }}" @endisset id="subjects"> --}}
+            <input type="text" class="form-control" name="subjects" @isset($user) value="{{$user->subjects }}" @endisset value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" >
 
         </div>
           <div class="form-group col-md-12">
