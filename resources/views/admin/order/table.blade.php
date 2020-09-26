@@ -4,7 +4,7 @@
             <th class="table-checkbox">
                 #
             </th>
-            <th>Name</th>
+            <th>Title</th>
             <th>Email</th>
             <th>Payment method</th>
             <th>Education level</th>

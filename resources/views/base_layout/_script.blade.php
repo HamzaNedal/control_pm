@@ -13,6 +13,7 @@
 <script type="text/javascript" src="{{ asset('metronic') }}/assets/global/plugins/select2/select2.min.js"></script>
 <script type="text/javascript" src="{{ asset('metronic') }}/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="{{ asset('metronic') }}/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="{{ asset('metronic') }}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
 <script src="{{asset('/metronic/assets/global/scripts/metronic.js')}}" type="text/javascript"></script>
 <script src="{{asset('/metronic/assets/admin/layout/scripts/layout.js')}}" type="text/javascript"></script>

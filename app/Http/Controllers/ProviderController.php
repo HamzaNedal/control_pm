@@ -56,6 +56,11 @@ class ProviderController extends Controller
         return view('admin.provider.edit',compact('user'));
     }
 
+    public  function destroy($id)
+    {   $user = User::destroy($id);
+
+    }
+
     protected function datatable(){
         $users = User::where(['role'=>'provider'])->get();
         $route ='provider';

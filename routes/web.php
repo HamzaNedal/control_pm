@@ -29,6 +29,9 @@ Route::get('/provider/edit/{id}',[ProviderController::class,'edit'])->name('admi
 Route::put('/provider/{id}',[ProviderController::class,'update'])->name('admin.provider.update');
 Route::delete('/provider/{id}',[ProviderController::class,'store'])->name('admin.provider.destroy');
 
+
+
+
 Route::get('/clients',[ClientController::class,'index'])->name('admin.client.index');
 Route::get('/client/datatable',[ClientController::class,'datatable'])->name('admin.client.datatable');
 Route::get('/client/create',[ClientController::class,'create'])->name('admin.client.create');
