@@ -49,8 +49,9 @@
           </div>
           <div class="form-group col-md-12">
             <label for="subjects" class="col-form-label">Subjects :</label>
-            <input type="text" class="form-control" name="subjects" @isset($user) value="{{$user->subjects }}" @endisset id="subjects">
-          </div>
+            {{-- <input type="text" class="form-control" name="subjects" @isset($user) value="{{$user->subjects }}" @endisset id="subjects"> --}}
+
+        </div>
           <div class="form-group col-md-12">
             <label for="country" class="col-form-label">Country :</label>
             <input type="text" class="form-control" name="country" @isset($user) value="{{$user->country }}" @endisset id="country">
@@ -60,7 +61,7 @@
             <input type="text" class="form-control" name="whats_up" @isset($user) value="{{$user->whats_up }}" @endisset id="whats_up">
           </div>
     </div>
- 
+
     <div class="form-actions right">
       <button type="submit" class="btn blue"><i class="fa fa-check"></i> Save</button>
     </div>

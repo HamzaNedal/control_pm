@@ -12,6 +12,7 @@
 <link href="{{asset('metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('metronic/assets/global/plugins/uniform/css/uniform.default.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('metronic/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css"/>
+
 <!-- END GLOBAL MANDATORY STYLES -->
 <link rel="stylesheet" type="text/css" href="{{ asset('metronic') }}/assets/global/plugins/select2/select2.css"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('metronic') }}/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
@@ -27,6 +28,10 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css"/>
 
 <link rel="stylesheet" type="text/css" href="{{ asset('metronic') }}/assets/global/plugins/sweetalert.css"/>
+<link href="{{asset('metronic/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}" rel="stylesheet" type="text/css"/>
+
+<link href="{{asset('metronic/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.css')}}" rel="stylesheet" type="text/css"/>
+
 
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>

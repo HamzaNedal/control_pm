@@ -14,8 +14,7 @@
 <script type="text/javascript" src="{{ asset('metronic') }}/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="{{ asset('metronic') }}/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
 <script type="text/javascript" src="{{ asset('metronic') }}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-
-<script src="{{asset('/metronic/assets/global/scripts/metronic.js')}}" type="text/javascript"></script>
+<script type="text/javascript" src="{{asset('/metronic/assets/global/scripts/metronic.js')}}" type="text/javascript"></script>
 <script src="{{asset('/metronic/assets/admin/layout/scripts/layout.js')}}" type="text/javascript"></script>
 <script src="{{asset('/metronic/assets/admin/layout/scripts/quick-sidebar.js')}}" type="text/javascript"></script>
 <script src="{{asset('/metronic/assets/admin/layout/scripts/demo.js')}}" type="text/javascript"></script>
@@ -23,7 +22,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js
 "></script>
 <script src="{{asset('/metronic/assets/global/plugins/sweetalert.min.js')}}" type="text/javascript"></script>
-
+<script src="{{asset('/metronic/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}" type="text/javascript"></script>
 
 <script>
     jQuery(document).ready(function() {
