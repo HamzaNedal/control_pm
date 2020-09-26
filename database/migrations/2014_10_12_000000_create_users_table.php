@@ -19,13 +19,18 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            //role
+
+              $table->enum('role', ['admin', 'provider','client']);
+
+
             //client
             $table->string('Phone')->nullable();
             $table->string('Payment')->nullable();
             $table->integer('words')->nullable();
 
             //provider
-            $table->string('payment_method')->nullable();
+             $table->string('payment_method')->nullable();
              $table->string('education_level')->nullable();
              $table->string('name_university')->nullable();
              $table->integer('years_experience')->nullable();
