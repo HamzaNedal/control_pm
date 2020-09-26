@@ -23,10 +23,11 @@ class updateProviderRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
-            'name' => 'required|unique:users,name'.$this->user_id,
-            'email' => 'required|email|unique:users,email,'.$this->user_id,
-            'password' => 'required',
+            'name' => 'required|unique:users,name,'.$this->id,
+            'email' => 'required|email|unique:users,email,'.$this->id,
+            'password' => 'nullable',
             'payment_method' => 'required|string',
             'education_level' => 'required|string',
             'name_university' => 'required|string',
