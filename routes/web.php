@@ -62,3 +62,9 @@ Route::get('rejectOrderByProvider/orders',[OrderController::class,'rejectOrderBy
 Route::get('rejectOrderByProvider/order/datatable',[OrderController::class,'datatableRejectOrderByProvider'])->name('admin.reject.order.by.provider.datatable');
 
 });
+Route::group(['prefix' => 'provider'], function () {
+
+    Route::get('/providers','provider\ProviderController@index')->name('provider.provider.index');
+    Route::get('/provider/datatable','provider\ProviderController@datatable')->name('provider.datatable');
+
+});
