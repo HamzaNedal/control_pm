@@ -90,7 +90,7 @@
                             </div>
                         </div>
                     </div>
-                    @include('admin.order_create.table')
+                    @include('admin.close_order.table')
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
@@ -104,10 +104,9 @@
             table =  $('#table').DataTable({
               processing: true,
               serverSide: true,
-              ajax: '{!! route('admin.send.order.datatable') !!}',
+              ajax: '{!! route('admin.close.order.datatable') !!}',
               columns: [
                   { data: 'id', name: 'id' },
-                  {data: 'actions', name: 'actions', orderable: false, searchable: false},
                   { data: 'client_id', name: 'client_id' },
                   { data: 'provider_id', name: 'provider_id' },
                   { data: 'title', name: 'title' },
@@ -119,8 +118,7 @@
 
               ]
           });
-          
-
+ 
       });
 
         </script>

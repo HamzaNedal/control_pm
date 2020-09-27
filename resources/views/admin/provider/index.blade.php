@@ -125,7 +125,6 @@
               columns: [
                   { data: 'id', name: 'id' },
                   {data: 'actions', name: 'actions', orderable: false, searchable: false},
-
                   { data: 'name', name: 'name' },
                   { data: 'email', name: 'email' },
                   { data: 'payment_method', name: 'payment_method' },
@@ -141,7 +140,7 @@
           });
   
           $(document).on('click','.remove',function(){
-          var url = "{{ route('admin.client.destroy') }}/";
+          var url = "{{ route('admin.provider.destroy') }}/";
           var id = $(this).data('id');
           url = url+id
         swal({

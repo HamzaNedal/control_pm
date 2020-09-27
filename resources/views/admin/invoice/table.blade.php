@@ -5,13 +5,16 @@
                 #
             </th>
             <th>Actions</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Payment</th>
-            <th>Words</th>
+            <th>Provider Name</th>
+            <th>Down payment</th>
+            <th>Payment method</th>
+            <th>Receipt</th>
             <th>Created at</th>
+
+
         </tr>
     </thead>
-
+    <tfoot>
+        
+    </tfoot>
 </table>

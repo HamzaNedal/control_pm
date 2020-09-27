@@ -28,7 +28,7 @@ class Order extends Model
         return $this->belongsTo(User::class, 'provider_id');
     }
 
-    public function getStatusAttribute($val)
+    public static function getStatusAttribute($val)
     {
         switch ($val) {
             case 0:

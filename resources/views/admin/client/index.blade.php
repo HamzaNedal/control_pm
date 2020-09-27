@@ -113,13 +113,13 @@
               ajax: '{!! route('admin.client.datatable') !!}',
               columns: [
                   { data: 'id', name: 'id' },
+                  {data: 'actions', name: 'actions', orderable: false, searchable: false}
                   { data: 'name', name: 'name' },
                   { data: 'email', name: 'email' },
                   { data: 'phone', name: 'phone' },
                   { data: 'payment', name: 'payment' },
                   { data: 'words', name: 'words' },
                   { data: 'created_at', name: 'created_at' },
-                  {data: 'actions', name: 'actions', orderable: false, searchable: false}
               ]
           });
           $(document).on('click','.remove',function(){

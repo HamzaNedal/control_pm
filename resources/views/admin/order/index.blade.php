@@ -87,8 +87,12 @@
 
               ]
           });
+          @isset($search)
+             table.columns(`{{ $id }}`).search(`{{ $search }}`).draw();
+          @endisset
+          
           $(document).on('click','.remove',function(){
-          var url = "{{ route('admin.client.destroy') }}/";
+          var url = "{{ route('admin.order.destroy') }}/";
           var id = $(this).data('id');
           url = url+id
         swal({

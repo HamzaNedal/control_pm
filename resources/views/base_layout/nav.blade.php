@@ -82,13 +82,29 @@
                         <a href="{{ route('admin.edit.order.after.compeleted.index') }}">
                             Show Orders Under modification </a>
                     </li>
+                    <li @isset($activeSub) {{ $activeSub == 'close.order' ? 'class=active' : '' }}  @endisset>
+                        <a href="{{ route('admin.close.order.index') }}">
+                            Show Orders Closed </a>
+                    </li>
+                </ul>
+            
+            </li>
+            <li class="start @isset($active) {{ $active == 'invoice' ? 'active open' : '' }}  @endisset">
+                <a href="javascript:;">
+                <i class="fa fa-cogs"></i>
+                <span class="title">
+                    Invoices </span>
+                <span class="arrow open">
+                </span>
+                <span class="selected"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li  @isset($activeSub) {{ $activeSub == 'invoice.index' ? 'class=active' : '' }}  @endisset >
+                        <a href="{{ route('admin.invoice.index') }}">
+                        Show Invoices </a>
+                    </li>
                 </ul>
              
-               
-
-
-            </li>
-
         </ul>
         <!-- END SIDEBAR MENU1 -->
         <!-- BEGIN RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->

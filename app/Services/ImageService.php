@@ -8,7 +8,7 @@ class ImageService {
     {
         $name = $file->getClientOriginalName();
         $name = str_replace(',', '', $name);
-        $fileName = time() . '.' . $name;
+        $fileName = time() . '_' . $name;
         $file->move(public_path().'/'.$path . '/', $fileName);
         return $fileName;
     }

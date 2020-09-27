@@ -4,7 +4,6 @@
             <th class="table-checkbox">
                 #
             </th>
-            <th>Actions</th>
             <th>client Name</th>
             <th>provider Name</th>
             <th>Title</th>
@@ -15,7 +14,5 @@
 
         </tr>
     </thead>
-    <tfoot>
-        
-    </tfoot>
+
 </table>

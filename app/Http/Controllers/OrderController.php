@@ -18,11 +18,11 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id=1,$status='',$search = '')
     {
         $active = 'order';
         $activeSub = 'order.index';
-        return view('admin.order.index', compact('active', 'activeSub'));
+        return view('admin.order.index', compact('active', 'activeSub','id','search'));
     }
     protected function datatable()
     {
@@ -246,6 +246,23 @@ class OrderController extends Controller
     public function datatbaleEditOrderAfterCompeleted()
     {
         return  $this->datatableSendOrderToProvider(5);
+    }
+
+    public function closeOrderView()
+    {
+        $active = 'order';
+        $activeSub = 'close.order';
+        return view('admin.close_order.index', compact('active', 'activeSub'));
+    }
+
+    public function datatbaleCloseOrder()
+    {
+        $orders = Order::where('delivery_date','<',date('yy-m-d'))->get();
+        return DataTables::of($orders)->addColumn('client_id', function ($data) {
+            return $data->getClient->name;
+        })->addColumn('provider_id', function ($data) {
+            return $data->getProvider->name;
+        })->make(true);
     }
     /**
      * Remove the specified resource from storage.

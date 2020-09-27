@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProviderController;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,7 @@ Route::get('/provider/create',[ProviderController::class,'create'])->name('admin
 Route::post('/provider',[ProviderController::class,'store'])->name('admin.provider.store');
 Route::get('/provider/edit/{id}',[ProviderController::class,'edit'])->name('admin.provider.edit');
 Route::put('/provider/{id}',[ProviderController::class,'update'])->name('admin.provider.update');
-Route::delete('/provider/{id}',[ProviderController::class,'destroy'])->name('admin.provider.destroy');
+Route::delete('/provider/{id?}',[ProviderController::class,'destroy'])->name('admin.provider.destroy');
 
 
 Route::get('/clients',[ClientController::class,'index'])->name('admin.client.index');
@@ -39,13 +40,21 @@ Route::get('/client/edit/{id}',[ClientController::class,'edit'])->name('admin.cl
 Route::put('/client/{id}',[ClientController::class,'update'])->name('admin.client.update');
 Route::delete('/client/{id?}',[ClientController::class,'destroy'])->name('admin.client.destroy');
 
-Route::get('/orders',[OrderController::class,'index'])->name('admin.order.index');
+Route::get('/orders/{id?}/{search?}',[OrderController::class,'index'])->name('admin.order.index');
 Route::get('/order/datatable',[OrderController::class,'datatable'])->name('admin.order.datatable');
 Route::get('/order/create',[OrderController::class,'create'])->name('admin.order.create');
 Route::post('/order',[OrderController::class,'store'])->name('admin.order.store');
 Route::get('/order/edit/{id}',[OrderController::class,'edit'])->name('admin.order.edit');
 Route::put('/order/{id}',[OrderController::class,'update'])->name('admin.order.update');
-Route::delete('/order/{id}',[OrderController::class,'destroy'])->name('admin.order.destroy');
+Route::delete('/order/{id?}',[OrderController::class,'destroy'])->name('admin.order.destroy');
+
+Route::get('/invoices',[InvoiceController::class,'index'])->name('admin.invoice.index');
+Route::get('/invoice/datatable',[InvoiceController::class,'datatable'])->name('admin.invoice.datatable');
+Route::get('/invoice/create',[InvoiceController::class,'create'])->name('admin.invoice.create');
+Route::post('/invoice',[InvoiceController::class,'store'])->name('admin.invoice.store');
+Route::get('/invoice/edit/{id}',[InvoiceController::class,'edit'])->name('admin.invoice.edit');
+Route::put('/invoice/{id}',[InvoiceController::class,'update'])->name('admin.invoice.update');
+Route::delete('/invoice/{id?}',[InvoiceController::class,'destroy'])->name('admin.invoice.destroy');
 
 //order not send
 Route::get('send/orders',[OrderController::class,'orderCreateButNotSend'])->name('admin.order.send.index');
@@ -67,5 +76,8 @@ Route::get('ComplateOrderByProvider/order/datatable',[OrderController::class,'da
 //EditOrderAfterCompeleted
 Route::get('EditOrderAfterCompeleted/orders',[OrderController::class,'editOrderAfterCompeletedView'])->name('admin.edit.order.after.compeleted.index');
 Route::get('EditOrderAfterCompeleted/order/datatable',[OrderController::class,'datatbaleEditOrderAfterCompeleted'])->name('admin.edit.order.after.compeleted.datatable');
+//EditOrderAfterCompeleted
+Route::get('CloseOrder/orders',[OrderController::class,'closeOrderView'])->name('admin.close.order.index');
+Route::get('CloseOrder/order/datatable',[OrderController::class,'datatbaleCloseOrder'])->name('admin.close.order.datatable');
 
 });
