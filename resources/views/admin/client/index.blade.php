@@ -149,10 +149,10 @@
                    .done(function() {
                         $('#table').DataTable().clear().draw();
                    });
-               
+
             swal("Deleted!", "Your imaginary file has been deleted.", "success");
             }
-         
+
         })
       });
 

@@ -23,6 +23,10 @@
 "></script>
 <script src="{{asset('/metronic/assets/global/plugins/sweetalert.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/metronic/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js')}}" type="text/javascript"></script>
+<script src="{{asset('/metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-process')}}" type="text/javascript"></script>
+<script src="{{asset('/metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js')}}" type="text/javascript"></script>
+<script src="{{asset('/metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js')}}" type="text/javascript"></script>
 
 <script>
     jQuery(document).ready(function() {
