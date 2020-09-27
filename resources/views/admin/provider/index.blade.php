@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>
@@ -75,24 +73,8 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="btn-group pull-right">
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i
-                                            class="fa fa-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a href="javascript:;">
-                                                Print </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                Save as PDF </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                Export to Excel </a>
-                                        </li>
-                                    </ul>
+                                <div class="btn-group pull-right buttons">
+                          
                                 </div>
                             </div>
                         </div>
@@ -134,6 +116,7 @@
             //        }
             //    });
             // });
+            
         $(function() {
           var table = $('#prvider-table').DataTable({
               processing: true,
@@ -153,8 +136,10 @@
                   { data: 'subjects', name: 'subjects' },
                   { data: 'country', name: 'country' },
                   { data: 'whats_up', name: 'whats_up' },
-              ]
+              ],
+
           });
+  
           $(document).on('click','.remove',function(){
           var url = "{{ route('admin.client.destroy') }}/";
           var id = $(this).data('id');
@@ -180,7 +165,7 @@
                    },
                    dataType: "html"})
                    .done(function() {
-                    table.ajax.reload();
+                        table.ajax.reload();
                    });
 
             swal("Deleted!", "Your imaginary file has been deleted.", "success");

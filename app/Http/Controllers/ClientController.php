@@ -13,7 +13,9 @@ class ClientController extends Controller
 {
     public function index()
     {
-        return view('admin.client.index');
+        $active ='user';   
+        $activeSub ='client.index';
+        return view('admin.client.index',compact('active','activeSub'));
     }
     public  function create()
     {
@@ -36,8 +38,10 @@ class ClientController extends Controller
     public  function edit($id)
     {
         try {
+            $active ='user';   
+             $activeSub ='client.index';
             $user = User::findOrFail($id);
-            return view('admin.client.edit', compact('user'));
+            return view('admin.client.edit', compact('user','active','activeSub'));
         } catch (ModelNotFoundException $e) {
             return redirect()->route('admin.client.index')->with('error', 'not found');
         }

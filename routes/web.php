@@ -60,5 +60,12 @@ Route::get('acceptOrderByProvider/order/datatable',[OrderController::class,'data
 //rejectOrderByProviderView
 Route::get('rejectOrderByProvider/orders',[OrderController::class,'rejectOrderByProviderView'])->name('admin.reject.order.by.provider.index');
 Route::get('rejectOrderByProvider/order/datatable',[OrderController::class,'datatableRejectOrderByProvider'])->name('admin.reject.order.by.provider.datatable');
+//ComplateOrderByProvider
+Route::get('ComplateOrderByProvider/orders',[OrderController::class,'complateOrderByProviderView'])->name('admin.complate.order.by.provider.index');
+Route::get('ComplateOrderByProvider/orders/{id}',[OrderController::class,'editOrderAfterCompeleted'])->name('admin.edit.order.after.compeleted');
+Route::get('ComplateOrderByProvider/order/datatable',[OrderController::class,'datatableComplateOrderByProvider'])->name('admin.complate.order.by.provider.datatable');
+//EditOrderAfterCompeleted
+Route::get('EditOrderAfterCompeleted/orders',[OrderController::class,'editOrderAfterCompeletedView'])->name('admin.edit.order.after.compeleted.index');
+Route::get('EditOrderAfterCompeleted/order/datatable',[OrderController::class,'datatbaleEditOrderAfterCompeleted'])->name('admin.edit.order.after.compeleted.datatable');
 
 });

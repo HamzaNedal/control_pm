@@ -23,4 +23,13 @@
         @include('admin.order.fileds',['action'=>route('admin.order.update',['id'=>$order->id]),'updateForm'=>'updateForm'])
     </div>
 </div>
+@push('js')
+<script src="{{ asset('metronic') }}/assets/admin/pages/scripts/form-samples.js"></script>
+<script>
+    jQuery(document).ready(function() {    
+
+       FormSamples.init();
+    });
+</script>
+@endpush
 @endsection
