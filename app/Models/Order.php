@@ -16,5 +16,13 @@ class Order extends Model
         'deadline',
         'added_date',
         'status',
+        'files',
     ];
+
+    public function getClient(){
+        return $this->belongsTo(User::class,'client_id');
+    } 
+    public function getProvider(){
+        return $this->belongsTo(User::class,'provider_id');
+    } 
 }

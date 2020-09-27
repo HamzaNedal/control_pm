@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="portlet light bordered">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="portlet-title">
         <div class="caption">
             <i class="icon-equalizer font-blue-hoki"></i>
@@ -11,7 +20,7 @@
 
     </div>
     <div class="portlet-body form" style="display: block;">
-        @include('admin.order.fileds',['action'=>route('admin.order.update',['id'=>$user->id]),'updateForm'=>'updateForm'])
+        @include('admin.order.fileds',['action'=>route('admin.order.update',['id'=>$order->id]),'updateForm'=>'updateForm'])
     </div>
 </div>
 @endsection

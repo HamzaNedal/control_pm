@@ -37,13 +37,12 @@
                         <a href="{{ route('admin.provider.index') }}">
                         Show Providers </a>
                     </li>
-                </ul>
-                <ul class="sub-menu">
                     <li class="active">
                         <a href="{{ route('admin.client.index') }}">
                         Show Clients </a>
                     </li>
                 </ul>
+             
             </li>
             <li class="start">
                 <a href="javascript:;">
@@ -55,11 +54,31 @@
                 <span class="selected"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="active">
+                    <li>
                         <a href="{{ route('admin.order.index') }}">
                         Show Orders </a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.order.send.index') }}">
+                        Show Orders not sent </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.order.send.to.provider.index') }}">
+                            Show Orders Sent</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.accept.order.by.provider.index') }}">
+                            Show Orders in progress </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.reject.order.by.provider.index') }}">
+                            Show Orders rejected </a>
+                    </li>
                 </ul>
+             
+               
+
+
             </li>
 
         </ul>
