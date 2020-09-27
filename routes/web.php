@@ -82,6 +82,5 @@ Route::get('CloseOrder/order/datatable',[OrderController::class,'datatbaleCloseO
 
 });
 
-Auth::routes();
-
+Auth::routes(['register' => false, 'password. request' => false, 'password. reset' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
