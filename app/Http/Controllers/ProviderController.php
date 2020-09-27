@@ -13,12 +13,16 @@ class ProviderController extends Controller
 {
     public function index()
     {
-        return view('admin.provider.index');
+        $active ='user';   
+        $activeSub ='provider.index';
+        return view('admin.provider.index',compact('active','activeSub'));
     }
 
     public function create()
     {
-        return view('admin.provider.create');
+        $active ='user';
+        $activeSub ='provider.index';
+        return view('admin.provider.create',compact('active','activeSub'));
     }
 
     public function store(createProviderRequest $request)
@@ -53,9 +57,13 @@ class ProviderController extends Controller
     }
 
     public  function edit($id)
-    {   $user = User::findOrFail($id);
+    {   
+        
+        $active ='user';
+        $activeSub ='provider.index';
 
-        return view('admin.provider.edit',compact('user'));
+        $user = User::findOrFail($id);
+        return view('admin.provider.edit',compact('user','active','activeSub'));
     }
 
     public  function destroy($id){

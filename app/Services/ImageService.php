@@ -6,8 +6,9 @@ class ImageService {
 
     public function upload($file, $path)
     {
-        $extension = $file->getClientOriginalExtension();
-        $fileName = time() . uniqid() . '.' . $extension;
+        $name = $file->getClientOriginalName();
+        $name = str_replace(',', '', $name);
+        $fileName = time() . '.' . $name;
         $file->move(public_path().'/'.$path . '/', $fileName);
         return $fileName;
     }

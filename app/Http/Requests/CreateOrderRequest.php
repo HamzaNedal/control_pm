@@ -32,7 +32,7 @@ class CreateOrderRequest extends FormRequest
             'deadline'=>'required|date',
             'provider_id'=>'required|integer',
             'client_id'=>'required|integer',
-            'files.*'=>'required|file|mimes:jpeg,png,jpg,doc,docx,ppt,pps,pptx,xls,xlsx,pdf',
+            'files.*'=>'required|file|mimes:jpeg,png,jpg,doc,docx,ppt,pps,pptx,xls,xlsx,pdf|max:5120',
         ];
     }
 }

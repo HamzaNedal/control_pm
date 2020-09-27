@@ -23,7 +23,7 @@
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <li class="start active open">
+            <li class="start @isset($active) {{ $active == 'user' ? 'active open' : '' }}  @endisset">
                 <a href="javascript:;">
                 <i class="fa fa-cogs"></i>
                 <span class="title">
@@ -33,18 +33,18 @@
                 <span class="selected"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="active">
+                    <li  @isset($activeSub) {{ $activeSub == 'provider.index' ? 'class=active' : '' }}  @endisset >
                         <a href="{{ route('admin.provider.index') }}">
                         Show Providers </a>
                     </li>
-                    <li class="active">
+                    <li  @isset($activeSub) {{ $activeSub == 'client.index' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.client.index') }}">
                         Show Clients </a>
                     </li>
                 </ul>
              
             </li>
-            <li class="start">
+            <li class="start @isset($active) {{ $active == 'order' ? 'active open' : '' }}  @endisset">
                 <a href="javascript:;">
                 <i class="fa fa-cogs"></i>
                 <span class="title">
@@ -54,25 +54,33 @@
                 <span class="selected"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li>
+                    <li @isset($activeSub) {{ $activeSub == 'order.index' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.order.index') }}">
                         Show Orders </a>
                     </li>
-                    <li>
+                    <li @isset($activeSub) {{ $activeSub == 'order.send.index' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.order.send.index') }}">
                         Show Orders not sent </a>
                     </li>
-                    <li>
+                    <li @isset($activeSub) {{ $activeSub == 'order.send.to.provider' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.order.send.to.provider.index') }}">
                             Show Orders Sent</a>
                     </li>
-                    <li>
+                    <li @isset($activeSub) {{ $activeSub == 'accept.order.by.provider' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.accept.order.by.provider.index') }}">
                             Show Orders in progress </a>
                     </li>
-                    <li>
+                    <li @isset($activeSub) {{ $activeSub == 'reject.order.by.provider' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.reject.order.by.provider.index') }}">
                             Show Orders rejected </a>
+                    </li>
+                    <li @isset($activeSub) {{ $activeSub == 'complate.order.by.provider' ? 'class=active' : '' }}  @endisset>
+                        <a href="{{ route('admin.complate.order.by.provider.index') }}">
+                            Show Orders Compeleted </a>
+                    </li>
+                    <li @isset($activeSub) {{ $activeSub == 'edit.order.after.compeleted' ? 'class=active' : '' }}  @endisset>
+                        <a href="{{ route('admin.edit.order.after.compeleted.index') }}">
+                            Show Orders Under modification </a>
                     </li>
                 </ul>
              

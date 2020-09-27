@@ -17,8 +17,7 @@
 <!-- END GLOBAL MANDATORY STYLES -->
 <link rel="stylesheet" type="text/css" href="{{ asset('metronic') }}/assets/global/plugins/select2/select2.css"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('metronic') }}/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('metronic') }}/assets/global/plugins/bootstrap-datepicker/css/datepicker.css">
-
+<link href="//cdn.datatables.net/buttons/1.5.6/css/buttons.bootstrap4.min.css" rel="stylesheet">
 <!-- BEGIN THEME STYLES -->
 <link href="{{asset('metronic/assets/global/css/components.css')}}" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="{{asset('metronic/assets/global/css/plugins.css')}}" rel="stylesheet" type="text/css"/>

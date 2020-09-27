@@ -20,14 +20,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-
-        return view('admin.order.index');
+        $active = 'order';
+        $activeSub = 'order.index';
+        return view('admin.order.index', compact('active', 'activeSub'));
     }
     protected function datatable()
     {
-        $users = Order::get();
+        $orders = Order::get();
         $route = 'order';
-        return DataTables::of($users)->addColumn('actions', function ($data) use ($route) {
+        return DataTables::of($orders)->addColumn('actions', function ($data) use ($route) {
             return view('admin.datatables.actions', compact('data', 'route'));
         })->addColumn('client_id', function ($data) use ($route) {
             return $data->getClient->name;
@@ -43,9 +44,11 @@ class OrderController extends Controller
      */
     public function create()
     {
+        $active = 'order';
+        $activeSub = 'order.index';
         $providers = User::where('role', 'provider')->get();
         $clients = User::where('role', 'client')->get();
-        return view('admin.order.create', compact('providers', 'clients'));
+        return view('admin.order.create', compact('providers', 'active', 'activeSub', 'clients'));
     }
 
     /**
@@ -89,10 +92,12 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
+        $active = 'order';
+        $activeSub = 'order.index';
         $order = Order::findOrFail($id);
         $providers = User::where('role', 'provider')->get();
         $clients = User::where('role', 'client')->get();
-        return view('admin.order.edit', compact('order', 'providers', 'clients'));
+        return view('admin.order.edit', compact('order', 'active', 'activeSub', 'providers', 'clients'));
     }
 
     /**
@@ -120,7 +125,9 @@ class OrderController extends Controller
 
     public function orderCreateButNotSend()
     {
-        return view('admin.order_create.index');
+        $active = 'order';
+        $activeSub = 'order.send.index';
+        return view('admin.order_create.index', compact('active', 'activeSub'));
     }
     protected function datatableOrderCreateButNotSend($id = 0)
     {
@@ -142,17 +149,18 @@ class OrderController extends Controller
     }
     public function sendOrderToProviderView()
     {
-       return view('admin.order_send_to_provider.index');
+        $active = 'order';
+        $activeSub = 'order.send.to.provider';
+        return view('admin.order_send_to_provider.index', compact('active', 'activeSub'));
     }
-    protected function datatableSendOrderToProvider($id=1)
+    protected function datatableSendOrderToProvider($id = 1)
     {
         $orders = Order::where(['status' => $id])->get();
         return DataTables::of($orders)->addColumn('client_id', function ($data) {
             return $data->getClient->name;
         })->addColumn('provider_id', function ($data) {
             return $data->getProvider->name;
-        })
-            ->make(true);
+        })->make(true);
     }
 
     public function acceptOrderByProvider($id)
@@ -164,12 +172,14 @@ class OrderController extends Controller
 
     public function acceptOrderByProviderView()
     {
-       return view('admin.order_accept_by_provider.index');
+        $active = 'order';
+        $activeSub = 'accept.order.by.provider';
+        return view('admin.order_accept_by_provider.index', compact('active', 'activeSub'));
     }
 
     protected function datatableAcceptOrderByProvider()
     {
-       return $this->datatableSendOrderToProvider(2);
+        return $this->datatableSendOrderToProvider(2);
     }
 
     public function rejectOrderByProvider($id)
@@ -181,7 +191,9 @@ class OrderController extends Controller
 
     public function rejectOrderByProviderView()
     {
-       return view('admin.order_reject_by_provider.index');
+        $active = 'order';
+        $activeSub = 'reject.order.by.provider';
+        return view('admin.order_reject_by_provider.index', compact('active', 'activeSub'));
     }
 
     protected function datatableRejectOrderByProvider()
@@ -193,12 +205,47 @@ class OrderController extends Controller
     public function complateOrderByProvider($id)
     {
         $order = Order::where(['order_id' => $id, 'provider_id' => auth()->user()->id])->first();
-        $order->status = 4;
-        $order->save();
+        if ($order) {
+            $order->status = 4;
+            $order->save();
+        }
+        abort(404);
+    }
+
+    public function complateOrderByProviderView()
+    {
+        $active = 'order';
+        $activeSub = 'complate.order.by.provider';
+        return view('admin.order_compeleted.index', compact('active', 'activeSub'));
     }
     protected function datatableComplateOrderByProvider()
     {
-        // $this->datatableOrderCreateButNotSend(4);
+        $orders = Order::where(['status' => 4])->get();
+        return DataTables::of($orders)->addColumn('actions', function ($data) {
+            return "<a  href='" . route('admin.edit.order.after.compeleted', ['id' => $data->id]) . "' class='btn btn-success btn-xs' alt='send to edit' title='send to edit'><i class='fa fa-undo'></i></a>";
+        })->addColumn('provider_id', function ($data) {
+            return $data->getProvider->name;
+        })->addColumn('provider_id', function ($data) {
+            return $data->getProvider->name;
+        })->rawColumns(['actions'])->make(true);
+    }
+
+
+    public function editOrderAfterCompeleted($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status = 5;
+        $order->save();
+    }
+    public function editOrderAfterCompeletedView()
+    {
+        $active = 'order';
+        $activeSub = 'edit.order.after.compeleted';
+        return view('admin.edit_order_after_compeleted.index', compact('active', 'activeSub'));
+    }
+    public function datatbaleEditOrderAfterCompeleted()
+    {
+        return  $this->datatableSendOrderToProvider(5);
     }
     /**
      * Remove the specified resource from storage.
