@@ -81,3 +81,7 @@ Route::get('CloseOrder/orders',[OrderController::class,'closeOrderView'])->name(
 Route::get('CloseOrder/order/datatable',[OrderController::class,'datatbaleCloseOrder'])->name('admin.close.order.datatable');
 
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
