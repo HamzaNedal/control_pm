@@ -65,7 +65,7 @@
           url = url+id
         swal({
             title: "Are you sure?",
-            text: `Your will sent this order to ${provider}!`,
+            text: `You will sent this order to ${provider}!`,
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-success",

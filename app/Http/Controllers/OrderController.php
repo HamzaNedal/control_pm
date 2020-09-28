@@ -224,7 +224,7 @@ class OrderController extends Controller
     {
         $orders = Order::where(['status' => 4])->get();
         return DataTables::of($orders)->addColumn('actions', function ($data) {
-            return "<a  href='" . route('admin.edit.order.after.compeleted', ['id' => $data->id]) . "' class='btn btn-success btn-xs' alt='send to edit' title='send to edit'><i class='fa fa-undo'></i></a>";
+            return "<a  data-id='".$data->id."' data-name='".$data->getProvider->name."' class='btn btn-success btn-xs sendOrder' alt='send to edit' title='send to edit'><i class='fa fa-undo'></i></a>";
         })->addColumn('provider_id', function ($data) {
             return $data->getProvider->name;
         })->addColumn('provider_id', function ($data) {

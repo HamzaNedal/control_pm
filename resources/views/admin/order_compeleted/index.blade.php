@@ -52,12 +52,42 @@
                   { data: 'status', name: 'status' },
                   { data: 'added_date', name: 'added_date' },
                   { data: 'deadline', name: 'deadline' },
-                  { data: 'number_words', name: 'number_words' },
+                  { data: 'files_provider', name: 'files_provider' },
                   
 
               ]
           });
- 
+          $(document).on('click','.sendOrder',function(e){
+              e.preventDefault();
+          var url = "{{ route('admin.edit.order.after.compeleted') }}/";
+          var id = $(this).data('id');
+          var provider = $(this).data('name');
+          url = url+id
+        swal({
+            title: "Are you sure?",
+            text: `You will sent this order to ${provider} to edit!`,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-success",
+            confirmButtonText: "Yes, Send it!",
+            closeOnConfirm: false
+        },
+        function(willConfirm){
+
+            if(willConfirm){
+            $.ajax({
+                   type: "get",
+                   url: `${url}`,
+                   dataType: "html"})
+                   .done(function() {
+                        table.ajax.reload();
+                   });
+
+            swal("Sended!", "Your order has been sent.", "success");
+            }
+
+        })
+      });
       });
 
         </script>
