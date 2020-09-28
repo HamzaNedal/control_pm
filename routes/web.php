@@ -71,7 +71,16 @@ Route::get('EditOrderAfterCompeleted/order/datatable',[OrderController::class,'d
 });
 Route::group(['prefix' => 'provider'], function () {
 
-    Route::get('/providers','provider\ProviderController@index')->name('provider.provider.index');
-    Route::get('/provider/datatable','provider\ProviderController@datatable')->name('provider.datatable');
+    Route::get('/orders','provider\ProviderController@index')->name('provider.provider.index');
+    Route::get('/order/datatable','provider\ProviderController@datatable')->name('provider.datatable');
+    Route::get('/accept/order/{id?}','provider\ProviderController@accept')->name('provider.accept');
+    Route::get('/reject/order/{id?}','provider\ProviderController@reject')->name('provider.reject');
+
+    Route::get('/send/order/datatable','provider\ProviderController@send_datatable')->name('order.send.datatable');
+    Route::get('/send/order','provider\ProviderController@page_send')->name('order.send');
+    Route::get('/progress/order/datatable','provider\ProviderController@onprogress_datatable')->name('order.onprogress.datatable');
+    Route::get('/progress/order','provider\ProviderController@page_onprogress')->name('order.onprogress');
+
+
 
 });

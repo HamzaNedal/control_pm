@@ -97,7 +97,7 @@
                             </div>
                         </div>
                     </div>
-                    @include('provider_pages.table')
+                    @include('provider_pages.order-onprogress.table')
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
@@ -136,17 +136,18 @@
             // });
         $(function() {
           var table = $('#prvider-table').DataTable({
-
               processing: true,
               serverSide: true,
-              ajax: '{!! route('provider.datatable') !!}',
+              'order':[0,'desc'],
+
+              ajax: '{!! route('order.onprogress.datatable') !!}',
               columns: [
                   { data: 'id' },
                  { data: 'deadline' },
                   { data: 'added_date' },
                   { data: 'status'  },
-
                   { data: 'details'  },
+                  { data: 'Delivery'  },
 
               ]
           });
@@ -181,7 +182,7 @@
                             table.ajax.reload();
                             });
 
-            Swal.fire('Successfully approved', '', 'success')
+            Swal.fire('Successfully approved', 'moved the order too on the progress  page', 'success')
         } else if (result.isDenied) {
 
             $.ajax({
@@ -193,7 +194,7 @@
                             table.ajax.reload();
                             });
 
-            Swal.fire('rejected', '', 'error')
+            Swal.fire('Successfully rejected', 'moved the order too on the  reject  page', 'error')
         }
         })
 
