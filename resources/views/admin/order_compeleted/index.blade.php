@@ -42,7 +42,7 @@
             table =  $('#table').DataTable({
               processing: true,
               serverSide: true,
-              ajax: '{!! route('admin.complate.order.by.provider.datatable') !!}',
+              ajax: '{!! route('admin.complete.order.by.provider.datatable') !!}',
               columns: [
                   { data: 'id', name: 'id' },
                   { data: 'actions' },

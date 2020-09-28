@@ -51,6 +51,7 @@
 
         $(function() {
             table =  $('#table').DataTable({
+              'order': [0,'desc'],
               processing: true,
               serverSide: true,
               ajax: '{!! route('admin.invoice.datatable') !!}',

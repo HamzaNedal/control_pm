@@ -2,7 +2,24 @@
 
 @section('title','Clients')
 @section('content')
-<div class="page-bar"></div>
+<div class="page-bar">
+    {{-- <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="{{ url('/') }}">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+        <li>
+            <a href="{{ url()->previous() }}">{{  url()->previous()  }}</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+        <li>
+            <a href="#">{{ url()->full() }}</a>
+        </li>
+</ul> --}}
+</div>
 
 
     <div class="row">
@@ -53,12 +70,13 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
              });
         var table =  $('#table').DataTable({
+            'order': [0,'desc'],
               processing: true,
               serverSide: true,
               ajax: '{!! route('admin.client.datatable') !!}',
               columns: [
                   { data: 'id', name: 'id' },
-                  {data: 'actions', name: 'actions', orderable: false, searchable: false}
+                  {data: 'actions', name: 'actions', orderable: false, searchable: false},
                   { data: 'name', name: 'name' },
                   { data: 'email', name: 'email' },
                   { data: 'phone', name: 'phone' },

@@ -45,8 +45,8 @@
                         <a href="{{ route('admin.reject.order.by.provider.index') }}">
                             Show Orders rejected </a>
                     </li>
-                    <li @isset($activeSub) {{ $activeSub == 'complate.order.by.provider' ? 'class=active' : '' }}  @endisset>
-                        <a href="{{ route('admin.complate.order.by.provider.index') }}">
+                    <li @isset($activeSub) {{ $activeSub == 'complete.order.by.provider' ? 'class=active' : '' }}  @endisset>
+                        <a href="{{ route('admin.complete.order.by.provider.index') }}">
                             Show Orders Compeleted </a>
                     </li>
                     <li @isset($activeSub) {{ $activeSub == 'edit.order.after.compeleted' ? 'class=active' : '' }}  @endisset>
