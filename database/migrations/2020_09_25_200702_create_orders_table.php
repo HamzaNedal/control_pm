@@ -28,7 +28,7 @@ class CreateOrdersTable extends Migration
             $table->date('delivery_date')->nullable();
             $table->tinyInteger('status');
             $table->string('files');
-            $table->string('files_provider');
+            $table->string('files_provider')->nullable();
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');;

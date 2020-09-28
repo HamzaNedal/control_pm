@@ -14,4 +14,11 @@ class Invoice extends Model
         'file',
 
     ];
+    protected $casts = [
+        'created_at'=>'date:Y-m-d h:m:s'
+    ];
+    public function getProvider()
+    {
+        return $this->belongsTo(User::class, 'provider_id');
+    }
 }

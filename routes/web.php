@@ -47,6 +47,7 @@ Route::post('/order',[OrderController::class,'store'])->name('admin.order.store'
 Route::get('/order/edit/{id}',[OrderController::class,'edit'])->name('admin.order.edit');
 Route::put('/order/{id}',[OrderController::class,'update'])->name('admin.order.update');
 Route::delete('/order/{id?}',[OrderController::class,'destroy'])->name('admin.order.destroy');
+Route::get('/order/exportExcel/{provider}',[OrderController::class,'exportExcel'])->name('admin.order.exportExcel');
 
 Route::get('/invoices',[InvoiceController::class,'index'])->name('admin.invoice.index');
 Route::get('/invoice/datatable',[InvoiceController::class,'datatable'])->name('admin.invoice.datatable');

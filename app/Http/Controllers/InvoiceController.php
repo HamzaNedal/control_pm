@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\Invoice;
+use App\Models\Order;
 use App\Models\User;
 use App\Services\ImageService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class InvoiceController extends Controller
@@ -83,10 +85,13 @@ class InvoiceController extends Controller
         $route ='invoice';
         return DataTables::of($users)->addColumn('actions', function ($data) use($route) {
             return view('admin.datatables.actions',compact('data','route'));
+        })->addColumn('provider_id', function ($data) {
+            return $data->getProvider->name;
         })->addColumn('file', function ($data) {
-          
             return '<a target="_blank" href="'.asset('files/'.$data->file).'">Download</a>';
         })->rawColumns(['actions','file'])
         ->make(true);
      }
+
+
 }

@@ -1,5 +1,6 @@
 @extends('base_layout.master_layout')
 
+@section('title','Add invoice')
 @section('content')
 
 <div class="portlet light bordered">

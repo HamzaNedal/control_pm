@@ -1,6 +1,8 @@
 @extends('base_layout.master_layout')
 
+@section('title','edit client')
 @section('content')
+
 <div class="portlet light bordered">
     <div class="portlet-title">
         <div class="caption">
