@@ -97,8 +97,8 @@
                     </ul>
                  
                 </li>
-            
                 @endcan
+            
             </ul>
         <!-- END SIDEBAR MENU1 -->
         <!-- BEGIN RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->

@@ -43,7 +43,7 @@ class ProviderController extends Controller
     }
     protected function datatable()
     {
-        $orders = Order::where('provider_id', 13)->where('status', '>', '0')->get();
+        $orders = Order::where('provider_id', auth()->user()->id)->where('status', '>', '0')->get();
         return DataTables::of($orders)->addColumn('status', function ($data) {
             if ($data->status == 'Waiting accept') {
                 return " <button data-id= '" . $data->id . "' type='button' href='' class='icon-btn btn green accrr'  alt='send' title='Click to accept or reject' style='height:50px'><i class='fa fa-external-link'></i>     <div style='color:#fff'>    Accept  </div>   </button>";
@@ -77,7 +77,7 @@ class ProviderController extends Controller
     protected function send_datatable()
     {
 
-        $orders = Order::where('provider_id', 13)->where('status', '=', '1')->get();
+        $orders = Order::where('provider_id', auth()->user()->id)->where('status', '=', '1')->get();
         return DataTables::of($orders)->addColumn('status', function ($data) {
             if ($data->status == 'Waiting accept') {
                 return " <button data-id= '" . $data->id . "' type='button' href='' class='icon-btn btn green accrr'  alt='send' title='Click to accept or reject' style='height:50px'><i class='fa fa-external-link'></i>     <div style='color:#fff'>    Accept  </div>   </button>";
@@ -112,7 +112,7 @@ class ProviderController extends Controller
     {
 
 
-        $orders = Order::where('provider_id', 13)->where('status', '=', '2')->get();
+        $orders = Order::where('provider_id', auth()->user()->id)->where('status', '=', '2')->get();
         return DataTables::of($orders)->addColumn('status', function ($data) {
 
             return  $data->status;
@@ -173,7 +173,7 @@ class ProviderController extends Controller
     {
 
 
-        $orders = Order::where('provider_id', 13)->where('status', '=', '4')->get();
+        $orders = Order::where('provider_id', auth()->user()->id)->where('status', '=', '4')->get();
         return DataTables::of($orders)->addColumn('status', function ($data) {
 
             return  $data->status;
@@ -194,7 +194,7 @@ class ProviderController extends Controller
     protected function modification_datatable()
     {
 
-        $orders = Order::where('provider_id', 13)->where('status', '=', '5')->get();
+        $orders = Order::where('provider_id', auth()->user()->id)->where('status', '=', '5')->get();
         return DataTables::of($orders)->addColumn('status', function ($data) {
             return  $data->status;
 

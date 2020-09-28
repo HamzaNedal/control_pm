@@ -84,9 +84,9 @@ Route::get('CloseOrder/orders',[OrderController::class,'closeOrderView'])->name(
 Route::get('CloseOrder/order/datatable',[OrderController::class,'datatbaleCloseOrder'])->name('admin.close.order.datatable');
 
 });
-Route::group(['prefix' => 'provider'], function () {
+Route::group(['prefix' => 'provider','middleware'=>['auth','can:provider']], function () {
 
-    Route::get('/orders','provider\ProviderController@index')->name('provider.provider.index');
+    Route::get('/orders','provider\ProviderController@index')->name('provider.order.index');
     Route::get('/order/datatable','provider\ProviderController@datatable')->name('provider.datatable');
     Route::get('/accept/order/{id?}','provider\ProviderController@accept')->name('provider.accept');
     Route::get('/reject/order/{id?}','provider\ProviderController@reject')->name('provider.reject');
