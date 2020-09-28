@@ -97,7 +97,7 @@ Route::group(['prefix' => 'provider'], function () {
     Route::get('/progress/order','provider\ProviderController@page_onprogress')->name('order.onprogress');
 
     Route::get('/modification/order/datatable','provider\ProviderController@modification_datatable')->name('order.modification.datatable');
-    Route::get('/modification/order','provider\ProviderController@page_modification')->name('order.onprogress');
+    Route::get('/modification/order','provider\ProviderController@page_modification')->name('order.modification');
 
 
 
