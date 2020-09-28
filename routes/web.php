@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProviderController;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +18,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [HomeController::class,'index']);
 
-Route::get('/', function () {
-    return view('base_layout.master_layout');
-});
-Route::group(['prefix' => 'admin'], function () {
 
+Route::group(['prefix' => 'admin','middleware'=>['auth','can:admin']], function () {
+    
 Route::get('/providers',[ProviderController::class,'index'])->name('admin.provider.index');
 // Route::get('/getProviders/{id?}',[ProviderController::class,'getProviders'])->name('admin.provider.getproviders');
 Route::get('/provider/datatable',[ProviderController::class,'datatable'])->name('admin.provider.datatable');
@@ -83,5 +84,5 @@ Route::get('CloseOrder/order/datatable',[OrderController::class,'datatbaleCloseO
 
 });
 
-Auth::routes(['register' => false, 'password. request' => false, 'password. reset' => false]);
+Auth::routes(['register' => false, 'request' => false, 'reset' => false]);
 Route::get('/home', 'HomeController@index')->name('home');

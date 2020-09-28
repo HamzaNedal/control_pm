@@ -28,7 +28,7 @@ class OrderController extends Controller
     }
     protected function datatable()
     {
-        $orders = Order::get();
+        $orders = Order::orderBy('id','desc')->get();
         $route = 'order';
         return DataTables::of($orders)->addColumn('actions', function ($data) use ($route) {
             return view('admin.datatables.actions', compact('data', 'route'));

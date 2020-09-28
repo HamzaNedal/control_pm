@@ -40,9 +40,10 @@
 				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-quick-sidebar-toggler">
-					<a href="{{ route('logout') }}" class="dropdown-toggle" title="Logout">
-					<i class="icon-logout"></i>
-					</a>
+					<form method="post" action="{{ route('logout') }}">
+						@csrf
+						<button class="btn btn-link" title="Logout"><i class="icon-logout"></i></button>
+					</form>
 				</li>
 				<!-- END QUICK SIDEBAR TOGGLER -->
 			</ul>

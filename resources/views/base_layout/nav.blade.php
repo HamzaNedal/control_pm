@@ -13,7 +13,8 @@
      
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-         
+         @can('admin')
+             
             <li class="start @isset($active) {{ $active == 'order' ? 'active open' : '' }}  @endisset">
                 <a href="javascript:;">
                 <i class="fa fa-cogs"></i>
@@ -97,7 +98,7 @@
                  
                 </li>
             
-            
+                @endcan
             </ul>
         <!-- END SIDEBAR MENU1 -->
         <!-- BEGIN RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->

@@ -59,6 +59,10 @@
 
         $(function() {
             table =  $('#table').DataTable({
+                'order': [
+                    0, // here is the column number
+                    'desc'
+                ],
               processing: true,
               serverSide: true,
               ajax: '{!! route('admin.order.datatable') !!}',
