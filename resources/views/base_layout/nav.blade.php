@@ -10,40 +10,10 @@
                 <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
                 <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
                 <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
-                <form class="sidebar-search sidebar-search-bordered" action="extra_search.html" method="POST">
-                    <a href="javascript:;" class="remove">
-                    <i class="icon-close"></i>
-                    </a>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                        <button class="btn submit"><i class="icon-magnifier"></i></button>
-                        </span>
-                    </div>
-                </form>
+     
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <li class="start @isset($active) {{ $active == 'user' ? 'active open' : '' }}  @endisset">
-                <a href="javascript:;">
-                <i class="fa fa-cogs"></i>
-                <span class="title">
-                Users </span>
-                <span class="arrow open">
-                </span>
-                <span class="selected"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li  @isset($activeSub) {{ $activeSub == 'provider.index' ? 'class=active' : '' }}  @endisset >
-                        <a href="{{ route('admin.provider.index') }}">
-                        Show Providers </a>
-                    </li>
-                    <li  @isset($activeSub) {{ $activeSub == 'client.index' ? 'class=active' : '' }}  @endisset>
-                        <a href="{{ route('admin.client.index') }}">
-                        Show Clients </a>
-                    </li>
-                </ul>
-             
-            </li>
+         
             <li class="start @isset($active) {{ $active == 'order' ? 'active open' : '' }}  @endisset">
                 <a href="javascript:;">
                 <i class="fa fa-cogs"></i>
@@ -90,6 +60,7 @@
             
             </li>
             <li class="start @isset($active) {{ $active == 'invoice' ? 'active open' : '' }}  @endisset">
+                
                 <a href="javascript:;">
                 <i class="fa fa-cogs"></i>
                 <span class="title">
@@ -104,8 +75,30 @@
                         Show Invoices </a>
                     </li>
                 </ul>
-             
-        </ul>
+                <li class="start @isset($active) {{ $active == 'user' ? 'active open' : '' }}  @endisset">
+                    <a href="javascript:;">
+                    <i class="fa fa-cogs"></i>
+                    <span class="title">
+                    Users </span>
+                    <span class="arrow open">
+                    </span>
+                    <span class="selected"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li  @isset($activeSub) {{ $activeSub == 'provider.index' ? 'class=active' : '' }}  @endisset >
+                            <a href="{{ route('admin.provider.index') }}">
+                            Show Providers </a>
+                        </li>
+                        <li  @isset($activeSub) {{ $activeSub == 'client.index' ? 'class=active' : '' }}  @endisset>
+                            <a href="{{ route('admin.client.index') }}">
+                            Show Clients </a>
+                        </li>
+                    </ul>
+                 
+                </li>
+            
+            
+            </ul>
         <!-- END SIDEBAR MENU1 -->
         <!-- BEGIN RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->
         <ul class="page-sidebar-menu visible-sm visible-xs" data-slide-speed="200" data-auto-scroll="true">

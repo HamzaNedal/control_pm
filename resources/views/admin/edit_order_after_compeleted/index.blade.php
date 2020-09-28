@@ -15,14 +15,7 @@
                         <i class="fa fa-globe"></i>Edit Orders Management
                     </div>
                     <div class="tools">
-                        <a href="javascript:;" class="collapse">
-                        </a>
-                        <a href="#portlet-config" data-toggle="modal" class="config">
-                        </a>
-                        <a href="javascript:;" class="reload">
-                        </a>
-                        {{-- <a href="javascript:;" class="remove">
-                        </a> --}}
+                       
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -32,25 +25,7 @@
                              
                             </div>
                             <div class="col-md-6">
-                                <div class="btn-group pull-right">
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i
-                                            class="fa fa-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a href="javascript:;">
-                                                Print </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                Save as PDF </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                Export to Excel </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>

@@ -59,7 +59,7 @@ Route::delete('/invoice/{id?}',[InvoiceController::class,'destroy'])->name('admi
 
 //order not send
 Route::get('send/orders',[OrderController::class,'orderCreateButNotSend'])->name('admin.order.send.index');
-Route::get('send/order/sendOrderToProvider/{id}',[OrderController::class,'sendOrderToProvider'])->name('admin.order.send.to.index');
+Route::get('send/order/sendOrderToProvider/{id?}',[OrderController::class,'sendOrderToProvider'])->name('admin.order.send.to.index');
 Route::get('send/order/datatable',[OrderController::class,'datatableOrderCreateButNotSend'])->name('admin.send.order.datatable');
 //sendOrderToProvider
 Route::get('send-to-provider/orders',[OrderController::class,'sendOrderToProviderView'])->name('admin.order.send.to.provider.index');
