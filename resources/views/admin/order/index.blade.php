@@ -1,10 +1,9 @@
 @extends('base_layout.master_layout')
 
+@section('title','Orders')
 @section('content')
-    <div class="page-bar">
-   
-       
-    </div>
+
+    <div class="page-bar"></div>
 
     <div class="row">
         <div class="col-md-12">
@@ -12,7 +11,7 @@
             <div class="portlet box grey-cascade">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-globe"></i>Orders Table
+                        <i class="fa fa-globe"></i>Orders Management
                     </div>
                     <div class="tools">
                         {{-- <a href="javascript:;" class="collapse">
@@ -37,23 +36,13 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="btn-group pull-right">
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i
-                                            class="fa fa-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a href="javascript:;">
-                                                Print </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                Save as PDF </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                Export to Excel </a>
-                                        </li>
-                                    </ul>
+                                    @if ($search)
+                                    <a class="btn btn-success" href="{{ route('admin.order.exportExcel',['provider'=>"$search"]) }}">Excel <i
+                                        class="fa fa-file-excel-o"></i>
+                                    </a> 
+                                    @endif
+                                   
+                              
                                 </div>
                             </div>
                         </div>
@@ -70,6 +59,7 @@
 
         $(function() {
             table =  $('#table').DataTable({
+             'order': [0,'desc'],
               processing: true,
               serverSide: true,
               ajax: '{!! route('admin.order.datatable') !!}',
@@ -87,8 +77,12 @@
 
               ]
           });
+          @isset($search)
+             table.columns(`{{ $id }}`).search(`^{{ $search }}$`, true, false).draw();
+          @endisset
+          
           $(document).on('click','.remove',function(){
-          var url = "{{ route('admin.client.destroy') }}/";
+          var url = "{{ route('admin.order.destroy') }}/";
           var id = $(this).data('id');
           url = url+id
         swal({

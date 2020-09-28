@@ -5,6 +5,7 @@
 
 <head>
   @include('base_layout.header._meta_header')
+
 </head>
 
 <body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo">

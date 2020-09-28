@@ -11,7 +11,7 @@
             <th>Status</th>
             <th>Date Added</th>
             <th>Deadline</th>
-            <th>Number of words</th>
+            <th>Files</th>
 
         </tr>
     </thead>

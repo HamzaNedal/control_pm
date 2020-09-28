@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrdersExport;
 use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
@@ -9,6 +10,7 @@ use App\Models\User;
 use App\Services\ImageService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
@@ -18,15 +20,15 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id=1,$search = '')
     {
         $active = 'order';
         $activeSub = 'order.index';
-        return view('admin.order.index', compact('active', 'activeSub'));
+        return view('admin.order.index', compact('active', 'activeSub','id','search'));
     }
     protected function datatable()
     {
-        $orders = Order::get();
+        $orders = Order::orderBy('id','desc')->get();
         $route = 'order';
         return DataTables::of($orders)->addColumn('actions', function ($data) use ($route) {
             return view('admin.datatables.actions', compact('data', 'route'));
@@ -133,7 +135,7 @@ class OrderController extends Controller
     {
         $orders = Order::where(['status' => $id])->get();
         return DataTables::of($orders)->addColumn('actions', function ($data) {
-            return "<a  href='" . route('admin.order.send.to.index', ['id' => $data->id]) . "' class='btn btn-success btn-xs' alt='send' title='send'><i class='fa fa-check'></i></a>";
+            return "<a  href='' data-id='".$data->id."' data-name='".$data->getProvider->name."' class='btn btn-success btn-xs sendOrder' alt='send' title='send'><i class='fa fa-check'></i></a>";
         })->addColumn('client_id', function ($data) {
             return $data->getClient->name;
         })->addColumn('provider_id', function ($data) {
@@ -222,7 +224,7 @@ class OrderController extends Controller
     {
         $orders = Order::where(['status' => 4])->get();
         return DataTables::of($orders)->addColumn('actions', function ($data) {
-            return "<a  href='" . route('admin.edit.order.after.compeleted', ['id' => $data->id]) . "' class='btn btn-success btn-xs' alt='send to edit' title='send to edit'><i class='fa fa-undo'></i></a>";
+            return "<a  data-id='".$data->id."' data-name='".$data->getProvider->name."' class='btn btn-success btn-xs sendOrder' alt='send to edit' title='send to edit'><i class='fa fa-undo'></i></a>";
         })->addColumn('provider_id', function ($data) {
             return $data->getProvider->name;
         })->addColumn('provider_id', function ($data) {
@@ -247,6 +249,34 @@ class OrderController extends Controller
     {
         return  $this->datatableSendOrderToProvider(5);
     }
+
+    public function closeOrderView()
+    {
+        $active = 'order';
+        $activeSub = 'close.order';
+        return view('admin.close_order.index', compact('active', 'activeSub'));
+    }
+
+    public function datatbaleCloseOrder()
+    {
+        $orders = Order::where('delivery_date','<',date('yy-m-d'))->get();
+        return DataTables::of($orders)->addColumn('client_id', function ($data) {
+            return $data->getClient->name;
+        })->addColumn('provider_id', function ($data) {
+            return $data->getProvider->name;
+        })->make(true);
+    }
+
+    public function exportExcel($provider)
+    {
+      $user = User::where('name',$provider)->first();
+      if($user){
+          $orders  = Order::select('id','provider_id','client_id','title','status','added_date','deadline','information','number_words')->where('provider_id',$user->id)->get();
+          return  Excel::download(new OrdersExport($orders), time().'_orders.xlsx');
+      }
+      return null;
+    }
+    
     /**
      * Remove the specified resource from storage.
      *

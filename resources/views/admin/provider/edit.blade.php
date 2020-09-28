@@ -1,6 +1,8 @@
 @extends('base_layout.master_layout')
 
+@section('title','Edit provider')
 @section('content')
+
 <div class="portlet light bordered">
     @if ($errors->any())
     <div class="alert alert-danger">

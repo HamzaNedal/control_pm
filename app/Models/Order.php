@@ -18,6 +18,9 @@ class Order extends Model
         'status',
         'files',
     ];
+    protected $casts = [
+        'created_at'=>'date:Y-m-d h:m:s'
+    ];
 
     public function getClient()
     {
@@ -50,5 +53,14 @@ class Order extends Model
                 return "Edit";
 
         }
+    }
+
+    public function getProviderNameAttribute()
+    {
+       return $this->getProvider->name;
+    }
+    public function getClientNameAttribute()
+    {
+       return $this->getClient->name;
     }
 }
