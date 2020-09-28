@@ -71,8 +71,6 @@ class ProviderController extends Controller
          try {
 
             $user = User::findOrFail($id)->delete();
-            return 'success';
-            // return redirect()->route('admin.provider.index')->with('success', 'The service provider has been successfully deleted');
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with('error', 'not found');
         }

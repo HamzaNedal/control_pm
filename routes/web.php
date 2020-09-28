@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProviderController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,7 @@ Route::get('/', [HomeController::class,'index']);
 
 
 Route::group(['prefix' => 'admin','middleware'=>['auth','can:admin']], function () {
-    
+
 Route::get('/providers',[ProviderController::class,'index'])->name('admin.provider.index');
 // Route::get('/getProviders/{id?}',[ProviderController::class,'getProviders'])->name('admin.provider.getproviders');
 Route::get('/provider/datatable',[ProviderController::class,'datatable'])->name('admin.provider.datatable');
@@ -83,6 +84,27 @@ Route::get('CloseOrder/orders',[OrderController::class,'closeOrderView'])->name(
 Route::get('CloseOrder/order/datatable',[OrderController::class,'datatbaleCloseOrder'])->name('admin.close.order.datatable');
 
 });
+Route::group(['prefix' => 'provider'], function () {
 
+    Route::get('/orders','provider\ProviderController@index')->name('provider.provider.index');
+    Route::get('/order/datatable','provider\ProviderController@datatable')->name('provider.datatable');
+    Route::get('/accept/order/{id?}','provider\ProviderController@accept')->name('provider.accept');
+    Route::get('/reject/order/{id?}','provider\ProviderController@reject')->name('provider.reject');
+
+    Route::get('/send/order/datatable','provider\ProviderController@send_datatable')->name('order.send.datatable');
+    Route::get('/send/order','provider\ProviderController@page_send')->name('order.send');
+    Route::get('/progress/order/datatable','provider\ProviderController@onprogress_datatable')->name('order.onprogress.datatable');
+    Route::get('/progress/order','provider\ProviderController@page_onprogress')->name('order.onprogress');
+
+    Route::get('/modification/order/datatable','provider\ProviderController@modification_datatable')->name('order.modification.datatable');
+    Route::get('/modification/order','provider\ProviderController@page_modification')->name('order.onprogress');
+
+
+
+    Route::get('/completed/order/datatable','provider\ProviderController@completed_datatable')->name('order.completed.datatable');
+    Route::get('/completed/order','provider\ProviderController@page_completed')->name('order.completed');
+
+
+});
 Auth::routes(['register' => false, 'request' => false, 'reset' => false]);
 Route::get('/home', 'HomeController@index')->name('home');

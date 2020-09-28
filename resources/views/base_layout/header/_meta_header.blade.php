@@ -28,11 +28,14 @@
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css"/>
 
-<link rel="stylesheet" type="text/css" href="{{ asset('metronic') }}/assets/global/plugins/sweetalert.css"/>
+{{-- <link rel="stylesheet" type="text/css" href="{{ asset('metronic') }}/assets/global/plugins/sweetalert.css"/> --}}
 <link href="{{asset('metronic/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}" rel="stylesheet" type="text/css"/>
 
 <link href="{{asset('metronic/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.css')}}" rel="stylesheet" type="text/css"/>
 
+<link href="{{asset('metronic/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css')}}" rel="stylesheet" type="text/css"/>
+<link href="{{asset('metronic/assets/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css')}}" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
