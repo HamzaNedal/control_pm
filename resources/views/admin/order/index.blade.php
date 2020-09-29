@@ -93,10 +93,10 @@
             confirmButtonClass: "btn-danger",
             confirmButtonText: "Yes, delete it!",
             closeOnConfirm: false
-        } })
+        })
         .then((willConfirm)=>{
 
-            if(willConfirm){
+            if(willConfirm.isConfirmed){
             $.ajax({
                    type: "post",
                    url: `${url}`,
@@ -109,7 +109,7 @@
                     table.ajax.reload();
                    });
 
-            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            Swal.fire("Deleted!", "Your imaginary file has been deleted.", "success");
             }
 
         })
