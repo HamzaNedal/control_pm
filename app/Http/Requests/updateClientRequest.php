@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class updateClientRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class updateClientRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,21 @@ class updateClientRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|unique:users,name,'.$this->id,
+            'email' => 'required|email|unique:users,email,'.$this->id,
+            'phone' => 'required|numeric',
+            'payment' => 'required|numeric',
+            'words' => 'required|numeric',
         ];
     }
+    public function prepareForValidation(){
+        if($this->password === null) {
+            $this->request->remove('password');
+        }else{
+           $this->password = Hash::make($this->password); 
+        }
+    }
+
+
+
 }

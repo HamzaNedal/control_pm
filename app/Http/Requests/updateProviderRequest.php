@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class updateProviderRequest extends FormRequest
 {
@@ -44,7 +45,7 @@ class updateProviderRequest extends FormRequest
         if($this->password === null) {
             $this->request->remove('password');
         }else{
-           // $this->password = Hash::make($this->password); 
+           $this->password = Hash::make($this->password); 
         }
     }
 }

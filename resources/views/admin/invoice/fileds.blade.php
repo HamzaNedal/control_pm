@@ -32,9 +32,9 @@
             </label>
             <label><input type="radio"  name="optionsRadios" id="client_id" value="client">Clients :
               <div class="client_id" style="display: none">
-                <select class="select2_category form-control" data-placeholder="Choose a Provider" name="provider_id" tabindex="1" value="{{ old('provider_id') }}">
-                  @foreach ($providers as $provider)
-                    <option value="{{ $provider->id }}" @isset($invoice) {{ $invoice->provider_id == $provider->id ? "selected" : "" }} @endisset>{{ $provider->name }}</option>
+                <select disabled class="select2_category form-control" data-placeholder="Choose a Provider" name="provider_id" tabindex="1" value="{{ old('provider_id') }}">
+                  @foreach ($clients as $client)
+                    <option value="{{ $client->id }}" @isset($invoice) {{ $invoice->provider_id == $client->id ? "selected" : "" }} @endisset>{{ $client->name }}</option>
                   @endforeach
                 </select>
                 <small><a href="{{ route('admin.provider.create') }}">Add New Provider</a></small>

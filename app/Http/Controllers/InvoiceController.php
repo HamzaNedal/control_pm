@@ -27,11 +27,13 @@ class InvoiceController extends Controller
         $active ='invoice';
         $activeSub ='invoice.index';
         $providers = User::where('role','provider')->get();
-        return view('admin.invoice.create',compact('active','activeSub','providers'));
+        $clients = User::where('role','client')->get();
+        return view('admin.invoice.create',compact('active','activeSub','providers','clients'));
     }
 
     public function store(CreateInvoiceRequest $request,ImageService $imageService)
     {
+        
         $input = $request->except(['_token', '_method']);
         if ($request->hasfile('file')) {
             $input['file'] = $imageService->upload($input['file'], 'files');
@@ -87,9 +89,12 @@ class InvoiceController extends Controller
             return view('admin.datatables.actions',compact('data','route'));
         })->addColumn('provider_id', function ($data) {
             return $data->getProvider->name;
-        })->addColumn('file', function ($data) {
+        })->addColumn('role', function ($data) {
+            return $data->getProvider->role;
+        })
+        ->addColumn('file', function ($data) {
             return '<a target="_blank" href="'.asset('files/'.$data->file).'">Download</a>';
-        })->rawColumns(['actions','file'])
+        })->rawColumns(['actions','file','role'])
         ->make(true);
      }
 

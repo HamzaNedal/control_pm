@@ -59,6 +59,7 @@
                   { data: 'id', name: 'id' },
                   {data: 'actions', name: 'actions', orderable: false, searchable: false},
                   { data: 'provider_id' },
+                  { data: 'role' },
                   { data: 'down_payment' },
                   { data: 'payment_method' },
                   { data: 'file' },

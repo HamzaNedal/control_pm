@@ -97,7 +97,23 @@
                     </ul>
 
                 </li>
+                <li class="start @isset($active) {{ $active == 'setting' ? 'active open' : '' }}  @endisset">
+                    <a href="javascript:;">
+                    <i class="fa fa-cogs"></i>
+                    <span class="title">
+                    Setting </span>
+                    <span class="arrow open">
+                    </span>
+                    <span class="selected"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li  @isset($active) {{ $active == 'setting' ? 'class=active' : '' }}  @endisset >
+                            <a href="{{ route('setting') }}">
+                            Setting </a>
+                        </li>
+                    </ul>
 
+                </li>
                 @endcan
                 @can('provider')
                

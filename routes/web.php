@@ -23,6 +23,8 @@ Route::get('/', [HomeController::class,'index']);
 
 
 Route::group(['prefix' => 'admin','middleware'=>['auth','can:admin']], function () {
+    Route::get('/setting', [HomeController::class,'setting'])->name('setting');
+    Route::post('/setting', [HomeController::class,'update'])->name('admin.setting.update');
 
 Route::get('/providers',[ProviderController::class,'index'])->name('admin.provider.index');
 // Route::get('/getProviders/{id?}',[ProviderController::class,'getProviders'])->name('admin.provider.getproviders');
