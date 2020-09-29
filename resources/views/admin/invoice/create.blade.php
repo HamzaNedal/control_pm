@@ -33,6 +33,9 @@
 
            FormSamples.init();
         });
+        $('#client_id').on('click',function(){
+          console.log('test');
+      })
     </script>
 @endpush
 @endsection

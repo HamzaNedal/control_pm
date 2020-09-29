@@ -210,13 +210,7 @@ class ProviderController extends Controller
             return  $data->status;
 
         })->addColumn('details', function ($data) {
-            return " <button class='icon-btn btn blue' style=' color:#fff ; height:50px'>
-                 <i class='fa fa-file-o'></i>
-
-                 <div style='color:#fff'>
-                 Details
-                 </div>
-                 </button>";
+            return view('provider_pages.modals.modal',compact('data'));;
         })->addColumn('Delivery', function ($data) {
           return view('provider_pages.modals.modalUpload',compact('data'));;
         })->rawColumns(['status', 'details', 'Delivery'])->make(true);;

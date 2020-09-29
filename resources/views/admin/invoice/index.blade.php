@@ -47,7 +47,7 @@
 
     @push('js')
 
-        <script>
+    <script>
 
         $(function() {
             table =  $('#table').DataTable({
@@ -99,7 +99,7 @@
         })
       });
       });
-
+ 
         </script>
     @endpush
 @endsection

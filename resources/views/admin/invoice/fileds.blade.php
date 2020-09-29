@@ -16,18 +16,40 @@
           <input type="text" class="form-control" name="payment_method" id="payment_method" @isset($invoice) value="{{$invoice->payment_method }}" @endisset value="{{ old('payment_method') }}">
           </div>
       </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Radio</label>
+          <div class="radio-list">
+            <label><input type="radio" name="optionsRadios" id="provider_id" value="provider"  checked="">Providers: 
+              <div class="provider_id">
+                <select class="select2_category form-control" data-placeholder="Choose a Provider" name="provider_id" tabindex="1" value="{{ old('provider_id') }}">
+                  @foreach ($providers as $provider)
+                    <option value="{{ $provider->id }}" @isset($invoice) {{ $invoice->provider_id == $provider->id ? "selected" : "" }} @endisset>{{ $provider->name }}</option>
+                  @endforeach
+                </select>
+                <small><a href="{{ route('admin.provider.create') }}">Add New Provider</a></small>
+              </div>
+            </label>
+            <label><input type="radio"  name="optionsRadios" id="client_id" value="client">Clients :
+              <div class="client_id" style="display: none">
+                <select class="select2_category form-control" data-placeholder="Choose a Provider" name="provider_id" tabindex="1" value="{{ old('provider_id') }}">
+                  @foreach ($providers as $provider)
+                    <option value="{{ $provider->id }}" @isset($invoice) {{ $invoice->provider_id == $provider->id ? "selected" : "" }} @endisset>{{ $provider->name }}</option>
+                  @endforeach
+                </select>
+                <small><a href="{{ route('admin.provider.create') }}">Add New Provider</a></small>
+              </div>
+             
+            </label>
+          </div>
 
-		<div class="col-md-6">
-      <div class="form-group">
-        <label class="control-label">Providers :</label>
-        <select class="select2_category form-control" data-placeholder="Choose a Provider" name="provider_id" tabindex="1" value="{{ old('provider_id') }}">
-          @foreach ($providers as $provider)
-            <option value="{{ $provider->id }}" @isset($invoice) {{ $invoice->provider_id == $provider->id ? "selected" : "" }} @endisset>{{ $provider->name }}</option>
-          @endforeach
-        </select>
-       <small><a href="{{ route('admin.provider.create') }}">Add New Provider</a></small>
+        </div>
       </div>
-    </div>
+		{{-- <div class="col-md-6">
+      <div class="form-group">
+        
+      </div>
+    </div> --}}
 		
     <div class="col-md-6">
       <div class="form-group">

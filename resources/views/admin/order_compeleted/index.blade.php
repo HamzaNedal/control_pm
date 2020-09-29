@@ -62,8 +62,10 @@
           var url = "{{ route('admin.edit.order.after.compeleted') }}/";
           var id = $(this).data('id');
           var provider = $(this).data('name');
+          var message_id = $(this).data('message');
+          var info = $('#'+message_id).val();
           url = url+id
-        swal({
+        swal.fire({
             title: "Are you sure?",
             text: `You will sent this order to ${provider} to edit!`,
             type: "warning",
@@ -71,19 +73,22 @@
             confirmButtonClass: "btn-success",
             confirmButtonText: "Yes, Send it!",
             closeOnConfirm: false
-        },
-        function(willConfirm){
+        })
+        .then((result)=>{
 
-            if(willConfirm){
+            if(result.isConfirmed){
             $.ajax({
                    type: "get",
                    url: `${url}`,
+                    data:{
+                        info:info
+                    },
                    dataType: "html"})
                    .done(function() {
                         table.ajax.reload();
                    });
 
-            swal("Sended!", "Your order has been sent.", "success");
+                   Swal.fire("Sended!", "Your order has been sent.", "success");
             }
 
         })
