@@ -10,11 +10,11 @@
                 <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
                 <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
                 <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
-     
+
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
          @can('admin')
-             
+
             <li class="start @isset($active) {{ $active == 'order' ? 'active open' : '' }}  @endisset">
                 <a href="javascript:;">
                 <i class="fa fa-cogs"></i>
@@ -58,10 +58,10 @@
                             Show Orders Closed </a>
                     </li>
                 </ul>
-            
+
             </li>
             <li class="start @isset($active) {{ $active == 'invoice' ? 'active open' : '' }}  @endisset">
-                
+
                 <a href="javascript:;">
                 <i class="fa fa-cogs"></i>
                 <span class="title">
@@ -95,10 +95,52 @@
                             Show Clients </a>
                         </li>
                     </ul>
-                 
+
+                </li>
+
+                @endcan
+                @can('provider')
+               
+                <li class="start @isset($active) {{ $active == 'order' ? 'active open' : '' }}  @endisset">
+                    <a href="javascript:;">
+                    <i class="fa fa-cogs"></i>
+                    <span class="title">
+                    Orders </span>
+                    <span class="arrow open">
+                    </span>
+                    <span class="selected"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li @isset($activeSub) {{ $activeSub == 'order.index' ? 'class=active' : '' }}  @endisset>
+                            <a href="{{ route('provider.order.index') }}">
+                            Show Orders </a>
+                        </li>
+                        <li @isset($activeSub) {{ $activeSub == 'order.send.index' ? 'class=active' : '' }}  @endisset>
+                            <a href="{{ route('order.send') }}">
+                                Sent orders </a>
+                        </li>
+                        <li @isset($activeSub) {{ $activeSub == 'order.send.to.provider' ? 'class=active' : '' }}  @endisset>
+                            <a href="{{ route('order.onprogress') }}">
+                                orders in progress</a>
+                        </li>
+
+
+                        <li @isset($activeSub) {{ $activeSub == 'complate.order.by.provider' ? 'class=active' : '' }}  @endisset>
+                            <a href="{{ route('order.completed') }}">
+                                Orders Compeleted </a>
+                        </li>
+                        <li @isset($activeSub) {{ $activeSub == 'edit.order.after.compeleted' ? 'class=active' : '' }}  @endisset>
+                            <a href="{{ route('order.modification') }}">
+                              Orders  modification </a>
+                        </li>
+
+                    </ul>
+
                 </li>
                 @endcan
-            
+              
+
+
             </ul>
         <!-- END SIDEBAR MENU1 -->
         <!-- BEGIN RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->

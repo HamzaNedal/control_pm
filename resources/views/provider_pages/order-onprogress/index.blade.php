@@ -115,25 +115,69 @@
         </x-slot>
     </x-modal> --}}
     @push('js')
+
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
+
         <script>
-            // $(document).on('click','.add-provider',function(){
-            //    $('#form-add-provider').submit();
-            // });
-            // $(document).on('click','.update-provider',function(){
-            //     var id = $(this).data('id');
-            //     $('#form-update-provider').children('.user_id').val(id);
-            //     var url = "/"+id;
-            //     $('#form-update-provider').attr('action',url);
-            //    $.ajax({
-            //        type: "get",
-            //        url: `${url}`,
-            //        data: "get",
-            //        dataType: "json",
-            //        success: function (response) {
-            //         $('#form-update-provider').children('#name').val(id);
-            //        }
-            //    });
-            // });
+       $(function() {
+       $(document).on('click','.saveFiles',function() {
+              var action = $(this).parent().parent().children().find('.formUpload').attr('action');
+              var formData = new FormData($(this).parent().parent().children().find('.formUpload')[0]);
+             
+
+            });
+       });
+       $(document).ready(function() { 
+        $(document).on('click','.saveFiles',function() {
+              var action = $(this).parent().parent().children().find('.formUpload').attr('action');
+              var order_id = $(this).parent().parent().children().find('.formUpload').find('#order_id');
+              var formData = new FormData($(this).parent().parent().children().find('.formUpload')[0]);
+   
+              $.ajax({
+                    xhr: function() {
+                        $('.uploadImageLine').html(` <div class="progress-bar" role="progressbar" aria-valuenow=""
+                        aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                            0%
+                        </div>`);
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = (evt.loaded / evt.total) * 100;
+                                $('.progress-bar').text(Math.floor(percentComplete) + '%');
+                                $('.progress-bar').css('width',Math.floor(percentComplete) + '%');
+                                if(Math.floor(percentComplete) == 100){
+                                    $('.progress-bar').text('Processing...');
+                                }
+                            }
+                    }, false);
+                    return xhr;
+                    },
+                    type: 'POST',
+                    url: action,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(data){
+                        $('.progress-bar').text('Done');
+                        $('.progress-bar').css('background-color', 'green');
+                        location.href = "{{ url()->current() }}";
+                    }
+                }).fail(function(data) {
+                          var obj = JSON.parse(data.responseText);
+                          $('.progress-bar').text('Failed!!');
+                          if(obj.errors.files != undefined){
+                             $('.progress-bar').append(`<p>${obj.errors.files[0]}</p>`);
+                          }
+                          if(obj.errors['files.0'] != undefined){
+                             $('.progress-bar').append(`<p>${obj.errors['files.0']}</p>`);
+                          }
+                          $('.progress-bar').css('width', '100%');
+                          $('.progress-bar').css('background-color', 'red');
+                });
+
+            });
+           
+        }); 
         $(function() {
           var table = $('#prvider-table').DataTable({
               processing: true,

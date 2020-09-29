@@ -95,9 +95,10 @@ Route::group(['prefix' => 'provider','middleware'=>['auth','can:provider']], fun
     Route::get('/send/order','provider\ProviderController@page_send')->name('order.send');
     Route::get('/progress/order/datatable','provider\ProviderController@onprogress_datatable')->name('order.onprogress.datatable');
     Route::get('/progress/order','provider\ProviderController@page_onprogress')->name('order.onprogress');
+    Route::post('/progress/order/upload','provider\ProviderController@uploadFiles')->name('provider.upload.files');
 
     Route::get('/modification/order/datatable','provider\ProviderController@modification_datatable')->name('order.modification.datatable');
-    Route::get('/modification/order','provider\ProviderController@page_modification')->name('order.onprogress');
+    Route::get('/modification/order','provider\ProviderController@page_modification')->name('order.modification');
 
 
 
