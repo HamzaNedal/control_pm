@@ -31,7 +31,8 @@ class UpdateOrderRequest extends FormRequest
             'deadline'=>'required|date',
             'provider_id'=>'required|integer',
             'client_id'=>'required|integer',
-            'files.*'=>'somtimes|nullable|file|mimes:jpeg,png,jpg,doc,docx,ppt,pps,pptx,xls,xlsx,pdf|max:5120',
+            'files.*'=>'sometimes|nullable|file|mimes:jpeg,png,jpg,doc,docx,ppt,pps,pptx,xls,xlsx,pdf|max:5120',
+            'files' => 'array|max_uploaded_file_size:5000',
         ];
     }
 }

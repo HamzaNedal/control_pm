@@ -63,4 +63,5 @@ class Order extends Model
     {
        return $this->getClient->name;
     }
+
 }

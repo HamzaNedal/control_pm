@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Services\ImageService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -71,8 +72,19 @@ class OrderController extends Controller
         }
         $input['files'] = substr($pathfiles, 0, -1);;
         $input['status'] = 0;
-        Order::Create($input);
+        $order=Order::Create($input);
+
+        $details=[
+            'title'=>'Congratulations!',
+            'body'=>' You have been assigned order number'.$order->id.',, please review the sent orders'
+
+      ];
+        $user=User::where('id',$request->provider_id)->first();
+        Mail::to($user->email)->send(new  \App\Mail\TestMail($details));
+
         return redirect()->route('admin.order.index')->with('success', 'Service order added successfully');
+
+
     }
 
     /**
@@ -94,12 +106,23 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
+
+        try {
+
         $active = 'order';
         $activeSub = 'order.index';
         $order = Order::findOrFail($id);
+
         $providers = User::where('role', 'provider')->get();
         $clients = User::where('role', 'client')->get();
         return view('admin.order.edit', compact('order', 'active', 'activeSub', 'providers', 'clients'));
+
+    } catch (ModelNotFoundException $e) {
+
+        return back()->with('error', 'not found');
+
+    }
+
     }
 
     /**
@@ -111,19 +134,27 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, $id, ImageService $imageService)
     {
+        try {
 
-        Order::findOrfail($id);
-        $input = $request->except(['_method', '_token']);
-        if ($request->hasfile('files')) {
-            $pathfiles = '';
-            foreach ($input['files'] as $value) {
-                $pathfiles .= $imageService->upload($value, 'files') . ',';
+            Order::findOrfail($id);
+            $input = $request->except(['_method', '_token']);
+            if ($request->hasfile('files')) {
+                $pathfiles = '';
+                foreach ($input['files'] as $value) {
+                    $pathfiles .= $imageService->upload($value, 'files') . ',';
+                }
+                $input['files'] = substr($pathfiles, 0, -1);;
             }
-            $input['files'] = substr($pathfiles, 0, -1);;
+            Order::where(['id' => $id])->update($input);
+            return redirect()->route('admin.order.index')->with('success', 'Service order updated successfully');
+
+
+        } catch (ModelNotFoundException $e) {
+
+            return back()->with('error', 'not found');
+
         }
-        Order::where(['id' => $id])->update($input);
-        return redirect()->route('admin.order.index')->with('success', 'Service order updated successfully');
-    }
+   }
 
     public function orderCreateButNotSend()
     {
@@ -276,7 +307,7 @@ class OrderController extends Controller
       }
       return null;
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *
