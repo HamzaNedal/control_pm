@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\provider;
 
+use App\Exports\InvoicesExport;
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\User;
 use App\Services\ImageService;
@@ -11,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProviderController extends Controller
@@ -232,5 +235,14 @@ class ProviderController extends Controller
         ]);
 
 
+    }
+
+    public function exportExcel()
+    {
+            $invoices  = Invoice::where('provider_id',auth()->user()->id)->get();
+            if($invoices){
+                return  Excel::download(new InvoicesExport($invoices), time() . '_Invoice.xlsx');
+            }
+        return null;
     }
 }

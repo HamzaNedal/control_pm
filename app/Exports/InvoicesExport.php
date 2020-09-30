@@ -26,19 +26,37 @@ class InvoicesExport implements FromCollection,WithHeadings,WithMapping
     }
     public function map($invoice): array
     {
-        return [
-            [
-                $invoice->id,
-                $invoice->getProvider->name,
-                $invoice->down_payment,
-                $invoice->payment_method,
-                asset($invoice->file),
-            ],
+        if($invoice->provider_id == auth()->user()->id){
+            return [
+                [
+                    $invoice->id,
+                    $invoice->down_payment,
+                    $invoice->payment_method,
+                    asset($invoice->file),
+                ],
+            ];
+
+        }else{
+            return [
+                [
+                    $invoice->id,
+                    $invoice->getProvider->name,
+                    $invoice->down_payment,
+                    $invoice->payment_method,
+                    asset($invoice->file),
+                ],
+            ];
+        }
+        
            
-        ];
+        
     }
     public function headings() :array
     {
-        return ["#", "Name","Down payment",'Payment method','Receipt'];
+        if(auth()->user()->role == 'provider'){
+            return ["#","Down payment",'Payment method','Receipt'];
+        } 
+            return ["#", "Name","Down payment",'Payment method','Receipt'];
+        
     }
 }

@@ -78,14 +78,6 @@ class OrderController extends Controller
         $input['status'] = 0;
         $order=Order::Create($input);
 
-        $details=[
-            'title'=>'Congratulations!',
-            'body'=>' You have been assigned order number'.$order->id.',, please review the sent orders'
-
-      ];
-        $user=User::where('id',$request->provider_id)->first();
-        Mail::to($user->email)->send(new  \App\Mail\TestMail($details));
-
         return redirect()->route('admin.order.index')->with('success', '  Order has been added successfully  ');
 
 
@@ -183,6 +175,14 @@ class OrderController extends Controller
         $order = Order::findOrfail($id);
         $order->status = 1;
         $order->save();
+        
+        $details=[
+            'title'=>'Congratulations!',
+            'body'=>' You have been assigned order number'.$order->id.',, please review the sent orders'
+
+      ];
+        $user=User::where('id',$order->provider_id)->first();
+        Mail::to($user->email)->send(new  \App\Mail\TestMail($details));
     }
     public function sendOrderToProviderView()
     {

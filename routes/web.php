@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\provider\ProviderController as FrontProviderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -108,6 +109,9 @@ Route::group(['prefix' => 'provider','middleware'=>['auth','can:provider']], fun
 
     Route::get('/completed/order/datatable','provider\ProviderController@completed_datatable')->name('order.completed.datatable');
     Route::get('/completed/order','provider\ProviderController@page_completed')->name('order.completed');
+
+    Route::get('/invoice/exportExcel',[FrontProviderController::class,'exportExcel'])->name('provider.invoice.exportExcel');
+
 
 
 });
