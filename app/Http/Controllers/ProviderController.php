@@ -82,7 +82,8 @@ class ProviderController extends Controller
 
          try {
 
-            $user = User::findOrFail($id)->delete();
+            $user = User::findOrFail($id);
+            $user->update(['delete'=>1]);
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with('error', 'not found');
         }

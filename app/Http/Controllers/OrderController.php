@@ -51,8 +51,8 @@ class OrderController extends Controller
     {
         $active = 'order';
         $activeSub = 'order.index';
-        $providers = User::where('role', 'provider')->get();
-        $clients = User::where('role', 'client')->get();
+        $providers = User::where(['role'=> 'provider','status'=>0])->get();
+        $clients = User::where(['role'=> 'client','status'=>0])->get();
         return view('admin.order.create', compact('providers', 'active', 'activeSub', 'clients'));
     }
 
@@ -109,8 +109,8 @@ class OrderController extends Controller
         $activeSub = 'order.index';
         $order = Order::findOrFail($id);
 
-        $providers = User::where('role', 'provider')->get();
-        $clients = User::where('role', 'client')->get();
+        $providers = User::where(['role'=> 'provider','status'=>0])->get();
+        $clients = User::where(['role'=> 'client','status'=>0])->get();
         return view('admin.order.edit', compact('order', 'active', 'activeSub', 'providers', 'clients'));
 
     } catch (ModelNotFoundException $e) {

@@ -38,6 +38,9 @@ class CreateUsersTable extends Migration
              $table->string('subjects')->nullable();
              $table->string('country')->nullable();
              $table->string('whats_up')->nullable();
+
+
+             $table->tinyInteger('delete')->default(0);
              $table->rememberToken();
 
              $table->timestamps();
