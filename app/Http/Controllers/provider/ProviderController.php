@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\provider;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\User;
 use App\Services\ImageService;
@@ -21,9 +22,8 @@ class ProviderController extends Controller
     public function index()
     {
         $active = 'order';
-        $activeSub = 'order.index';
-        return view('provider_pages.index',compact('activeSub','active'));
-
+        $activeSub = 1;
+        return view('provider_pages.index', compact('activeSub', 'active'));
     }
     public function accept($id = 0)
     {
@@ -57,7 +57,7 @@ class ProviderController extends Controller
                 return $data->status;
             }
         })->addColumn('details', function ($data) {
-            return view('provider_pages.modals.modal',compact('data'));
+            return view('provider_pages.modals.modal', compact('data'));
         })->rawColumns(['status', 'details'])
             ->make(true);
     }
@@ -68,7 +68,9 @@ class ProviderController extends Controller
 
     public function page_send()
     {
-        return view('provider_pages.order-send.index');
+        $activeSub=2;
+
+        return view('provider_pages.order-send.index',compact('activeSub'));
     }
 
 
@@ -85,7 +87,7 @@ class ProviderController extends Controller
                 return $data->status;
             }
         })->addColumn('details', function ($data) {
-            return view('provider_pages.modals.modal',compact('data'));
+            return view('provider_pages.modals.modal', compact('data'));
         })->rawColumns(['status', 'details'])
             ->make(true);;
     }
@@ -97,7 +99,8 @@ class ProviderController extends Controller
 
     public function page_onprogress()
     {
-        return view('provider_pages.order-onprogress.index');
+        $activeSub=3;
+        return view('provider_pages.order-onprogress.index',compact('activeSub'));
     }
 
 
@@ -110,23 +113,23 @@ class ProviderController extends Controller
 
             return  $data->status;
         })->addColumn('details', function ($data) {
-              return view('provider_pages.modals.modal',compact('data'));;
+            return view('provider_pages.modals.modal', compact('data'));;
         })->addColumn('Delivery', function ($data) {
 
-            return view('provider_pages.modals.modalUpload',compact('data'));
+            return view('provider_pages.modals.modalUpload', compact('data'));
         })->rawColumns(['status', 'details', 'Delivery'])->make(true);;
     }
 
-    public function uploadFiles(Request $request,ImageService $imageService){
+    public function uploadFiles(Request $request, ImageService $imageService)
+    {
 
         $validator = Validator::make($request->all(), [
-            'order_id'=>'required|integer',
+            'order_id' => 'required|integer',
             'files' => 'array|max_uploaded_file_size:5000',
             'files.*' => 'required|file|mimes:jpeg,png,jpg,doc,docx,ppt,pps,pptx,xls,xlsx,pdf',
         ]);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return Response::json(array(
                 'success' => false,
                 'errors' => $validator->getMessageBag()->toArray()
@@ -141,7 +144,7 @@ class ProviderController extends Controller
         }
         $pathfiles = substr($pathfiles, 0, -1);;
 
-        Order::where(['id'=> $request->order_id,'provider_id'=>auth()->user()->id])->update([
+        Order::where(['id' => $request->order_id, 'provider_id' => auth()->user()->id])->update([
             'files_provider' => $pathfiles,
             'status' => 4,
             'delivery_date' => date('yy-m-d', time() + 86400 * 60),
@@ -151,7 +154,7 @@ class ProviderController extends Controller
     public function order_delivery(Request $request, ImageService $imageService)
     {
         $validatedData = $request->validate([
-            'order_id'=>'required|integer',
+            'order_id' => 'required|integer',
             'files' => 'array|max_uploaded_file_size:5000',
             'files.*' => 'required|file|mimes:jpeg,png,jpg,doc,docx,ppt,pps,pptx,xls,xlsx,pdf',
         ]);
@@ -167,11 +170,11 @@ class ProviderController extends Controller
         }
         $input['files'] = substr($pathfiles, 0, -1);;
 
-        Order::where(['id'=> $request->order_id,'provider_id'=>auth()->user()->id])->update([
+        Order::where(['id' => $request->order_id, 'provider_id' => auth()->user()->id])->update([
             'files_provider' => $input['files'],
             'status' => 4
         ]);
-        return redirect()->route('order.onprogress')->with('success', 'The request has been delivered successfully');
+        return back()->with('success', 'The request has been delivered successfully');
     }
 
     //Completed requests page
@@ -179,7 +182,9 @@ class ProviderController extends Controller
 
     public function page_completed()
     {
-        return view('provider_pages.order-completed.index');
+        $activeSub=4;
+
+        return view('provider_pages.order-completed.index',compact('activeSub'));
     }
 
     protected function completed_datatable()
@@ -199,7 +204,8 @@ class ProviderController extends Controller
 
     public function page_modification()
     {
-        return view('provider_pages.order-modification.index');
+        $activeSub=5;
+        return view('provider_pages.order-modification.index',compact('activeSub'));
     }
 
 
@@ -210,27 +216,57 @@ class ProviderController extends Controller
         $orders = Order::where('provider_id', auth()->user()->id)->where('status', '=', '5')->get();
         return DataTables::of($orders)->addColumn('status', function ($data) {
             return  $data->status;
-
         })->addColumn('details', function ($data) {
-            return view('provider_pages.modals.modal',compact('data'));;
+            return view('provider_pages.modals.modal', compact('data'));;
         })->addColumn('Delivery', function ($data) {
-          return view('provider_pages.modals.modalUpload',compact('data'));;
+            return view('provider_pages.modals.modalUpload', compact('data'));;
         })->rawColumns(['status', 'details', 'Delivery'])->make(true);;
     }
 
 
 
-    public function login (){
+    public function login()
+    {
 
 
         User::create([
 
-            'name'=>'admin',
-            'role'=>'admin',
-            'password'=>Hash::make('123456789'),
-            'email'=>'admin@admin.com'
+            'name' => 'admin',
+            'role' => 'admin',
+            'password' => Hash::make('123456789'),
+            'email' => 'admin@admin.com'
         ]);
+    }
+    ///page invoices
 
+    public function invoice_page()
+    {
+        $activeSub=6;
+
+        return view('provider_pages.Invoices_provider.index',compact('activeSub'));
+    }
+    protected function invoice_datatable()
+    {
+
+
+        $invoices = Invoice::where('provider_id', auth()->user()->id)->get();
+        return DataTables::of($invoices)->addColumn('details', function ($data) {
+            return
+                " <a class='icon-btn btn blue' href='" . route('detials.provider.invoice', ['id' => $data->id]) . "' style=' color:#fff ; height:50px'>
+                    <i class='fa fa-file-o'></i>
+
+                    <div style='color:#fff'>
+                   Details
+                   </div></a>";
+        })->rawColumns(['details'])->make(true);;
+    }
+
+
+    public function invoice_details($id){
+
+
+        $invoice = Invoice::findOrFail($id);
+        return view('provider_pages.Invoices_provider.details',compact('invoice'));
 
     }
 }

@@ -109,14 +109,17 @@ Route::group(['prefix' => 'provider','middleware'=>['auth','can:provider']], fun
     Route::get('/completed/order','provider\ProviderController@page_completed')->name('order.completed');
 
 
+
+    Route::get('order/invoices/datatable','provider\ProviderController@invoice_datatable')->name('provider.invoice.datatable');
+    Route::get('order/invoices','provider\ProviderController@invoice_page')->name('provider.invoice');
+
+    Route::get('order/invoice-details/{id}','provider\ProviderController@invoice_details')->name('detials.provider.invoice');
+
+
 });
 
 Route::get('/create/login','provider\ProviderController@login');
 
-Route::get('/send-email',function(){
 
-
-    echo 'ssssssss';
-});
 Auth::routes(['register' => false, 'request' => false, 'reset' => false]);
 Route::get('/home', 'HomeController@index')->name('home');

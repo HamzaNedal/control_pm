@@ -72,6 +72,7 @@ class OrderController extends Controller
 
             }
         }
+
         $input['status'] = 0;
         $order=Order::Create($input);
 

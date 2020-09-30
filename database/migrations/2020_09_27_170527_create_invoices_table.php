@@ -20,8 +20,10 @@ class CreateInvoicesTable extends Migration
             $table->string('down_payment');
             $table->string('payment_method');
             $table->string('file');
+            $table->date('date');
+
             $table->timestamps();
-            
+
             $table->foreign('provider_id')->references('id')->on('users')->onDelete('cascade');;
 
         });

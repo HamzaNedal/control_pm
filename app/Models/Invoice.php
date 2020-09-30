@@ -12,6 +12,7 @@ class Invoice extends Model
         'payment_method',
         'provider_id',
         'file',
+    'date'
 
     ];
     protected $casts = [

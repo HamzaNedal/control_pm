@@ -33,7 +33,7 @@ class HomeController extends Controller
        return redirect()->route('provider.order.index');
 
     }
-    public function setting(){  
+    public function setting(){
         $active ='setting';
         return view('admin.setting.create',compact('active'));
     }
