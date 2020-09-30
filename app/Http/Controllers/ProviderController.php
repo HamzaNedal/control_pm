@@ -56,7 +56,11 @@ class ProviderController extends Controller
 
         $input['role'] = 'provider';
 
-        $input['password']=Hash::make($input['password']);
+        if($input['password'] === null) {
+            unset($input['password']);
+        }else{
+           $input['password'] = Hash::make($input['password']); 
+        }
 
         $input['role'] = 'provider';
         $user = User::where('id', $id)->update($input);
@@ -91,7 +95,7 @@ class ProviderController extends Controller
     }
 
     protected function datatable(){
-        $users = User::where(['role'=>'provider'])->get();
+        $users = User::where(['role'=>'provider','delete'=>0])->get();
         $route ='provider';
         return DataTables::of($users)->addColumn('actions', function ($data) use($route) {
             return view('admin.datatables.actions',compact('data','route'));

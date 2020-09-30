@@ -38,8 +38,5 @@ class createProviderRequest extends FormRequest
             'capacity_day'=>'required|numeric',
         ];
     }
-    public function prepareForValidation()
-    {
-        $this->password = Hash::make($this->password); 
-    }
+  
 }

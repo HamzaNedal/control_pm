@@ -27,7 +27,7 @@ class updateProviderRequest extends FormRequest
         
         return [
             'name' => 'required|unique:users,name,'.$this->id,
-            'email' => 'required|email|unique:users,email,'.$this->id,
+            'email' => 'required|exists:users,email,delete,0|email|unique:users,email,'.$this->id,
             'password' => 'nullable',
             'payment_method' => 'required|string',
             'education_level' => 'required|string',
@@ -40,12 +40,5 @@ class updateProviderRequest extends FormRequest
         ];
 
     }
-    public function prepareForValidation()
-    {
-        if($this->password === null) {
-            $this->request->remove('password');
-        }else{
-           $this->password = Hash::make($this->password); 
-        }
-    }
+  
 }
