@@ -36,7 +36,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('provider_id')->references('id')->on('users')->onDelete('cascade');;
 
         });
-        DB::update("ALTER TABLE orders AUTO_INCREMENT = 1000000");
+       // DB::update("ALTER TABLE orders AUTO_INCREMENT = 1000000");
 
 
     }
