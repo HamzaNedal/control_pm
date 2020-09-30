@@ -83,6 +83,7 @@
                   { data: 'payment', name: 'payment' },
                   { data: 'words', name: 'words' },
                   { data: 'created_at', name: 'created_at' },
+                  { data: 'total_amount', name: 'total_amount' },
               ]
           });
           $(document).on('click','.remove',function(){

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\createProviderRequest;
 use App\Http\Requests\updateProviderRequest;
+use App\Models\Invoice;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -55,7 +56,11 @@ class ProviderController extends Controller
 
         $input['role'] = 'provider';
 
-        $input['password']=Hash::make($input['password']);
+        if($input['password'] === null) {
+            unset($input['password']);
+        }else{
+           $input['password'] = Hash::make($input['password']); 
+        }
 
         $input['role'] = 'provider';
         $user = User::where('id', $id)->update($input);
@@ -81,7 +86,8 @@ class ProviderController extends Controller
 
          try {
 
-            $user = User::findOrFail($id)->delete();
+            $user = User::findOrFail($id);
+            $user->update(['delete'=>1]);
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with('error', 'not found');
         }
@@ -89,11 +95,15 @@ class ProviderController extends Controller
     }
 
     protected function datatable(){
-        $users = User::where(['role'=>'provider'])->get();
+        $users = User::where(['role'=>'provider','delete'=>0])->get();
         $route ='provider';
         return DataTables::of($users)->addColumn('actions', function ($data) use($route) {
             return view('admin.datatables.actions',compact('data','route'));
-        })->rawColumns(['actions'])
+        })->addColumn('total_amount', function ($data) {
+            $amount = Invoice::where('provider_id',$data->id)->get();
+            $amount = $amount->sum('down_payment');
+            return "<a href='".route('admin.invoice.index',['id'=>2,'search'=>$data->name])."'  title='Show his invoices'>".$amount."</a>";
+        })->rawColumns(['actions','total_amount'])
         ->make(true);
      }
 

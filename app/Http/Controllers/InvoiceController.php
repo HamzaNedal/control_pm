@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InvoicesExport;
 use App\Http\Requests\CreateInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\Invoice;
@@ -16,19 +17,19 @@ use Yajra\DataTables\Facades\DataTables;
 
 class InvoiceController extends Controller
 {
-    public function index()
+    public function index($id = 1, $search = '')
     {
         $active ='invoice';
         $activeSub ='invoice.index';
-        return view('admin.invoice.index',compact('active','activeSub'));
+        return view('admin.invoice.index',compact('active','activeSub','search','id'));
     }
 
     public function create()
     {
         $active ='invoice';
         $activeSub ='invoice.index';
-        $providers = User::where('role','provider')->get();
-        $clients = User::where('role','client')->get();
+        $providers = User::where(['role'=> 'provider','delete'=>0])->get();
+        $clients = User::where(['role'=> 'client','delete'=>0])->get();
         return view('admin.invoice.create',compact('active','activeSub','providers','clients'));
     }
 
@@ -52,9 +53,10 @@ class InvoiceController extends Controller
 
         $active ='invoice';
         $activeSub ='invoice.index';
-        $providers = User::where('role','provider')->get();
+        $providers = User::where(['role'=> 'provider','delete'=>0])->get();
+        $clients = User::where(['role'=> 'client','delete'=>0])->get();
         $invoice = Invoice::findOrFail($id);
-        return view('admin.invoice.edit',compact('invoice','providers','active','activeSub'));
+        return view('admin.invoice.edit',compact('invoice','providers','clients','active','activeSub'));
     }
 
     public function update(UpdateInvoiceRequest $request, $id,ImageService $imageService)
@@ -98,6 +100,16 @@ class InvoiceController extends Controller
             return '<a target="_blank" href="'.asset('files/'.$data->file).'">Download</a>';
         })->rawColumns(['actions','file','role'])
         ->make(true);
+     }
+
+     public function exportExcel($provider)
+     {
+         $user = User::where('name', $provider)->first();
+         if ($user) {
+             $invoices  = Invoice::where('provider_id', $user->id)->get();
+             return  Excel::download(new InvoicesExport($invoices), time() . '_invoices.xlsx');
+         }
+         return null;
      }
 
 

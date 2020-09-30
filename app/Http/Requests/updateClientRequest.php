@@ -26,19 +26,13 @@ class updateClientRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:users,name,'.$this->id,
-            'email' => 'required|email|unique:users,email,'.$this->id,
+            'email' => 'required|email|unique:users,delete,0,email,'.$this->id,
             'phone' => 'required|numeric',
             'payment' => 'required|numeric',
             'words' => 'required|numeric',
         ];
     }
-    public function prepareForValidation(){
-        if($this->password === null) {
-            $this->request->remove('password');
-        }else{
-           $this->password = Hash::make($this->password); 
-        }
-    }
+    
 
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\createClientRequest;
 use App\Http\Requests\updateClientRequest;
+use App\Models\Invoice;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -64,7 +65,8 @@ class ClientController extends Controller
 
         try {
 
-           $user = User::findOrFail($id)->delete();
+           $user = User::findOrFail($id);
+           $user->update(['delete'=>1]);
            return 'success';
         //    return redirect()->route('admin.client.index')->with('success', 'The client has been successfully deleted');
        } catch (ModelNotFoundException $e) {
@@ -79,7 +81,11 @@ class ClientController extends Controller
         $route = 'client';
         return DataTables::of($users)->addColumn('actions', function ($data) use ($route) {
             return view('admin.datatables.actions', compact('data', 'route'));
-        })->rawColumns(['actions'])
+        })->addColumn('total_amount', function ($data) {
+            $amount = Invoice::where('provider_id',$data->id)->get();
+            $amount = $amount->sum('down_payment');
+            return "<a href='".route('admin.invoice.index',['id'=>2,'search'=>$data->name])."'  title='Show his invoices'>".$amount."</a>";
+        })->rawColumns(['actions','total_amount'])
             ->make(true);
     }
 }

@@ -33,10 +33,12 @@ class OrderController extends Controller
         $route = 'order';
         return DataTables::of($orders)->addColumn('actions', function ($data) use ($route) {
             return view('admin.datatables.actions', compact('data', 'route'));
-        })->addColumn('client_id', function ($data) use ($route) {
+        })->addColumn('client_id', function ($data) {
             return $data->getClient->name;
-        })->addColumn('provider_id', function ($data) use ($route) {
+        })->addColumn('provider_id', function ($data) {
             return $data->getProvider->name;
+        })->addColumn('status', function ($data) {
+            return view('admin.datatables.color-status', compact('data'));
         })->rawColumns(['actions'])
             ->make(true);
     }
@@ -49,8 +51,8 @@ class OrderController extends Controller
     {
         $active = 'order';
         $activeSub = 'order.index';
-        $providers = User::where('role', 'provider')->get();
-        $clients = User::where('role', 'client')->get();
+        $providers = User::where(['role'=> 'provider','delete'=>0])->get();
+        $clients = User::where(['role'=> 'client','delete'=>0])->get();
         return view('admin.order.create', compact('providers', 'active', 'activeSub', 'clients'));
     }
 
@@ -71,18 +73,11 @@ class OrderController extends Controller
                 $input['files'] = substr($pathfiles, 0, -1);;
 
             }
+            $input['files'] = substr($pathfiles, 0, -1);;
         }
 
         $input['status'] = 0;
         $order=Order::Create($input);
-
-        $details=[
-            'title'=>'Congratulations!',
-            'body'=>' You have been assigned order number'.$order->id.',, please review the sent orders'
-
-      ];
-        $user=User::where('id',$request->provider_id)->first();
-        Mail::to($user->email)->send(new  \App\Mail\TestMail($details));
 
         return redirect()->route('admin.order.index')->with('success', '  Order has been added successfully  ');
 
@@ -115,8 +110,8 @@ class OrderController extends Controller
         $activeSub = 'order.index';
         $order = Order::findOrFail($id);
 
-        $providers = User::where('role', 'provider')->get();
-        $clients = User::where('role', 'client')->get();
+        $providers = User::where(['role'=> 'provider','delete'=>0])->get();
+        $clients = User::where(['role'=> 'client','delete'=>0])->get();
         return view('admin.order.edit', compact('order', 'active', 'activeSub', 'providers', 'clients'));
 
     } catch (ModelNotFoundException $e) {
@@ -168,7 +163,7 @@ class OrderController extends Controller
     {
         $orders = Order::where(['status' => $id])->get();
         return DataTables::of($orders)->addColumn('actions', function ($data) {
-            return "<a  href='' data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='btn btn-success btn-xs sendOrder' alt='send' title='send'><i class='fa fa-paper-plane-o'></i></a>";
+            return  $data->getProvider->delete == 1 ? 'this user removed' : "<a  href='' data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='btn btn-success btn-xs sendOrder' alt='send' title='send'><i class='fa fa-paper-plane-o'></i></a>";
         })->addColumn('client_id', function ($data) {
             return $data->getClient->name;
         })->addColumn('provider_id', function ($data) {
@@ -181,6 +176,14 @@ class OrderController extends Controller
         $order = Order::findOrfail($id);
         $order->status = 1;
         $order->save();
+        
+        $details=[
+            'title'=>'Congratulations!',
+            'body'=>' You have been assigned order number'.$order->id.',, please review the sent orders'
+
+      ];
+        $user=User::where('id',$order->provider_id)->first();
+        Mail::to($user->email)->send(new  \App\Mail\TestMail($details));
     }
     public function sendOrderToProviderView()
     {
@@ -257,7 +260,7 @@ class OrderController extends Controller
     {
         $orders = Order::where(['status' => 4])->get();
         return DataTables::of($orders)->addColumn('actions', function ($data) {
-            return view('admin.order_compeleted.datatables.modal-return',compact('data'));
+            return $data->getProvider->delete == 1 ? 'this user removed' :  view('admin.order_compeleted.datatables.modal-return',compact('data'));
             // return "<a  data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='btn btn-success btn-xs sendOrder' alt='send to edit' title='send to edit'><i class='fa fa-undo'></i></a>";
         })->addColumn('client_id', function ($data) {
             return $data->getClient->name;

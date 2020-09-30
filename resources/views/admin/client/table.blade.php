@@ -11,6 +11,7 @@
             <th>Payment</th>
             <th>Words</th>
             <th>Created at</th>
+            <th>Total amount</th>
         </tr>
     </thead>
 
