@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        URL::forceScheme('https');
     }
 
     /**
@@ -26,15 +27,15 @@ class AppServiceProvider extends ServiceProvider
     {
         Validator::extend('max_uploaded_file_size', function ($attribute, $value, $parameters, $validator) {
 
-            $total_size = array_reduce($value, function ( $sum, $item ) { 
+            $total_size = array_reduce($value, function ( $sum, $item ) {
                 // each item is UploadedFile Object
-                $sum += filesize($item->path()); 
+                $sum += filesize($item->path());
                 return $sum;
             });
-    
+
             // $parameters[0] in kilobytes
-            return $total_size < $parameters[0] * 1024; 
-    
+            return $total_size < $parameters[0] * 1024;
+
         }, 'The size should be at most 5 MB');
     }
 }
