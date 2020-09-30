@@ -30,8 +30,8 @@ class CreateOrderRequest extends FormRequest
             'information'=>'required|string',
             'added_date'=>'required|date',
             'deadline'=>'required|date',
-            'provider_id'=>'required|integer',
-            'client_id'=>'required|integer',
+            'provider_id'=>'required|integer|exists:users,id,delete,0,role,provider',
+            'client_id'=>'required|integer|exists:users,id,delete,0,role,client',
             'files' => 'required|array|max_uploaded_file_size:5000',
             'files.*'=>'required|file|mimes:jpeg,png,jpg,doc,docx,ppt,pps,pptx,xls,xlsx,pdf',
         ];
