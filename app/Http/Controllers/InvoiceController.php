@@ -27,8 +27,8 @@ class InvoiceController extends Controller
     {
         $active ='invoice';
         $activeSub ='invoice.index';
-        $providers = User::where(['role'=> 'provider','status'=>0])->get();
-        $clients = User::where(['role'=> 'client','status'=>0])->get();
+        $providers = User::where(['role'=> 'provider','delete'=>0])->get();
+        $clients = User::where(['role'=> 'client','delete'=>0])->get();
         return view('admin.invoice.create',compact('active','activeSub','providers','clients'));
     }
 
@@ -51,8 +51,8 @@ class InvoiceController extends Controller
         
         $active ='invoice';
         $activeSub ='invoice.index';
-        $providers = User::where(['role'=> 'provider','status'=>0])->get();
-        $clients = User::where(['role'=> 'client','status'=>0])->get();
+        $providers = User::where(['role'=> 'provider','delete'=>0])->get();
+        $clients = User::where(['role'=> 'client','delete'=>0])->get();
         $invoice = Invoice::findOrFail($id);
         return view('admin.invoice.edit',compact('invoice','providers','clients','active','activeSub'));
     }

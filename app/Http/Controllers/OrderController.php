@@ -51,8 +51,8 @@ class OrderController extends Controller
     {
         $active = 'order';
         $activeSub = 'order.index';
-        $providers = User::where(['role'=> 'provider','status'=>0])->get();
-        $clients = User::where(['role'=> 'client','status'=>0])->get();
+        $providers = User::where(['role'=> 'provider','delete'=>0])->get();
+        $clients = User::where(['role'=> 'client','delete'=>0])->get();
         return view('admin.order.create', compact('providers', 'active', 'activeSub', 'clients'));
     }
 
@@ -109,8 +109,8 @@ class OrderController extends Controller
         $activeSub = 'order.index';
         $order = Order::findOrFail($id);
 
-        $providers = User::where(['role'=> 'provider','status'=>0])->get();
-        $clients = User::where(['role'=> 'client','status'=>0])->get();
+        $providers = User::where(['role'=> 'provider','delete'=>0])->get();
+        $clients = User::where(['role'=> 'client','delete'=>0])->get();
         return view('admin.order.edit', compact('order', 'active', 'activeSub', 'providers', 'clients'));
 
     } catch (ModelNotFoundException $e) {
@@ -162,7 +162,7 @@ class OrderController extends Controller
     {
         $orders = Order::where(['status' => $id])->get();
         return DataTables::of($orders)->addColumn('actions', function ($data) {
-            return "<a  href='' data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='btn btn-success btn-xs sendOrder' alt='send' title='send'><i class='fa fa-paper-plane-o'></i></a>";
+            return  $data->getProvider->delete == 1 ? 'this user removed' : "<a  href='' data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='btn btn-success btn-xs sendOrder' alt='send' title='send'><i class='fa fa-paper-plane-o'></i></a>";
         })->addColumn('client_id', function ($data) {
             return $data->getClient->name;
         })->addColumn('provider_id', function ($data) {
