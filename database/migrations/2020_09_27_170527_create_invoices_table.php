@@ -27,7 +27,7 @@ class CreateInvoicesTable extends Migration
             $table->foreign('provider_id')->references('id')->on('users')->onDelete('cascade');;
 
         });
-        DB::update("ALTER TABLE invoices AUTO_INCREMENT = 159673");
+       // DB::update("ALTER TABLE invoices AUTO_INCREMENT = 159673");
     }
 
     /**
