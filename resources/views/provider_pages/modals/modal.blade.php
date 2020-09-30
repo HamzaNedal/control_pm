@@ -15,7 +15,8 @@
           </button>
         </div>
         <div class="modal-body" class="scroller" style="height:300px;word-wrap: break-word;overflow-y: scroll;" data-always-visible="1" data-rail-visible1="1" >
-          @if($data->status == 'Edit')
+          {{-- @dd($data->status ) --}}
+          @if($data->status != 'Edit')
             <p>{{ $data->information }}</p> 
           @else
             <p>{{ $data->information_return }}</p> 

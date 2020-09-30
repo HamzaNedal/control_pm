@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InvoicesExport;
 use App\Http\Requests\CreateInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\Invoice;
@@ -15,11 +16,11 @@ use Yajra\DataTables\Facades\DataTables;
 
 class InvoiceController extends Controller
 {
-    public function index()
+    public function index($id = 1, $search = '')
     {
         $active ='invoice';   
         $activeSub ='invoice.index';
-        return view('admin.invoice.index',compact('active','activeSub'));
+        return view('admin.invoice.index',compact('active','activeSub','search','id'));
     }
 
     public function create()
@@ -96,6 +97,16 @@ class InvoiceController extends Controller
             return '<a target="_blank" href="'.asset('files/'.$data->file).'">Download</a>';
         })->rawColumns(['actions','file','role'])
         ->make(true);
+     }
+
+     public function exportExcel($provider)
+     {
+         $user = User::where('name', $provider)->first();
+         if ($user) {
+             $invoices  = Invoice::where('provider_id', $user->id)->get();
+             return  Excel::download(new InvoicesExport($invoices), time() . '_invoices.xlsx');
+         }
+         return null;
      }
 
 

@@ -32,10 +32,12 @@ class OrderController extends Controller
         $route = 'order';
         return DataTables::of($orders)->addColumn('actions', function ($data) use ($route) {
             return view('admin.datatables.actions', compact('data', 'route'));
-        })->addColumn('client_id', function ($data) use ($route) {
+        })->addColumn('client_id', function ($data) {
             return $data->getClient->name;
-        })->addColumn('provider_id', function ($data) use ($route) {
+        })->addColumn('provider_id', function ($data) {
             return $data->getProvider->name;
+        })->addColumn('status', function ($data) {
+            return view('admin.datatables.color-status', compact('data'));
         })->rawColumns(['actions'])
             ->make(true);
     }
@@ -68,8 +70,9 @@ class OrderController extends Controller
             foreach ($input['files'] as $value) {
                 $pathfiles .= $imageService->upload($value, 'files') . ',';
             }
+            $input['files'] = substr($pathfiles, 0, -1);;
         }
-        $input['files'] = substr($pathfiles, 0, -1);;
+       
         $input['status'] = 0;
         Order::Create($input);
         return redirect()->route('admin.order.index')->with('success', 'Service order added successfully');

@@ -33,7 +33,11 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="btn-group pull-right">
-                                
+                                    @if ($search)
+                                    <a class="btn btn-success" href="{{ route('admin.invoice.exportExcel',['provider'=>"$search"]) }}">Excel <i
+                                        class="fa fa-file-excel-o"></i>
+                                    </a> 
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -66,11 +70,14 @@
                   { data: 'created_at' },
               ]
           });
+          @isset($search)
+             table.columns(`{{ $id }}`).search(`^{{ $search }}$`, true, false).draw();
+          @endisset
           $(document).on('click','.remove',function(){
           var url = "{{ route('admin.invoice.destroy') }}/";
           var id = $(this).data('id');
           url = url+id
-        swal({
+        Swal.fire({
             title: "Are you sure?",
             text: "Your will not be able to recover this imaginary file!",
             type: "warning",
@@ -81,7 +88,7 @@
         },
         function(willConfirm){
 
-            if(willConfirm){
+            if(willConfirm.isConfirmed){
             $.ajax({
                    type: "post",
                    url: `${url}`,
@@ -94,7 +101,7 @@
                     table.ajax.reload();
                    });
 
-            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            Swal.fire("Deleted!", "Your imaginary file has been deleted.", "success");
             }
 
         })

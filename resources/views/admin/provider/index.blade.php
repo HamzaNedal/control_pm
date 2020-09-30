@@ -1,6 +1,13 @@
 @extends('base_layout.master_layout')
 
 @section('title','Providers')
+@push('css')
+    <style>
+        .text-break{
+            word-break:break-all
+        }
+    </style>
+@endpush
 @section('content')
 
     <div class="page-bar"></div>
@@ -84,9 +91,10 @@
               processing: true,
               serverSide: true,
               ajax: '{!! route('admin.provider.datatable') !!}',
+           
               columns: [
                   { data: 'id', name: 'id' },
-                  {data: 'actions', name: 'actions', orderable: false, searchable: false},
+                  {data: 'actions', name: 'actions',orderable: false, searchable: false},
                   { data: 'name', name: 'name' },
                   { data: 'email', name: 'email' },
                   { data: 'payment_method', name: 'payment_method' },
@@ -97,8 +105,27 @@
                   { data: 'subjects', name: 'subjects' },
                   { data: 'country', name: 'country' },
                   { data: 'whats_up', name: 'whats_up' },
+                  { data: 'total_amount', name: 'total_amount' },
               ],
-
+  
+              "autoWidth": false,
+              "columnDefs": [
+                    { "width": "1%", "targets": 0 },
+                    { "width": "100%", "targets": 1 },
+                    { "width": "10%", "targets": 2 },
+                    { "width": "10%", "targets": 3 },
+                    { "width": "10%", "targets": 4 },
+                    { "width": "10%", "targets": 5 },
+                    { "width": "10%", "targets": 6 },
+                    { "width": "10%", "targets": 7 },
+                    { "width": "10%", "targets":8 },
+                    { "width": "10%", "targets": 9 ,className:'text-break'},
+                    { "width": "10%", "targets": 1 },
+                    { "width": "10%", "targets": 11 },
+                    { "width": "10%", "targets": 12 }
+                    
+                ],
+        
           });
   
           $(document).on('click','.remove',function(){

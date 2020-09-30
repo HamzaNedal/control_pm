@@ -16,6 +16,7 @@
             <th>Subjects</th>
             <th>Country</th>
             <th>Whatsapp</th>
+            <th>Total amount</th>
         </tr>
     </thead>
 

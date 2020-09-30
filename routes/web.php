@@ -53,13 +53,14 @@ Route::put('/order/{id}',[OrderController::class,'update'])->name('admin.order.u
 Route::delete('/order/{id?}',[OrderController::class,'destroy'])->name('admin.order.destroy');
 Route::get('/order/exportExcel/{provider}',[OrderController::class,'exportExcel'])->name('admin.order.exportExcel');
 
-Route::get('/invoices',[InvoiceController::class,'index'])->name('admin.invoice.index');
+Route::get('/invoices/{id?}/{search?}',[InvoiceController::class,'index'])->name('admin.invoice.index');
 Route::get('/invoice/datatable',[InvoiceController::class,'datatable'])->name('admin.invoice.datatable');
 Route::get('/invoice/create',[InvoiceController::class,'create'])->name('admin.invoice.create');
 Route::post('/invoice',[InvoiceController::class,'store'])->name('admin.invoice.store');
 Route::get('/invoice/edit/{id}',[InvoiceController::class,'edit'])->name('admin.invoice.edit');
 Route::put('/invoice/{id}',[InvoiceController::class,'update'])->name('admin.invoice.update');
 Route::delete('/invoice/{id?}',[InvoiceController::class,'destroy'])->name('admin.invoice.destroy');
+Route::get('/invoice/exportExcel/{provider}',[InvoiceController::class,'exportExcel'])->name('admin.invoice.exportExcel');
 
 //order not send
 Route::get('send/orders',[OrderController::class,'orderCreateButNotSend'])->name('admin.order.send.index');
