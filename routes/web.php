@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProviderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -109,6 +110,14 @@ Route::group(['prefix' => 'provider','middleware'=>['auth','can:provider']], fun
     Route::get('/completed/order','provider\ProviderController@page_completed')->name('order.completed');
 
 
+});
+
+Route::get('/create/login','provider\ProviderController@login');
+
+Route::get('/send-email',function(){
+
+
+    echo 'ssssssss';
 });
 Auth::routes(['register' => false, 'request' => false, 'reset' => false]);
 Route::get('/home', 'HomeController@index')->name('home');

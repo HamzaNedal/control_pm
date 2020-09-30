@@ -85,8 +85,8 @@
             confirmButtonClass: "btn-danger",
             confirmButtonText: "Yes, delete it!",
             closeOnConfirm: false
-        },
-        function(willConfirm){
+        })
+        .then((willConfirm)=>{
 
             if(willConfirm.isConfirmed){
             $.ajax({

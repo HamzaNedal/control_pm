@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Services\ImageService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -69,13 +70,25 @@ class OrderController extends Controller
             $pathfiles = '';
             foreach ($input['files'] as $value) {
                 $pathfiles .= $imageService->upload($value, 'files') . ',';
+                $input['files'] = substr($pathfiles, 0, -1);;
+
             }
             $input['files'] = substr($pathfiles, 0, -1);;
         }
-       
         $input['status'] = 0;
-        Order::Create($input);
-        return redirect()->route('admin.order.index')->with('success', 'Service order added successfully');
+        $order=Order::Create($input);
+
+        $details=[
+            'title'=>'Congratulations!',
+            'body'=>' You have been assigned order number'.$order->id.',, please review the sent orders'
+
+      ];
+        $user=User::where('id',$request->provider_id)->first();
+        Mail::to($user->email)->send(new  \App\Mail\TestMail($details));
+
+        return redirect()->route('admin.order.index')->with('success', '  Order has been added successfully  ');
+
+
     }
 
     /**
@@ -97,12 +110,23 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
+
+        try {
+
         $active = 'order';
         $activeSub = 'order.index';
         $order = Order::findOrFail($id);
+
         $providers = User::where('role', 'provider')->get();
         $clients = User::where('role', 'client')->get();
         return view('admin.order.edit', compact('order', 'active', 'activeSub', 'providers', 'clients'));
+
+    } catch (ModelNotFoundException $e) {
+
+        return back()->with('error', 'not found');
+
+    }
+
     }
 
     /**
@@ -114,19 +138,27 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, $id, ImageService $imageService)
     {
+        try {
 
-        Order::findOrfail($id);
-        $input = $request->except(['_method', '_token']);
-        if ($request->hasfile('files')) {
-            $pathfiles = '';
-            foreach ($input['files'] as $value) {
-                $pathfiles .= $imageService->upload($value, 'files') . ',';
+            Order::findOrfail($id);
+            $input = $request->except(['_method', '_token']);
+            if ($request->hasfile('files')) {
+                $pathfiles = '';
+                foreach ($input['files'] as $value) {
+                    $pathfiles .= $imageService->upload($value, 'files') . ',';
+                }
+                $input['files'] = substr($pathfiles, 0, -1);;
             }
-            $input['files'] = substr($pathfiles, 0, -1);;
+            Order::where(['id' => $id])->update($input);
+            return redirect()->route('admin.order.index')->with('success', 'The order has been successfully updated');
+
+
+        } catch (ModelNotFoundException $e) {
+
+            return back()->with('error', 'not found');
+
         }
-        Order::where(['id' => $id])->update($input);
-        return redirect()->route('admin.order.index')->with('success', 'Service order updated successfully');
-    }
+   }
 
     public function orderCreateButNotSend()
     {
@@ -138,7 +170,7 @@ class OrderController extends Controller
     {
         $orders = Order::where(['status' => $id])->get();
         return DataTables::of($orders)->addColumn('actions', function ($data) {
-            return "<a  href='' data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='btn btn-success btn-xs sendOrder' alt='send' title='send'><i class='fa fa-check'></i></a>";
+            return "<a  href='' data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='btn btn-success btn-xs sendOrder' alt='send' title='send'><i class='fa fa-paper-plane-o'></i></a>";
         })->addColumn('client_id', function ($data) {
             return $data->getClient->name;
         })->addColumn('provider_id', function ($data) {
@@ -300,10 +332,9 @@ class OrderController extends Controller
         try {
 
             Order::findOrFail($id)->delete();
-            return 'success';
-            // return redirect()->route('admin.provider.index')->with('success', 'The service provider has been successfully deleted');
+            return back()->with('success ', 'The deletion was successful');            // return redirect()->route('admin.provider.index')->with('success', 'The service provider has been successfully deleted');
         } catch (ModelNotFoundException $e) {
-            return redirect()->back()->with('error', 'not found');
+            return back()->with('error', 'not found');
         }
     }
 }

