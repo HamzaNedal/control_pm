@@ -116,24 +116,8 @@
     </x-modal> --}}
     @push('js')
         <script>
-            // $(document).on('click','.add-provider',function(){
-            //    $('#form-add-provider').submit();
-            // });
-            // $(document).on('click','.update-provider',function(){
-            //     var id = $(this).data('id');
-            //     $('#form-update-provider').children('.user_id').val(id);
-            //     var url = "/"+id;
-            //     $('#form-update-provider').attr('action',url);
-            //    $.ajax({
-            //        type: "get",
-            //        url: `${url}`,
-            //        data: "get",
-            //        dataType: "json",
-            //        success: function (response) {
-            //         $('#form-update-provider').children('#name').val(id);
-            //        }
-            //    });
-            // });
+     $(document).ready(function() {
+
         $(function() {
           var table = $('#prvider-table').DataTable({
 

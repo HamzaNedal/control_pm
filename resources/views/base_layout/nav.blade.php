@@ -17,9 +17,9 @@
 
             <li class="start @isset($active) {{ $active == 'order' ? 'active open' : '' }}  @endisset">
                 <a href="javascript:;">
-                <i class="fa fa-cogs"></i>
+                <i class="fa fa-cubes"></i>
                 <span class="title">
-                Orders </span>
+                    Orders management </span>
                 <span class="arrow open">
                 </span>
                 <span class="selected"></span>
@@ -27,35 +27,48 @@
                 <ul class="sub-menu">
                     <li @isset($activeSub) {{ $activeSub == 'order.index' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.order.index') }}">
-                        Show Orders </a>
+                            <i class=" fa fa-reorder"></i>
+
+                            Orders </a>
                     </li>
                     <li @isset($activeSub) {{ $activeSub == 'order.send.index' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.order.send.index') }}">
-                        Show Orders not sent </a>
+                            <i class="fa fa-info-circle"></i>
+
+                            Orders notsent </a>
                     </li>
                     <li @isset($activeSub) {{ $activeSub == 'order.send.to.provider' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.order.send.to.provider.index') }}">
-                            Show Orders Sent</a>
+                            <i class=" fa fa-send"></i>
+
+                             Orders Sent</a>
                     </li>
                     <li @isset($activeSub) {{ $activeSub == 'accept.order.by.provider' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.accept.order.by.provider.index') }}">
-                            Show Orders in progress </a>
+                            <i class=" fa fa-plane"></i>
+
+                           Orders onprogress </a>
                     </li>
+
                     <li @isset($activeSub) {{ $activeSub == 'reject.order.by.provider' ? 'class=active' : '' }}  @endisset>
+
                         <a href="{{ route('admin.reject.order.by.provider.index') }}">
-                            Show Orders rejected </a>
+                            <i class=" fa fa-close"></i>
+                             Orders rejected </a>
                     </li>
-                    <li @isset($activeSub) {{ $activeSub == 'complate.order.by.provider' ? 'class=active' : '' }}  @endisset>
-                        <a href="{{ route('admin.complate.order.by.provider.index') }}">
-                            Show Orders Compeleted </a>
+                    <li @isset($activeSub) {{ $activeSub == 'complete.order.by.provider' ? 'class=active' : '' }}  @endisset>
+                        <a href="{{ route('admin.complete.order.by.provider.index') }}">
+                            <i class="fa fa-truck"></i>
+                            Orders Compeleted </a>
                     </li>
                     <li @isset($activeSub) {{ $activeSub == 'edit.order.after.compeleted' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.edit.order.after.compeleted.index') }}">
-                            Show Orders Under modification </a>
+                            <i class="fa fa-pencil-square"></i>Under modification </a>
                     </li>
                     <li @isset($activeSub) {{ $activeSub == 'close.order' ? 'class=active' : '' }}  @endisset>
                         <a href="{{ route('admin.close.order.index') }}">
-                            Show Orders Closed </a>
+                              <i class="fa fa-unlock-alt"></i>
+                            Orders Closed </a>
                     </li>
                 </ul>
 
@@ -63,9 +76,9 @@
             <li class="start @isset($active) {{ $active == 'invoice' ? 'active open' : '' }}  @endisset">
 
                 <a href="javascript:;">
-                <i class="fa fa-cogs"></i>
+                <i class="fa fa-file"></i>
                 <span class="title">
-                    Invoices </span>
+                    Invoices management </span>
                 <span class="arrow open">
                 </span>
                 <span class="selected"></span>
@@ -73,14 +86,16 @@
                 <ul class="sub-menu">
                     <li  @isset($activeSub) {{ $activeSub == 'invoice.index' ? 'class=active' : '' }}  @endisset >
                         <a href="{{ route('admin.invoice.index') }}">
-                        Show Invoices </a>
+                            <i class="fa fa-plus-square"></i>
+
+                            Invoices </a>
                     </li>
                 </ul>
                 <li class="start @isset($active) {{ $active == 'user' ? 'active open' : '' }}  @endisset">
                     <a href="javascript:;">
-                    <i class="fa fa-cogs"></i>
+                    <i class="fa fa-users"></i>
                     <span class="title">
-                    Users </span>
+                    Users Mangment </span>
                     <span class="arrow open">
                     </span>
                     <span class="selected"></span>
@@ -88,17 +103,40 @@
                     <ul class="sub-menu">
                         <li  @isset($activeSub) {{ $activeSub == 'provider.index' ? 'class=active' : '' }}  @endisset >
                             <a href="{{ route('admin.provider.index') }}">
-                            Show Providers </a>
+                                <i class="fa fa-user-plus"></i>
+                                Providers </a>
                         </li>
                         <li  @isset($activeSub) {{ $activeSub == 'client.index' ? 'class=active' : '' }}  @endisset>
                             <a href="{{ route('admin.client.index') }}">
-                            Show Clients </a>
+                                <i class="fa fa-user"></i>
+                                Clients </a>
                         </li>
                     </ul>
 
                 </li>
+                <li class="start @isset($active) {{ $active == 'setting' ? 'active open' : '' }}  @endisset">
+                    <a href="javascript:;">
+                    <i class="fa fa-cogs"></i>
+                    <span class="title">
+                    Setting </span>
+                    <span class="arrow open">
+                    </span>
+                    <span class="selected"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li  @isset($active) {{ $active == 'setting' ? 'class=active' : '' }}  @endisset >
 
+                            <a href="{{ route('setting') }}">
+                                <i class="fa fa-wrench"></i>
+
+                            Setting admin </a>
+                        </li>
+                    </ul>
+
+                </li>
                 @endcan
+                @can('provider')
+
                 <li class="start @isset($active) {{ $active == 'order' ? 'active open' : '' }}  @endisset">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i>
@@ -110,7 +148,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li @isset($activeSub) {{ $activeSub == 'order.index' ? 'class=active' : '' }}  @endisset>
-                            <a href="{{ route('provider.provider.index') }}">
+                            <a href="{{ route('provider.order.index') }}">
                             Show Orders </a>
                         </li>
                         <li @isset($activeSub) {{ $activeSub == 'order.send.index' ? 'class=active' : '' }}  @endisset>
@@ -135,6 +173,8 @@
                     </ul>
 
                 </li>
+                @endcan
+
 
 
             </ul>

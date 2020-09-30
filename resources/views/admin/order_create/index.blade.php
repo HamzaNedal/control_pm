@@ -63,7 +63,7 @@
           var id = $(this).data('id');
           var provider = $(this).data('name');
           url = url+id
-        swal({
+          Swal.fire({
             title: "Are you sure?",
             text: `You will sent this order to ${provider}!`,
             type: "warning",
@@ -71,10 +71,10 @@
             confirmButtonClass: "btn-success",
             confirmButtonText: "Yes, Send it!",
             closeOnConfirm: false
-        },
-        function(willConfirm){
+        })
+        .then((willConfirm)=>{
 
-            if(willConfirm){
+            if(willConfirm.isConfirmed){
             $.ajax({
                    type: "get",
                    url: `${url}`,

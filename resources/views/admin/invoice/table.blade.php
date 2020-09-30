@@ -5,7 +5,8 @@
                 #
             </th>
             <th>Actions</th>
-            <th>Provider Name</th>
+            <th>User Name</th>
+            <th>Role</th>
             <th>Down payment</th>
             <th>Payment method</th>
             <th>Receipt</th>

@@ -7,13 +7,14 @@ use App\Http\Requests\updateProviderRequest;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProviderController extends Controller
 {
     public function index()
     {
-        $active ='user';   
+        $active ='user';
         $activeSub ='provider.index';
         return view('admin.provider.index',compact('active','activeSub'));
     }
@@ -28,9 +29,13 @@ class ProviderController extends Controller
     public function store(createProviderRequest $request)
     {
 
+        $input=$request->all();
         $input = $request->except(['_token', '_method']);
 
+
         $input['role'] = 'provider';
+        $input['password']=Hash::make($input['password']);
+
 
         $user = User::create($input);
 
@@ -42,9 +47,15 @@ class ProviderController extends Controller
 
     public function update(updateProviderRequest $request, $id)
     {
+        $input=$request->all();
+
 
         $input = $request->except(['_token', '_method']);
 
+
+        $input['role'] = 'provider';
+
+        $input['password']=Hash::make($input['password']);
 
         $input['role'] = 'provider';
         $user = User::where('id', $id)->update($input);
@@ -57,8 +68,8 @@ class ProviderController extends Controller
     }
 
     public  function edit($id)
-    {   
-        
+    {
+
         $active ='user';
         $activeSub ='provider.index';
 

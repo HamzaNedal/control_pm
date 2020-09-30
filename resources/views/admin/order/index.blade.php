@@ -85,7 +85,7 @@
           var url = "{{ route('admin.order.destroy') }}/";
           var id = $(this).data('id');
           url = url+id
-        swal({
+          Swal.fire({
             title: "Are you sure?",
             text: "Your will not be able to recover this imaginary file!",
             type: "warning",
@@ -93,10 +93,10 @@
             confirmButtonClass: "btn-danger",
             confirmButtonText: "Yes, delete it!",
             closeOnConfirm: false
-        },
-        function(willConfirm){
+        })
+        .then((willConfirm)=>{
 
-            if(willConfirm){
+            if(willConfirm.isConfirmed){
             $.ajax({
                    type: "post",
                    url: `${url}`,
@@ -109,7 +109,7 @@
                     table.ajax.reload();
                    });
 
-            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            Swal.fire("Deleted!", "Your imaginary file has been deleted.", "success");
             }
 
         })

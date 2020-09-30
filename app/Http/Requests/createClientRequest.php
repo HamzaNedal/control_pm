@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class createClientRequest extends FormRequest
 {
@@ -33,5 +34,9 @@ class createClientRequest extends FormRequest
 
 
         ];
+    }
+    public function prepareForValidation()
+    {
+        $this->password = Hash::make($this->password); 
     }
 }

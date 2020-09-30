@@ -24,6 +24,8 @@ Route::get('/', [HomeController::class,'index']);
 
 
 Route::group(['prefix' => 'admin','middleware'=>['auth','can:admin']], function () {
+    Route::get('/setting', [HomeController::class,'setting'])->name('setting');
+    Route::post('/setting', [HomeController::class,'update'])->name('admin.setting.update');
 
 Route::get('/providers',[ProviderController::class,'index'])->name('admin.provider.index');
 // Route::get('/getProviders/{id?}',[ProviderController::class,'getProviders'])->name('admin.provider.getproviders');
@@ -68,15 +70,15 @@ Route::get('send/order/datatable',[OrderController::class,'datatableOrderCreateB
 Route::get('send-to-provider/orders',[OrderController::class,'sendOrderToProviderView'])->name('admin.order.send.to.provider.index');
 Route::get('send-to-provider/order/datatable',[OrderController::class,'datatableSendOrderToProvider'])->name('admin.order.send.to.provider.datatable');
 //acceptOrderByProviderView
-Route::get('acceptOrderByProvider/orders',[OrderController::class,'acceptOrderByProviderView'])->name('admin.accept.order.by.provider.index');
-Route::get('acceptOrderByProvider/order/datatable',[OrderController::class,'datatableAcceptOrderByProvider'])->name('admin.accept.order.by.provider.datatable');
+Route::get('AcceptOrderByProvider/orders',[OrderController::class,'acceptOrderByProviderView'])->name('admin.accept.order.by.provider.index');
+Route::get('AcceptOrderByProvider/order/datatable',[OrderController::class,'datatableAcceptOrderByProvider'])->name('admin.accept.order.by.provider.datatable');
 //rejectOrderByProviderView
-Route::get('rejectOrderByProvider/orders',[OrderController::class,'rejectOrderByProviderView'])->name('admin.reject.order.by.provider.index');
-Route::get('rejectOrderByProvider/order/datatable',[OrderController::class,'datatableRejectOrderByProvider'])->name('admin.reject.order.by.provider.datatable');
-//ComplateOrderByProvider
-Route::get('ComplateOrderByProvider/orders',[OrderController::class,'complateOrderByProviderView'])->name('admin.complate.order.by.provider.index');
-Route::get('ComplateOrderByProvider/orders/{id?}',[OrderController::class,'editOrderAfterCompeleted'])->name('admin.edit.order.after.compeleted');
-Route::get('ComplateOrderByProvider/order/datatable',[OrderController::class,'datatableComplateOrderByProvider'])->name('admin.complate.order.by.provider.datatable');
+Route::get('RejectOrderByProvider/orders',[OrderController::class,'rejectOrderByProviderView'])->name('admin.reject.order.by.provider.index');
+Route::get('RejectOrderByProvider/order/datatable',[OrderController::class,'datatableRejectOrderByProvider'])->name('admin.reject.order.by.provider.datatable');
+//completeOrderByProvider
+Route::get('CompleteOrderByProvider/orders',[OrderController::class,'completeOrderByProviderView'])->name('admin.complete.order.by.provider.index');
+Route::get('CompleteOrderByProvider/orders/{id?}',[OrderController::class,'editOrderAfterCompeleted'])->name('admin.edit.order.after.compeleted');
+Route::get('CompleteOrderByProvider/order/datatable',[OrderController::class,'datatableCompleteOrderByProvider'])->name('admin.complete.order.by.provider.datatable');
 //EditOrderAfterCompeleted
 Route::get('EditOrderAfterCompeleted/orders',[OrderController::class,'editOrderAfterCompeletedView'])->name('admin.edit.order.after.compeleted.index');
 Route::get('EditOrderAfterCompeleted/order/datatable',[OrderController::class,'datatbaleEditOrderAfterCompeleted'])->name('admin.edit.order.after.compeleted.datatable');
@@ -85,9 +87,9 @@ Route::get('CloseOrder/orders',[OrderController::class,'closeOrderView'])->name(
 Route::get('CloseOrder/order/datatable',[OrderController::class,'datatbaleCloseOrder'])->name('admin.close.order.datatable');
 
 });
-Route::group(['prefix' => 'provider'], function () {
+Route::group(['prefix' => 'provider','middleware'=>['auth','can:provider']], function () {
 
-    Route::get('/orders','provider\ProviderController@index')->name('provider.provider.index');
+    Route::get('/orders','provider\ProviderController@index')->name('provider.order.index');
     Route::get('/order/datatable','provider\ProviderController@datatable')->name('provider.datatable');
     Route::get('/accept/order/{id?}','provider\ProviderController@accept')->name('provider.accept');
     Route::get('/reject/order/{id?}','provider\ProviderController@reject')->name('provider.reject');
@@ -96,6 +98,7 @@ Route::group(['prefix' => 'provider'], function () {
     Route::get('/send/order','provider\ProviderController@page_send')->name('order.send');
     Route::get('/progress/order/datatable','provider\ProviderController@onprogress_datatable')->name('order.onprogress.datatable');
     Route::get('/progress/order','provider\ProviderController@page_onprogress')->name('order.onprogress');
+    Route::post('/progress/order/upload','provider\ProviderController@uploadFiles')->name('provider.upload.files');
 
     Route::get('/modification/order/datatable','provider\ProviderController@modification_datatable')->name('order.modification.datatable');
     Route::get('/modification/order','provider\ProviderController@page_modification')->name('order.modification');
@@ -104,11 +107,11 @@ Route::group(['prefix' => 'provider'], function () {
 
     Route::get('/completed/order/datatable','provider\ProviderController@completed_datatable')->name('order.completed.datatable');
     Route::get('/completed/order','provider\ProviderController@page_completed')->name('order.completed');
-    Route::get('/completed/login','provider\ProviderController@login')->name('order.completed');
 
 
 });
 
+Route::get('/create/login','provider\ProviderController@login');
 
 Route::get('/send-email',function(){
 

@@ -21,15 +21,15 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id=1,$search = '')
+    public function index($id = 1, $search = '')
     {
         $active = 'order';
         $activeSub = 'order.index';
-        return view('admin.order.index', compact('active', 'activeSub','id','search'));
+        return view('admin.order.index', compact('active', 'activeSub', 'id', 'search'));
     }
     protected function datatable()
     {
-        $orders = Order::orderBy('id','desc')->get();
+        $orders = Order::get();
         $route = 'order';
         return DataTables::of($orders)->addColumn('actions', function ($data) use ($route) {
             return view('admin.datatables.actions', compact('data', 'route'));
@@ -68,9 +68,10 @@ class OrderController extends Controller
             $pathfiles = '';
             foreach ($input['files'] as $value) {
                 $pathfiles .= $imageService->upload($value, 'files') . ',';
+                $input['files'] = substr($pathfiles, 0, -1);;
+
             }
         }
-        $input['files'] = substr($pathfiles, 0, -1);;
         $input['status'] = 0;
         $order=Order::Create($input);
 
@@ -82,7 +83,7 @@ class OrderController extends Controller
         $user=User::where('id',$request->provider_id)->first();
         Mail::to($user->email)->send(new  \App\Mail\TestMail($details));
 
-        return redirect()->route('admin.order.index')->with('success', 'Service order added successfully');
+        return redirect()->route('admin.order.index')->with('success', '  Order has been added successfully  ');
 
 
     }
@@ -146,7 +147,7 @@ class OrderController extends Controller
                 $input['files'] = substr($pathfiles, 0, -1);;
             }
             Order::where(['id' => $id])->update($input);
-            return redirect()->route('admin.order.index')->with('success', 'Service order updated successfully');
+            return redirect()->route('admin.order.index')->with('success', 'The order has been successfully updated');
 
 
         } catch (ModelNotFoundException $e) {
@@ -166,7 +167,7 @@ class OrderController extends Controller
     {
         $orders = Order::where(['status' => $id])->get();
         return DataTables::of($orders)->addColumn('actions', function ($data) {
-            return "<a  href='' data-id='".$data->id."' data-name='".$data->getProvider->name."' class='btn btn-success btn-xs sendOrder' alt='send' title='send'><i class='fa fa-check'></i></a>";
+            return "<a  href='' data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='btn btn-success btn-xs sendOrder' alt='send' title='send'><i class='fa fa-paper-plane-o'></i></a>";
         })->addColumn('client_id', function ($data) {
             return $data->getClient->name;
         })->addColumn('provider_id', function ($data) {
@@ -235,32 +236,40 @@ class OrderController extends Controller
     }
 
 
-    public function complateOrderByProvider($id)
-    {
-        $order = Order::where(['order_id' => $id, 'provider_id' => auth()->user()->id])->first();
-        if ($order) {
-            $order->status = 4;
-            $order->save();
-        }
-        abort(404);
-    }
+    // public function completeOrderByProvider($id)
+    // {
+    //     $order = Order::where(['order_id' => $id, 'provider_id' => auth()->user()->id])->first();
+    //     if ($order) {
+    //         $order->status = 4;
+    //         $order->save();
+    //     }
+    //     abort(404);
+    // }
 
-    public function complateOrderByProviderView()
+    public function completeOrderByProviderView()
     {
         $active = 'order';
-        $activeSub = 'complate.order.by.provider';
+        $activeSub = 'complete.order.by.provider';
         return view('admin.order_compeleted.index', compact('active', 'activeSub'));
     }
-    protected function datatableComplateOrderByProvider()
+    protected function datatableCompleteOrderByProvider()
     {
         $orders = Order::where(['status' => 4])->get();
         return DataTables::of($orders)->addColumn('actions', function ($data) {
-            return "<a  data-id='".$data->id."' data-name='".$data->getProvider->name."' class='btn btn-success btn-xs sendOrder' alt='send to edit' title='send to edit'><i class='fa fa-undo'></i></a>";
+            return view('admin.order_compeleted.datatables.modal-return',compact('data'));
+            // return "<a  data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='btn btn-success btn-xs sendOrder' alt='send to edit' title='send to edit'><i class='fa fa-undo'></i></a>";
+        })->addColumn('client_id', function ($data) {
+            return $data->getClient->name;
         })->addColumn('provider_id', function ($data) {
             return $data->getProvider->name;
-        })->addColumn('provider_id', function ($data) {
-            return $data->getProvider->name;
-        })->rawColumns(['actions'])->make(true);
+        })->addColumn('files_provider', function ($data) {
+            $files = explode(',',$data->files_provider);
+            $output = '';
+            foreach ($files as  $file) {
+               $output .="<a target='_blank' href='".asset('files/'.$file)."'>$file</a><br>";
+            }
+            return $output;
+        })->rawColumns(['actions','files_provider'])->make(true);
     }
 
 
@@ -268,6 +277,7 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
         $order->status = 5;
+        $order->information_return = request('info');
         $order->save();
     }
     public function editOrderAfterCompeletedView()
@@ -290,7 +300,7 @@ class OrderController extends Controller
 
     public function datatbaleCloseOrder()
     {
-        $orders = Order::where('delivery_date','<',date('yy-m-d'))->get();
+        $orders = Order::where('delivery_date', '<', date('yy-m-d'))->get();
         return DataTables::of($orders)->addColumn('client_id', function ($data) {
             return $data->getClient->name;
         })->addColumn('provider_id', function ($data) {
@@ -300,12 +310,12 @@ class OrderController extends Controller
 
     public function exportExcel($provider)
     {
-      $user = User::where('name',$provider)->first();
-      if($user){
-          $orders  = Order::select('id','provider_id','client_id','title','status','added_date','deadline','information','number_words')->where('provider_id',$user->id)->get();
-          return  Excel::download(new OrdersExport($orders), time().'_orders.xlsx');
-      }
-      return null;
+        $user = User::where('name', $provider)->first();
+        if ($user) {
+            $orders  = Order::select('id', 'provider_id', 'client_id', 'title', 'status', 'added_date', 'deadline', 'information', 'number_words')->where('provider_id', $user->id)->get();
+            return  Excel::download(new OrdersExport($orders), time() . '_orders.xlsx');
+        }
+        return null;
     }
 
     /**
@@ -319,10 +329,9 @@ class OrderController extends Controller
         try {
 
             Order::findOrFail($id)->delete();
-            return 'success';
-            // return redirect()->route('admin.provider.index')->with('success', 'The service provider has been successfully deleted');
+            return back()->with('success ', 'The deletion was successful');            // return redirect()->route('admin.provider.index')->with('success', 'The service provider has been successfully deleted');
         } catch (ModelNotFoundException $e) {
-            return redirect()->back()->with('error', 'not found');
+            return back()->with('error', 'not found');
         }
     }
 }

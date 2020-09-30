@@ -1,4 +1,5 @@
 <script src="{{asset('/metronic/assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+
 <script src="{{asset('/metronic/assets/global/plugins/jquery-migrate.min.js')}}" type="text/javascript"></script>
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 <script src="{{asset('/metronic/assets/global/plugins/jquery-ui/jquery-ui.min.js')}}" type="text/javascript"></script>
@@ -23,10 +24,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 {{-- <script src="{{asset('/metronic/assets/global/plugins/sweetalert.min.js')}}" type="text/javascript"></script> --}}
 <script src="{{asset('/metronic/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('/metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js')}}" type="text/javascript"></script>
+{{-- <script src="{{asset('/metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js')}}" type="text/javascript"></script>
 <script src="{{asset('/metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-process')}}" type="text/javascript"></script>
 <script src="{{asset('/metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js')}}" type="text/javascript"></script>
-<script src="{{asset('/metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js')}}" type="text/javascript"></script>
+<script src="{{asset('/metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js')}}" type="text/javascript"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
 <script>
     jQuery(document).ready(function() {
@@ -39,8 +40,6 @@ TableManaged.init();
     });
 
   </script>
-<script>
-
-        </script>
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
 
 @include('base_layout.message')

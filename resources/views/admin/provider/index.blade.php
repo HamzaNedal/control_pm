@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="btn-group pull-right buttons">
-                          
+
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
             //        }
             //    });
             // });
-            
+
         $(function() {
           var table = $('#prvider-table').DataTable({
               processing: true,
@@ -100,12 +100,14 @@
               ],
 
           });
-  
+
+
+
           $(document).on('click','.remove',function(){
           var url = "{{ route('admin.provider.destroy') }}/";
           var id = $(this).data('id');
           url = url+id
-        swal({
+          Swal.fire({
             title: "Are you sure?",
             text: "Your will not be able to recover this imaginary file!",
             type: "warning",
@@ -113,10 +115,10 @@
             confirmButtonClass: "btn-danger",
             confirmButtonText: "Yes, delete it!",
             closeOnConfirm: false
-        },
-        function(willConfirm){
+        })
+        .then((willConfirm)=>{
 
-            if(willConfirm){
+            if(willConfirm.isConfirmed){
             $.ajax({
                    type: "post",
                    url: `${url}`,
@@ -126,10 +128,10 @@
                    },
                    dataType: "html"})
                    .done(function() {
-                        table.ajax.reload();
+                    table.ajax.reload();
                    });
 
-            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            Swal.fire("Deleted!", "Your imaginary file has been deleted.", "success");
             }
 
         })

@@ -26,6 +26,7 @@ class CreateOrdersTable extends Migration
             $table->date('deadline');
             $table->date('added_date');
             $table->date('delivery_date')->nullable();
+            $table->text('information_return')->nullable();
             $table->tinyInteger('status');
             $table->string('files');
             $table->string('files_provider')->nullable();

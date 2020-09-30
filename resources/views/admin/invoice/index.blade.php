@@ -47,10 +47,11 @@
 
     @push('js')
 
-        <script>
+    <script>
 
         $(function() {
             table =  $('#table').DataTable({
+              'order': [0,'desc'],
               processing: true,
               serverSide: true,
               ajax: '{!! route('admin.invoice.datatable') !!}',
@@ -58,6 +59,7 @@
                   { data: 'id', name: 'id' },
                   {data: 'actions', name: 'actions', orderable: false, searchable: false},
                   { data: 'provider_id' },
+                  { data: 'role' },
                   { data: 'down_payment' },
                   { data: 'payment_method' },
                   { data: 'file' },
@@ -98,7 +100,7 @@
         })
       });
       });
-
+ 
         </script>
     @endpush
 @endsection

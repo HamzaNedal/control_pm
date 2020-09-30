@@ -33,6 +33,18 @@
 
            FormSamples.init();
         });
+        $('#client_id').on('click',function(){
+            $('.client_id').css('display', 'block');
+            $('.provider_id').css('display', 'none');
+            $('.provider_id').children('.select2_category').attr('disabled', 'disabled');
+            $('.client_id').children('.select2_category').removeAttr('disabled', 'disabled');
+      })
+      $('#provider_id').on('click',function(){
+            $('.provider_id').css('display', 'block');
+            $('.client_id').css('display', 'none');
+            $('.client_id').children('.select2_category').attr('disabled', 'disabled');
+            $('.provider_id').children('.select2_category').removeAttr('disabled', 'disabled');
+      })
     </script>
 @endpush
 @endsection

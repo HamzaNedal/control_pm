@@ -35,6 +35,6 @@ class AppServiceProvider extends ServiceProvider
             // $parameters[0] in kilobytes
             return $total_size < $parameters[0] * 1024; 
     
-        }, 'The size should be 5 MB');
+        }, 'The size should be at most 5 MB');
     }
 }
