@@ -75,6 +75,7 @@ class OrderController extends Controller
             }
             $input['files'] = substr($pathfiles, 0, -1);;
         }
+
         $input['status'] = 0;
         $order=Order::Create($input);
 

@@ -34,7 +34,7 @@ class HomeController extends Controller
        return redirect()->route('provider.order.index');
 
     }
-    public function setting(){  
+    public function setting(){
         $active ='setting';
         $activeSub ='setting.admin';
         return view('admin.setting.create',compact('active','activeSub'));

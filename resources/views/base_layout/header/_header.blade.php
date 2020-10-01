@@ -3,7 +3,7 @@
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
-              <span class="logo-default" style="font-size: 18px ; color:white ;margin-top:19px">  Manage team tasks</span>
+              <span class="logo-default" style="font-size: 18px ; color:white ;margin-top:19px ;font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;padding: 10px ">  Manage team tasks</span>
 			{{-- <img src="../../assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/> --}}
 			<div class="menu-toggler sidebar-toggler">
 			</div>

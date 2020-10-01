@@ -117,9 +117,17 @@ Route::group(['prefix' => 'provider','middleware'=>['auth','can:provider']], fun
 
 
 
+
+    Route::get('order/invoices/datatable','provider\ProviderController@invoice_datatable')->name('provider.invoice.datatable');
+    Route::get('order/invoices','provider\ProviderController@invoice_page')->name('provider.invoice');
+
+    Route::get('order/invoice-details/{id}','provider\ProviderController@invoice_details')->name('detials.provider.invoice');
+
+
 });
 
-Route::get('/create/login','provider\ProviderController@login');
+// Route::get('/create/login','provider\ProviderController@login');
+
 
 Auth::routes(['register' => false, 'request' => false, 'reset' => false]);
 Route::get('/home', 'HomeController@index')->name('home');

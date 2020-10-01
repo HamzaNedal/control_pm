@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Services\ImageService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -18,7 +19,7 @@ class InvoiceController extends Controller
 {
     public function index($id = 1, $search = '')
     {
-        $active ='invoice';   
+        $active ='invoice';
         $activeSub ='invoice.index';
         return view('admin.invoice.index',compact('active','activeSub','search','id'));
     }
@@ -34,11 +35,12 @@ class InvoiceController extends Controller
 
     public function store(CreateInvoiceRequest $request,ImageService $imageService)
     {
-        
+
         $input = $request->except(['_token', '_method']);
         if ($request->hasfile('file')) {
             $input['file'] = $imageService->upload($input['file'], 'files');
         }
+        $input['date']=Carbon::now();
         $user = Invoice::create($input);
         if ($user) {
             return redirect()->route('admin.invoice.index')->with('success','Service invoice added successfully');
@@ -47,8 +49,8 @@ class InvoiceController extends Controller
     }
 
     public  function edit($id)
-    {   
-        
+    {
+
         $active ='invoice';
         $activeSub ='invoice.index';
         $providers = User::where(['role'=> 'provider','delete'=>0])->get();

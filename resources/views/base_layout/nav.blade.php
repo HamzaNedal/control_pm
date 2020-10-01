@@ -144,47 +144,58 @@
                 @endcan
                 @can('provider')
 
-                <li class="start @isset($active) {{ $active == 'order' ? 'active open' : '' }}  @endisset">
+
+                <li class="start active open" >
                     <a href="javascript:;">
-                    <i class="fa fa-cogs"></i>
-                    <span class="title">
-                    Orders </span>
-                    <span class="arrow open">
-                    </span>
-                    <span class="selected"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li @isset($activeSub) {{ $activeSub == 'order.index' ? 'class=active' : '' }}  @endisset>
+                        <i class="fa fa-user"></i>
+                        <span class="title">
+                            Service provider </span>
+                        <span class="arrow open">
+                        </span>
+                        <span class="selected"></span>
+                        </a>
+                        <ul class="sub-menu">
+
+                        <li @isset($activeSub) {{ $activeSub == 1 ? 'class=active' : '' }}  @endisset>
                             <a href="{{ route('provider.order.index') }}">
-                            Show Orders </a>
+                                <i class=" fa fa-reorder"></i>
+                                Orders </a>
                         </li>
-                        <li @isset($activeSub) {{ $activeSub == 'order.send.index' ? 'class=active' : '' }}  @endisset>
+                        <li @isset($activeSub) {{ $activeSub == 2 ? 'class=active' : '' }}  @endisset>
                             <a href="{{ route('order.send') }}">
-                                Sent orders </a>
+                                <i class=" fa fa-send"></i>
+                                 Sent orders </a>
                         </li>
-                        <li @isset($activeSub) {{ $activeSub == 'order.send.to.provider' ? 'class=active' : '' }}  @endisset>
+                        <li @isset($activeSub) {{ $activeSub == 3 ? 'class=active' : '' }}  @endisset>
                             <a href="{{ route('order.onprogress') }}">
-                                orders in progress</a>
+                                <i class=" fa fa-plane"></i>   orders onprogress</a>
                         </li>
 
 
-                        <li @isset($activeSub) {{ $activeSub == 'complate.order.by.provider' ? 'class=active' : '' }}  @endisset>
+                        <li @isset($activeSub) {{ $activeSub == 4 ? 'class=active' : '' }}  @endisset>
                             <a href="{{ route('order.completed') }}">
+                                <i class="fa fa-truck"></i>
                                 Orders Compeleted </a>
                         </li>
-                        <li @isset($activeSub) {{ $activeSub == 'edit.order.after.compeleted' ? 'class=active' : '' }}  @endisset>
+                        <li @isset($activeSub) {{ $activeSub == 5 ? 'class=active' : '' }}  @endisset>
                             <a href="{{ route('order.modification') }}">
-                              Orders  modification </a>
+                                <i class="fa fa-pencil-square"></i>
+                                Orders  modification </a>
                         </li>
 
-                    </ul>
-
+                        <li @isset($activeSub) {{ $activeSub == 6 ? 'class=active' : '' }}  @endisset>
+                            <a href="{{ route('provider.invoice') }}">
+                                <i class="fa fa-folder-open"></i>
+                                Invoices </a>
+                        </li>
+                        </ul>
                 </li>
+
                 @endcan
 
-
-
             </ul>
+
+
         <!-- END SIDEBAR MENU1 -->
         <!-- BEGIN RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->
         <ul class="page-sidebar-menu visible-sm visible-xs" data-slide-speed="200" data-auto-scroll="true">
