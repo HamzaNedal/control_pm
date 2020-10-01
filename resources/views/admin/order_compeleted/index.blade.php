@@ -14,14 +14,14 @@
                         <i class="fa fa-globe"></i>Completed Orders Management
                     </div>
                     <div class="tools">
-                       
+
                     </div>
                 </div>
                 <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
                             <div class="col-md-6">
-                             
+
                             </div>
                             <div class="col-md-6">
                                 <div class="btn-group pull-right"></div>
@@ -44,8 +44,7 @@
               serverSide: true,
               ajax: '{!! route('admin.complete.order.by.provider.datatable') !!}',
               columns: [
-                  { data: 'id', name: 'id' },
-                  { data: 'actions' },
+                  { data: 'order_number', name: 'id' },
                   { data: 'client_id', name: 'client_id' },
                   { data: 'provider_id', name: 'provider_id' },
                   { data: 'title', name: 'title' },
@@ -53,7 +52,8 @@
                   { data: 'added_date', name: 'added_date' },
                   { data: 'deadline', name: 'deadline' },
                   { data: 'files_provider', name: 'files_provider' },
-                  
+                  { data: 'actions' },
+
 
               ]
           });

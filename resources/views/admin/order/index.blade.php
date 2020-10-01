@@ -39,10 +39,10 @@
                                     @if ($search)
                                     <a class="btn btn-success" href="{{ route('admin.order.exportExcel',['provider'=>"$search"]) }}">Excel <i
                                         class="fa fa-file-excel-o"></i>
-                                    </a> 
+                                    </a>
                                     @endif
-                                   
-                              
+
+
                                 </div>
                             </div>
                         </div>
@@ -64,8 +64,8 @@
               serverSide: true,
               ajax: '{!! route('admin.order.datatable') !!}',
               columns: [
-                  { data: 'id', name: 'id' },
-                  {data: 'actions', name: 'actions', orderable: false, searchable: false},
+                  { data: 'order_number', name: 'id' },
+
                   { data: 'client_id', name: 'client_id' },
                   { data: 'provider_id', name: 'provider_id' },
                   { data: 'title', name: 'title' },
@@ -73,14 +73,15 @@
                   { data: 'added_date', name: 'added_date' },
                   { data: 'deadline', name: 'deadline' },
                   { data: 'number_words', name: 'number_words' },
-                  
+                  { data: 'actions',  orderable: false, searchable: false}
+
 
               ]
           });
-          @isset($search)
+          @if($search !=='')
              table.columns(`{{ $id }}`).search(`^{{ $search }}$`, true, false).draw();
-          @endisset
-          
+          @endif
+
           $(document).on('click','.remove',function(){
           var url = "{{ route('admin.order.destroy') }}/";
           var id = $(this).data('id');

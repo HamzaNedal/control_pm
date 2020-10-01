@@ -27,7 +27,7 @@ class createClientRequest extends FormRequest
         return [
 
             'name' => 'required|unique:users,name',
-            'email' => 'required|exists:users,email,delete,0|email|unique:users,email',
+            'email' => 'required|email|unique:users,email',
             'phone' => 'required|numeric',
             'payment' => 'required|numeric',
             'words' => 'required|numeric',

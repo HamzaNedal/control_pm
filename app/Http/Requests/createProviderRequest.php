@@ -38,5 +38,5 @@ class createProviderRequest extends FormRequest
             'capacity_day'=>'required|numeric',
         ];
     }
-  
+
 }

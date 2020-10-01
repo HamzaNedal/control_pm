@@ -28,10 +28,10 @@
                     <div class="table-toolbar">
                         <div class="row">
                             <div class="col-md-6">
-                             
+
                             </div>
                             <div class="col-md-6">
-                             
+
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
               serverSide: true,
               ajax: '{!! route('admin.order.send.to.provider.datatable') !!}',
               columns: [
-                  { data: 'id', name: 'id' },
+                  { data: 'order_number'},
                   { data: 'client_id', name: 'client_id' },
                   { data: 'provider_id', name: 'provider_id' },
                   { data: 'title', name: 'title' },
@@ -59,11 +59,11 @@
                   { data: 'added_date', name: 'added_date' },
                   { data: 'deadline', name: 'deadline' },
                   { data: 'number_words', name: 'number_words' },
-                  
+
 
               ]
           });
- 
+
       });
 
         </script>

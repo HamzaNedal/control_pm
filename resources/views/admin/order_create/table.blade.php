@@ -2,9 +2,8 @@
     <thead>
         <tr>
             <th class="table-checkbox">
-                #
+                # order
             </th>
-            <th>Actions</th>
             <th>client Name</th>
             <th>provider Name</th>
             <th>Title</th>
@@ -12,6 +11,8 @@
             <th>Date Added</th>
             <th>Deadline</th>
             <th>Number of words</th>
+            <th>Send to provider </th>
+
 
         </tr>
     </thead>
