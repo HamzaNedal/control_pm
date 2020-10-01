@@ -70,9 +70,9 @@
                   { data: 'created_at' },
               ]
           });
-          @isset($search)
+          @if($search !== '')
              table.columns(`{{ $id }}`).search(`^{{ $search }}$`, true, false).draw();
-          @endisset
+          @endif
           $(document).on('click','.remove',function(){
           var url = "{{ route('admin.invoice.destroy') }}/";
           var id = $(this).data('id');

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+       
     }
 
     /**
@@ -24,6 +26,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // $googleMail = Setting::where('key','googleMail')->first();
+        // config(['mail.mailers.smtp.username'=>$googleMail->email]);
+        // config(['mail.mailers.smtp.password'=>$googleMail->password]);
+        // config(['mail.from.name'=>$googleMail->name]);
+        // config(['mail.from.address'=>$googleMail->email]);
+
         Validator::extend('max_uploaded_file_size', function ($attribute, $value, $parameters, $validator) {
 
             $total_size = array_reduce($value, function ( $sum, $item ) { 

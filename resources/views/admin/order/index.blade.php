@@ -64,22 +64,23 @@
               serverSide: true,
               ajax: '{!! route('admin.order.datatable') !!}',
               columns: [
-                  { data: 'id', name: 'id' },
-                  {data: 'actions', name: 'actions', orderable: false, searchable: false},
-                  { data: 'client_id', name: 'client_id' },
-                  { data: 'provider_id', name: 'provider_id' },
-                  { data: 'title', name: 'title' },
-                  { data: 'status', name: 'status' },
-                  { data: 'added_date', name: 'added_date' },
-                  { data: 'deadline', name: 'deadline' },
-                  { data: 'number_words', name: 'number_words' },
+                  { data: 'id' },
                   
-
+                  { data: 'client_id' },
+                  { data: 'provider_id' },
+                  { data: 'title' },
+                  { data: 'status'},
+                  { data: 'added_date'},
+                  { data: 'deadline'},
+                  { data: 'number_words'},
+                  {data: 'actions', orderable: false, searchable: false},
+                 
+                  
               ]
           });
-          @isset($search)
+          @if($search !== '')
              table.columns(`{{ $id }}`).search(`^{{ $search }}$`, true, false).draw();
-          @endisset
+          @endif
           
           $(document).on('click','.remove',function(){
           var url = "{{ route('admin.order.destroy') }}/";

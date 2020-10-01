@@ -6,6 +6,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\provider\ProviderController as FrontProviderController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -27,6 +28,8 @@ Route::get('/', [HomeController::class,'index']);
 Route::group(['prefix' => 'admin','middleware'=>['auth','can:admin']], function () {
     Route::get('/setting', [HomeController::class,'setting'])->name('setting');
     Route::post('/setting', [HomeController::class,'update'])->name('admin.setting.update');
+    Route::get('/googleMailSetting', [HomeController::class,'googleMailSettingView'])->name('admin.setting.googleMail');
+    Route::post('/googleMailSetting', [HomeController::class,'googleMail'])->name('admin.setting.googleMail.update');
 
 Route::get('/providers',[ProviderController::class,'index'])->name('admin.provider.index');
 // Route::get('/getProviders/{id?}',[ProviderController::class,'getProviders'])->name('admin.provider.getproviders');
@@ -118,10 +121,5 @@ Route::group(['prefix' => 'provider','middleware'=>['auth','can:provider']], fun
 
 Route::get('/create/login','provider\ProviderController@login');
 
-Route::get('/send-email',function(){
-
-
-    echo 'ssssssss';
-});
 Auth::routes(['register' => false, 'request' => false, 'reset' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
