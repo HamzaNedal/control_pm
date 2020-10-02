@@ -124,12 +124,19 @@
                     <span class="selected"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li  @isset($active) {{ $active == 'setting' ? 'class=active' : '' }}  @endisset >
+                        <li  @isset($activeSub) {{ $activeSub == 'setting.admin' ? 'class=active' : '' }}  @endisset >
 
                             <a href="{{ route('setting') }}">
                                 <i class="fa fa-wrench"></i>
 
                             Setting admin </a>
+                        </li>
+                        <li  @isset($activeSub) {{ $activeSub == 'setting.googleMail' ? 'class=active' : '' }}  @endisset >
+
+                            <a href="{{ route('admin.setting.googleMail') }}">
+                                <i class="fa fa-wrench"></i>
+
+                            Setting google mail </a>
                         </li>
                     </ul>
 

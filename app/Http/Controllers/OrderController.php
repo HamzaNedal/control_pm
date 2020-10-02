@@ -177,7 +177,7 @@ class OrderController extends Controller
         $orders = Order::where(['status' => $id])->get();
         return DataTables::of($orders)->addColumn('actions', function ($data) {
             return  $data->getProvider->delete == 1 ? 'this user removed' : "<a  href='' data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='icon-btn btn green sendOrder' alt='send' title='send' style='width:100%'><i class='fa fa-paper-plane-o'></i>
-            <div> send</div>
+            <div> se</div>
             </a>";
         })->addColumn('client_id', function ($data) {
             return $data->getClient->name;
@@ -194,7 +194,7 @@ class OrderController extends Controller
 
         $details=[
             'title'=>'Congratulations!',
-            'body'=>' You have been assigned order number'.$order->id.',, please review the sent orders'
+            'body'=>' order number ('.$order->id .') assigned to you, through your panel check and response'
 
       ];
         $user=User::where('id',$order->provider_id)->first();

@@ -18,7 +18,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label>Radio</label>
+          {{-- <label>Radio</label> --}}
           <div class="radio-list">
             <label><input type="radio" name="optionsRadios" id="provider_id" value="provider"  checked="">Providers: 
               <div class="provider_id">
@@ -37,7 +37,7 @@
                     <option value="{{ $client->id }}" @isset($invoice) {{ $invoice->provider_id == $client->id ? "selected" : "" }} @endisset>{{ $client->name }}</option>
                   @endforeach
                 </select>
-                <small><a href="{{ route('admin.provider.create') }}">Add New Provider</a></small>
+                <small><a href="{{ route('admin.client.create') }}">Add New Client</a></small>
               </div>
              
             </label>

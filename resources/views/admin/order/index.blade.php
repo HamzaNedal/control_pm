@@ -82,6 +82,7 @@
              table.columns(`{{ $id }}`).search(`^{{ $search }}$`, true, false).draw();
           @endif
 
+
           $(document).on('click','.remove',function(){
           var url = "{{ route('admin.order.destroy') }}/";
           var id = $(this).data('id');
