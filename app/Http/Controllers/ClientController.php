@@ -85,7 +85,7 @@ class ClientController extends Controller
         })->addColumn('total_amount', function ($data) {
             $amount = Invoice::where('provider_id',$data->id)->get();
             $amount = $amount->sum('down_payment');
-            return "<a href='".route('admin.invoice.index',['id'=>2,'search'=>$data->name])."'  title='Show his invoices'>".$amount."</a>";
+            return "<a href='".route('admin.invoice.index',['id'=>1,'search'=>$data->name])."'  title='Show his invoices'>".$amount."</a>";
         })->rawColumns(['actions','total_amount'])
             ->make(true);
     }
