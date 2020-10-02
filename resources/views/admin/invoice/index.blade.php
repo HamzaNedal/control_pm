@@ -60,7 +60,7 @@
               serverSide: true,
               ajax: '{!! route('admin.invoice.datatable') !!}',
               columns: [
-                  { data: 'order_number', name: 'id' },
+                  { data: 'id', name: 'id' },
                   { data: 'provider_id' },
                   { data: 'role' },
                   { data: 'down_payment' },
