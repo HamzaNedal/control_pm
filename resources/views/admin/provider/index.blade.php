@@ -155,7 +155,7 @@
                    },
                    dataType: "html"})
                    .done(function() {
-                    table.ajax.reload();
+                        table.ajax.reload();
                    });
 
             Swal.fire("Deleted!", "Your imaginary file has been deleted.", "success");

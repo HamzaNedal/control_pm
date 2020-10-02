@@ -65,8 +65,9 @@ class ClientController extends Controller
 
         try {
 
-           $user = User::findOrFail($id);
-           $user->update(['delete'=>1]);
+            $user = User::findOrFail($id);
+            $user->delete =1;
+            $user->save();
            return 'success';
         //    return redirect()->route('admin.client.index')->with('success', 'The client has been successfully deleted');
        } catch (ModelNotFoundException $e) {
