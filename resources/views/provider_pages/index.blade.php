@@ -64,12 +64,12 @@
               serverSide: true,
               ajax: '{!! route('provider.datatable') !!}',
               columns: [
-                  { data: 'id' },
-                 { data: 'deadline' },
+                  { data: 'order_number' },
+                  { data: 'deadline' },
                   { data: 'added_date' },
                   { data: 'status'  },
-
                   { data: 'details'  },
+                  { data: 'files'},
 
               ]
           });

@@ -127,12 +127,13 @@
 
               ajax: '{!! route('order.onprogress.datatable') !!}',
               columns: [
-                  { data: 'id' },
+                  { data: 'order_number' },
                  { data: 'deadline' },
                   { data: 'added_date' },
                   { data: 'status'  },
                   { data: 'details'  },
                   { data: 'Delivery'  },
+                  { data: 'files'  },
 
               ]
           });

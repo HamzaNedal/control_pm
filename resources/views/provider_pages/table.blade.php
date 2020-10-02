@@ -7,6 +7,7 @@
             <th>Deadline</th>
             <th>Order status</th>
             <th>Order details</th>
+            <th>Files</th>
 
 
         </tr>

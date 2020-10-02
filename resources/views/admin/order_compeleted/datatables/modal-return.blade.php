@@ -1,4 +1,7 @@
-<button  type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal-return-{{ $data->id }}" alt='send to edit' title='send to edit'><i class='fa fa-undo'></i></button>
+<button  type="button" class="icon-btn btn blue" data-toggle="modal" data-target="#modal-return-{{ $data->id }}" alt='send to edit' title='send to edit' style="width: 50%">
+    <i class='fa fa-undo'></i>
+<div style="color: white">edit   </div>
+</button>
 
 <div class="modal fade" id="modal-return-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-return-{{ $data->id }}Label" aria-hidden="true">
   <div class="modal-dialog" role="document">

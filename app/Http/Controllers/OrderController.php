@@ -77,8 +77,21 @@ class OrderController extends Controller
         }
 
         $input['status'] = 0;
+
+        $orders=Order::latest()->first();
+
+
+
+        if ($orders==null){
+            $input['order_number'] = 1000596;
+
+        }
+
         $order=Order::Create($input);
 
+       $or= Order::find($order->id);
+       $orn =$orders->order_number + 4;
+       $or->update(['order_number' => $orn]);
         return redirect()->route('admin.order.index')->with('success', '  Order has been added successfully  ');
 
 
@@ -163,7 +176,9 @@ class OrderController extends Controller
     {
         $orders = Order::where(['status' => $id])->get();
         return DataTables::of($orders)->addColumn('actions', function ($data) {
-            return  $data->getProvider->delete == 1 ? 'this user removed' : "<a  href='' data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='btn btn-success btn-xs sendOrder' alt='send' title='send'><i class='fa fa-paper-plane-o'></i></a>";
+            return  $data->getProvider->delete == 1 ? 'this user removed' : "<a  href='' data-id='" . $data->id . "' data-name='" . $data->getProvider->name . "' class='icon-btn btn green sendOrder' alt='send' title='send' style='width:100%'><i class='fa fa-paper-plane-o'></i>
+            <div> se</div>
+            </a>";
         })->addColumn('client_id', function ($data) {
             return $data->getClient->name;
         })->addColumn('provider_id', function ($data) {
@@ -176,10 +191,10 @@ class OrderController extends Controller
         $order = Order::findOrfail($id);
         $order->status = 1;
         $order->save();
-        
+
         $details=[
             'title'=>'Congratulations!',
-            'body'=>' You have been assigned order number'.$order->id.',, please review the sent orders'
+            'body'=>' order number ('.$order->id .') assigned to you, through your panel check and response'
 
       ];
         $user=User::where('id',$order->provider_id)->first();

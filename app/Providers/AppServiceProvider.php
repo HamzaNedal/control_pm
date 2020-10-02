@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -16,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       
+
         //URL::forceScheme('https');
     }
 
@@ -27,6 +29,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        
+        if(!Schema::hasTable('Setting')){
+            Artisan::call('migrate');
+        }
         $googleMail = Setting::where('key','googleMail')->first();
         config(['mail.mailers.smtp.username'=>$googleMail->email]);
         config(['mail.mailers.smtp.password'=>$googleMail->password]);

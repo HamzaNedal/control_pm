@@ -36,7 +36,7 @@
                                     @if ($search)
                                     <a class="btn btn-success" href="{{ route('admin.invoice.exportExcel',['provider'=>"$search"]) }}">Excel <i
                                         class="fa fa-file-excel-o"></i>
-                                    </a> 
+                                    </a>
                                     @endif
                                 </div>
                             </div>
@@ -60,16 +60,18 @@
               serverSide: true,
               ajax: '{!! route('admin.invoice.datatable') !!}',
               columns: [
-                  { data: 'id', name: 'id' },
-                  {data: 'actions', name: 'actions', orderable: false, searchable: false},
+                  { data: 'order_number', name: 'id' },
                   { data: 'provider_id' },
                   { data: 'role' },
                   { data: 'down_payment' },
                   { data: 'payment_method' },
                   { data: 'file' },
                   { data: 'created_at' },
+                  {data: 'actions', name: 'actions', orderable: false, searchable: false},
+
               ]
           });
+
           @if($search !== '')
              table.columns(`{{ $id }}`).search(`^{{ $search }}$`, true, false).draw();
           @endif
@@ -107,7 +109,7 @@
         })
       });
       });
- 
+
         </script>
     @endpush
 @endsection

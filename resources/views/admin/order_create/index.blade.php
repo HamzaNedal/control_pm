@@ -14,17 +14,17 @@
                         <i class="fa fa-globe"></i>Created Orders Management
                     </div>
                     <div class="tools">
-                        
+
                     </div>
                 </div>
                 <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
                             <div class="col-md-6">
-                             
+
                             </div>
                             <div class="col-md-6">
-                            
+
                             </div>
                         </div>
                     </div>
@@ -40,12 +40,12 @@
 
         $(function() {
             table =  $('#table').DataTable({
+                'order': [0,'desc'],
               processing: true,
               serverSide: true,
               ajax: '{!! route('admin.send.order.datatable') !!}',
               columns: [
-                  { data: 'id', name: 'id' },
-                  {data: 'actions', name: 'actions', orderable: false, searchable: false},
+                  { data: 'order_number', name: 'id' },
                   { data: 'client_id', name: 'client_id' },
                   { data: 'provider_id', name: 'provider_id' },
                   { data: 'title', name: 'title' },
@@ -53,7 +53,9 @@
                   { data: 'added_date', name: 'added_date' },
                   { data: 'deadline', name: 'deadline' },
                   { data: 'number_words', name: 'number_words' },
-                  
+                  {data: 'actions', name: 'actions', orderable: false, searchable: false}
+
+
 
               ]
           });
@@ -83,7 +85,7 @@
                         table.ajax.reload();
                    });
 
-            swal("Sended!", "Your order has been sent.", "success");
+            Swal.fire("Sended!", "Your order has been sent.", "success");
             }
 
         })

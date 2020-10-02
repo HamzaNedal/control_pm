@@ -17,6 +17,7 @@ class Order extends Model
         'added_date',
         'status',
         'files',
+        'order_number'
     ];
     protected $casts = [
         'created_at'=>'date:Y-m-d h:m:s'

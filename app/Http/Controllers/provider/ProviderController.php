@@ -60,7 +60,14 @@ class ProviderController extends Controller
             }
         })->addColumn('details', function ($data) {
             return view('provider_pages.modals.modal', compact('data'));
-        })->rawColumns(['status', 'details'])
+        })->addColumn('files', function ($data) {
+            $files = explode(',',$data->files);
+            $output = '';
+            foreach ($files as  $file) {
+               $output .="<a target='_blank' href='".asset('files/'.$file)."'>$file</a><br>";
+            }
+            return $output;
+        })->rawColumns(['status','files', 'details'])
             ->make(true);
     }
 
@@ -119,7 +126,14 @@ class ProviderController extends Controller
         })->addColumn('Delivery', function ($data) {
 
             return view('provider_pages.modals.modalUpload', compact('data'));
-        })->rawColumns(['status', 'details', 'Delivery'])->make(true);;
+        })->addColumn('files', function ($data) {
+            $files = explode(',',$data->files);
+            $output = '';
+            foreach ($files as  $file) {
+               $output .="<a target='_blank' href='".asset('files/'.$file)."'>$file</a><br>";
+            }
+            return $output;
+        })->rawColumns(['status','files', 'details', 'Delivery'])->make(true);;
     }
 
     public function uploadFiles(Request $request, ImageService $imageService)

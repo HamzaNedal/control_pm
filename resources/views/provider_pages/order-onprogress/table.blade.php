@@ -8,6 +8,7 @@
             <th>Order status</th>
             <th>Order details</th>
             <th>Order  Delivery</th>
+            <th>Order  Files</th>
 
         </tr>
     </thead>

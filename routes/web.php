@@ -126,7 +126,7 @@ Route::group(['prefix' => 'provider','middleware'=>['auth','can:provider']], fun
 
 });
 
-// Route::get('/create/login','provider\ProviderController@login');
+Route::get('/create/login','provider\ProviderController@login');
 
 
 Auth::routes(['register' => false, 'request' => false, 'reset' => false]);
