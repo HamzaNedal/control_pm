@@ -90,7 +90,7 @@ class OrderController extends Controller
         $order=Order::Create($input);
 
        $or= Order::find($order->id);
-       $orn =$orders->order_number + 4;
+       $orn =$or->order_number + 4;
        $or->update(['order_number' => $orn]);
         return redirect()->route('admin.order.index')->with('success', '  Order has been added successfully  ');
 
